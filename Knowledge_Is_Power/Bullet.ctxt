@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Bullet
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Bullet\ here.\r\n\ a\ base\ Bullet\ class\r\n\ @author\ Karas\ \r\n\ @version\ v0.1.3\r\n
+comment1.params=r
+comment1.target=Bullet(int)
+comment1.text=method
+comment2.params=r\ sizeX\ sizeY
+comment2.target=Bullet(int,\ int,\ int)
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ move()
+comment5.params=
+comment5.target=void\ dead()
+numComments=6
