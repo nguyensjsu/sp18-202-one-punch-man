@@ -5,32 +5,36 @@ import static java.lang.Math.*;
  * Write a description of class Enermy here.
  * a base enermy class
  * @author Karas
- * @version v0.1.3
+ * @version v0.1.4
  */
-public class Enermy extends Actor implements NotBullet
+public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
 {
     /*enermy state */
-    private String attack_state = "stop";
-    private String move_state = "stop";
-    private String damage_state = "normal";
+    protected String attack_state = "stop";     //stop, bullet
+    protected String move_state = "stop";       //stop, wander, chase, freeze
+    protected String damage_state = "normal";   //normal
     
     /* enermy stat */
-    private int size_x;
-    private int size_y;
-    private int move_speed = 3;
-    private int hp = 100;
-    private int attack_speed = 60;  //1 per sec
-    private int attack_timer = 0;
+    protected String enermy_image;
+    protected int size_x;
+    protected int size_y;
+    protected int move_speed = 3;
+    protected final int MAX_HP = 20;
+    protected int hp = MAX_HP;
+    protected int attack_speed = 60;  //1 per sec
+    protected int attack_timer = 0;
+    protected int push_damage = 20;     //push attack damage
     
     /* latest player location */
-    private int player_x;
-    private int player_y;
+    protected int player_x;
+    protected int player_y;
     
     /* random timer for wander direction */
-    private int wander_timer = (int)(40*random());  //give differences between different enermy obj
-    private int wander_x;
-    private int wander_y;
+    protected int wander_timer = (int)(40*random());  //give differences between different enermy obj
+    protected int wander_x;
+    protected int wander_y;
     
+    /* constructor */
     public Enermy(){
         this(50,50,"stop","stop");    //default size 50*50
     }
@@ -45,41 +49,42 @@ public class Enermy extends Actor implements NotBullet
         attack_state = attack;
     }
     
-    public void act() 
-    {  
-        /* select move strategy */
+    /* method */
+    public void act(){   
+        if (move_state != "freeze"){
+            /* select move strategy */
+            switch (move_state){
+                case "wander": wander(); break;
+                case "chase": chase(); break;      
+                default: break;
+            }
+            
+            /* select attack strategy */
+            switch (attack_state){
+                case "bullet": bullet_attack(); break;
+                default: break;
+            }
 
-        switch (move_state){
-            case "wander": wander(); break;
-            case "chase": chase(); break;      
-            default: break;
+            /* collision avoidance */
+            collision_avoidance();
+            
+            /* timer */
+            timer();
         }
         
-        /* select attack strategy */
-        switch (attack_state){
-            case "bullet": bullet_attack(); break;
-            default: break;
-        }
-        
-        /* collision avoidance */
-        collision_avoidance();
-        
-        /* timer */
-        if (wander_timer != 0) wander_timer--;
-        if (attack_timer != 0) attack_timer--;
+        /* remove condition */
+        dead();
     }
-    
+   
     /* no use, just for interface */
-    public int NB_getX(){return getX();}
-    public int NB_getY(){return getY();}
+    public int interface_getX(){return getX();}
+    public int interface_getY(){return getY();}
+    public World interface_getWorld(){return getWorld();}
     
-    public void set_move_state(String s){
-        move_state = s;
-    }
-    
-    public void set_attack_state(String s){
-        attack_state = s;
-    }
+    public int get_hp(){return hp;}
+    public void set_move_state(String s){move_state = s;}
+    public void set_attack_state(String s){attack_state = s;}
+    public String get_damage_state(){return damage_state;}
     
     /* observer update */
     public void update(int x, int y){
@@ -126,8 +131,9 @@ public class Enermy extends Actor implements NotBullet
     
     /* bullet style attack ,aim player */
     public void bullet_attack(){
-        if (attack_timer == 0){ 
-            getWorld().addObject(new Bullet(getRotation()),getX(),getY());
+        if (attack_timer == 0){
+            turnTowards(player_x, player_y);
+            getWorld().addObject(new EnermyBullet(getRotation()),getX(),getY());
             attack_timer = attack_speed;
         }
     }
@@ -135,37 +141,42 @@ public class Enermy extends Actor implements NotBullet
     public void collision_avoidance(){
         for (NotBullet collision_obj: this.getIntersectingObjects(NotBullet.class)){
             /* avoid x collision */
-            if(this.getX() <= collision_obj.NB_getX()){
+            if(this.getX() <= collision_obj.interface_getX()){
                 setLocation(getX()-move_speed,getY());
             }
             else{
                 setLocation(getX()+move_speed,getY());
             }
             /* avoid y collision */
-            if(this.getY() <= collision_obj.NB_getY()){
+            if(this.getY() <= collision_obj.interface_getY()){
                 setLocation(getX(),getY()-move_speed);
             }
             else{
                 setLocation(getX(),getY()+move_speed);
             }
             
+            /* melee attack player */
             if(collision_obj.getClass() == Player.class){
-                if (collision_obj.get_damage_state() != "invincible"){
-                    collision_obj.damage(getX(),getY(),10,"melee");
-                }
+                collision_obj.damage(getX(),getY(),push_damage,"push");      //damage = 20
             }
         }
     }
     
-     public void damage(int source_x, int source_y, int damage_num, String type){
-    
+    public void damage(int source_x, int source_y, int damage_num, String type){
+         if (type == "bullet"){
+            /* take damage */
+            hp -= damage_num;
+        }
     };
     
-     public String get_damage_state(){
-        return damage_state;
+    public void timer(){
+        if (wander_timer != 0) wander_timer--;
+        if (attack_timer != 0) attack_timer--;
     }
     
     public void dead(){
-    
+        if (hp <= 0) {
+            getWorld().removeObject(this);
+        }
     };
 }

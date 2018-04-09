@@ -25,19 +25,23 @@ public class BaseWorld extends World
     public void prepare()
     {
         /* create player */
-        Player player = new Player(50,50);
-        addObject(player,800,400);
+        Player player = new Player(50,50);  //size 50*50
+        addObject(player, 800, 400);
+        HpDecorator player_hp = new HpDecorator(player,100,100,0,40,50,10);   // hp 100-100, offset(0,40), size 50*10
+        addObject(player_hp, 10000, 10000);
         
-        /* create 3 enermies */
-        Enermy enermy1 = new Enermy(50,50,"wander","stop");
-        Enermy enermy2 = new Enermy(50,50,"chase","stop");
-        Enermy enermy3 = new Enermy(50,50,"chase","bullet");
-        Enermy enermy4 = new Enermy(50,50,"chase","stop");
-        Enermy enermy5 = new Enermy(50,50,"chase","stop");
-        addObject(enermy1,200,200);
-        addObject(enermy2,400,400);
-        addObject(enermy3,800,800);
-        addObject(enermy4,400,800);
-        addObject(enermy5,200,800);
+        /* create 3 chasing enermies that shots bullets */
+        for (int i=0; i<3; i++){
+            Enermy enermy = new Enermy(50,50,"chase","bullet");
+            addObject(enermy, (int)(1600*random()), (int)(900*random()));
+            HpDecorator enermy_hp = new HpDecorator(enermy,20,20,0,40,50,10);   //hp 20-20, offset(0,40), size 50*10
+            addObject(enermy_hp, 10000, 10000);
+        }
+        
+        /* create 1 wandering enermy that does not attack */
+        Enermy enermy = new Enermy(50,50,"wander","stop");
+        addObject(enermy, (int)(1600*random()), (int)(900*random()));
+        HpDecorator enermy_hp = new HpDecorator(enermy,20,20,0,40,50,10);   //hp 20-20, offset(0,40), size 50*10
+        addObject(enermy_hp, 10000, 10000);
     }
 }

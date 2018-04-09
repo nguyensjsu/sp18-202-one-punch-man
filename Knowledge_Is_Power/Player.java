@@ -5,35 +5,39 @@ import static java.lang.Math.*;
  * Write a description of class Obj here.
  * A base player class
  * @author Karas
- * @version v0.1.3
+ * @version v0.1.4
  */
-public class Player extends Actor implements NotBullet
+public class Player extends Actor implements NotBullet,FreezeObj,HasHp
 {
-    //private GifImage gif = new GifImage("obj_arrow.gif");
+    //protected GifImage gif = new GifImage("obj_arrow.gif");
     /* player state */
-    private String move_state = "wasd";
-    private String damage_state = "normal";
+    protected String move_state = "wasd";       //wasd, push, freeze
+    protected String damage_state = "normal";       //normal, invincible
     
     /* player stat */
-    private int size_x;
-    private int size_y;
-    private int move_speed = 5;
-    private final int MAX_HP = 100;
-    private int hp = MAX_HP;
-    private int attack_speed = 30;  //2 per sec
-    private int attack_timer = 0;
+    protected String player_image = "lobster.png";
+    protected String trans_image = "red-draught.png";
+    protected int size_x;
+    protected int size_y;
+    protected int move_speed = 5;
+    protected final int MAX_HP = 100;
+    protected int hp = MAX_HP;
+    protected int bullet_damage = 10;
+    protected int attack_speed = 30;  //2 per sec
+    protected int attack_timer = 0;
     
-    /* pull stat */
-    private int pull_x;
-    private int pull_y;
-    private int pull_rotation;
-    private int pull_speed = 0;
-    private int pull_timer = 0;
+    /* push stat */
+    protected int push_x;
+    protected int push_y;
+    protected int push_rotation;
+    protected int push_speed = 0;
+    protected int push_timer = 0;
     
     /* damage stat */
-    private final int INVINCIBLE_TIME = 60;
-    private int invincible_timer = 0;
+    protected final int INVINCIBLE_TIME = 60;
+    protected int invincible_timer = 0;
     
+    /* constructor */
     public Player(){
         this(50,50);    //default size 50*50
     }
@@ -46,36 +50,39 @@ public class Player extends Actor implements NotBullet
         setImage(image);
     }
     
-    public void act() 
-    {
-       //setImage(gif.getCurrentImage());
-       
-       switch (move_state){
-           case "wasd": wasd_move(); break;
-           case "pull": pull(pull_x, pull_y, pull_speed); break;
-           default: break;
-        }
-       base_attack();
-       
-       /* invincible flash */
-       if (invincible_timer % 20 >= 10){
-           setImage(new GreenfootImage("red-draught.png"));
+    /* method */
+    public void act(){
+       //setImage(gif.getCurrentImage());      
+       /* update move */
+       if (move_state != "freeze"){
+           switch (move_state){
+               case "wasd": wasd_move(); break;
+               case "push": push(push_x, push_y, push_speed); break;
+               default: break;
+            }
+           
+           /* ability */
+           base_attack();
+           
+           /* invincible flash */
+           invincible_flash(player_image,trans_image);
+           
+           /* timer */
+           timer();
        }
-       else{
-           setImage(new GreenfootImage("lobster.png"));
-        }
        
-       if (invincible_timer == 0) damage_state = "normal";
-       
-       /* timer */
-       if (attack_timer != 0) attack_timer--;
-       if (pull_timer != 0) pull_timer--;
-       if (invincible_timer != 0) invincible_timer--;
+       /* game over condition */
+       dead();
     }    
 
     /* no use, just for interface */
-    public int NB_getX(){return getX();}
-    public int NB_getY(){return getY();}
+    public int interface_getX(){return getX();}
+    public int interface_getY(){return getY();}
+    public World interface_getWorld(){return getWorld();}
+    
+    public int get_hp(){return hp;}
+    public String get_damage_state(){return damage_state;}
+    public void set_move_state(String s){move_state = s;}
     
     /* movement control using WASD */
     public void wasd_move(){
@@ -109,11 +116,11 @@ public class Player extends Actor implements NotBullet
         }
     }
 
-    public void pull(int target_x, int target_y, int speed){
+    public void push(int target_x, int target_y, int speed){
         int update_x = getX();
         int update_y = getY();
         
-        /* pull to target */
+        /* push to target */
         if (abs(getX() - target_x) > 5|| abs(getY() - target_y) > 5){
             double dx = target_x - getX();
             double dy = target_y - getY();
@@ -131,11 +138,11 @@ public class Player extends Actor implements NotBullet
         setLocation(update_x,update_y);
         
         /* smooth end */
-        if(pull_timer < 10)
-            pull_speed--;
+        if(push_timer < 10)
+            push_speed--;
         
         /* back to wasd */
-        if (pull_timer == 0){
+        if (push_timer == 0){
             move_state = "wasd";
         }
     }
@@ -152,34 +159,71 @@ public class Player extends Actor implements NotBullet
     /* bullet style attack (aim by mouse)*/
     public void bullet_attack(){
         if (attack_timer == 0){
-            getWorld().addObject(new Bullet(getRotation()),getX(),getY());
+            getWorld().addObject(new PlayerBullet(getRotation(), 20, 20, bullet_damage),getX(),getY());
             attack_timer = attack_speed;
         }
     }
     
     public void damage(int source_x,int source_y, int damage_num, String type){
-        if (type == "melee"){
-            /* bounce away */
-            move_state = "pull";
-            int dx = source_x - getX();
-            int dy = source_y - getY();
-            pull_x = getX() - (int)(100*dx/sqrt(dx*dx+dy*dy));
-            pull_y = getY() - (int)(100*dy/sqrt(dx*dx+dy*dy));
-            pull_speed = 10;
-            pull_timer = 20;
-            /* take damage */
-            hp -= damage_num;
-            /* invincible time */
-            invincible_timer = INVINCIBLE_TIME;
-            damage_state = "invincible";
+        if ((damage_state) != "invincible"){
+            switch (type){
+                case "push":
+                    /* bounce away */
+                    move_state = "push";
+                    int dx = source_x - getX();
+                    int dy = source_y - getY();
+                    push_x = getX() - (int)(100*dx/sqrt(dx*dx+dy*dy));
+                    push_y = getY() - (int)(100*dy/sqrt(dx*dx+dy*dy));
+                    push_speed = 10;
+                    push_timer = 20;
+                    /* take damage */
+                    hp -= damage_num;
+                    /* invincible time */
+                    invincible_timer = INVINCIBLE_TIME;
+                    damage_state = "invincible";
+                    break;
+                    
+                case "bullet":
+                    /* take damage */
+                    hp -= damage_num;
+                    /* invincible time */
+                    invincible_timer = INVINCIBLE_TIME;
+                    damage_state = "invincible";
+                    break;
+                    
+                default: break;
+            }
         }
     }
     
-    public String get_damage_state(){
-        return damage_state;
+    public void invincible_flash(String origin, String trans){
+       if (invincible_timer % 20 >= 10){
+           GreenfootImage image = new GreenfootImage(trans);
+           image.scale(size_x, size_y);
+           setImage(image);
+       }
+       else{
+           GreenfootImage image = new GreenfootImage(origin);
+           image.scale(size_x, size_y);
+           setImage(image);
+        }
+       
+       if ((invincible_timer == 0) && damage_state == "invincible") damage_state = "normal";
+    }
+    
+    public void timer(){   
+       if (attack_timer != 0) attack_timer--;
+       if (push_timer != 0) push_timer--;
+       if (invincible_timer != 0) invincible_timer--;
     }
     
     public void dead(){
-    
+        if(hp <= 0){
+            /* game over phase */
+            getWorld().showText("GAME OVER",800,450);
+            
+            /* clear all */
+            getWorld().removeObjects(getWorld().getObjects(Actor.class));
+        }
     }
 }

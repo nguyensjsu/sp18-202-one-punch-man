@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=FreezeObj
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ NotBullet\ here.\r\n\ a\ interface\ for\ freezable\ actor\r\n\ @author\ Karas\r\n\ @version\ v0.1.4\r\n
+comment1.params=s
+comment1.target=void\ set_move_state(java.lang.String)
+comment2.params=
+comment2.target=int\ interface_getX()
+comment3.params=
+comment3.target=int\ interface_getY()
+numComments=4
