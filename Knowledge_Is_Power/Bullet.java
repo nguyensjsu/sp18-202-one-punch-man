@@ -22,6 +22,9 @@ public class Bullet extends Actor implements FreezeObj
     protected int fire_rotation;
    
     /* constructor */
+    public Bullet(){
+    }
+    
     public Bullet(int r){
         this(r,20,20,20);        //default size 20*20, not through, 20 damage
     }

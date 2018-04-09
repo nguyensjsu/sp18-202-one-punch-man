@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import static java.lang.Math.*;
+import java.util.*;
 
 /**
  * Write a description of class Obj here.
@@ -9,6 +10,7 @@ import static java.lang.Math.*;
  */
 public class Player extends Actor implements NotBullet,FreezeObj,HasHp
 {
+    private ArrayList<ActorAction> actionList = new ArrayList<ActorAction>();
     //protected GifImage gif = new GifImage("obj_arrow.gif");
     /* player state */
     protected String move_state = "wasd";       //wasd, push, freeze
@@ -50,10 +52,9 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
         setImage(image);
     }
     
-    /* method */
-    public void act(){
-       //setImage(gif.getCurrentImage());      
-       /* update move */
+    
+    public void act() 
+    {   /* update move */
        if (move_state != "freeze"){
            switch (move_state){
                case "wasd": wasd_move(); break;
@@ -73,7 +74,18 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
        
        /* game over condition */
        dead();
-    }    
+       
+       /* other action */
+       for(ActorAction action : actionList){
+           action.doAction();
+       }
+    }
+    public void attach(ActorAction newAction){
+        actionList.add(newAction);
+    }
+    public void detach(ActorAction newAction){
+        actionList.remove(newAction);
+    }
 
     /* no use, just for interface */
     public int interface_getX(){return getX();}
