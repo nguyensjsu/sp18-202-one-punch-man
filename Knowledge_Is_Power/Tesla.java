@@ -9,17 +9,18 @@ import static java.lang.Math.*;
  */
 public class Tesla extends Player implements ActorAction
 {
-    private GifImage gif = new GifImage("Tesla_head.gif");
-    private int sector_last = 60;
     private int sector_timer = 0;
     private String sector_state = "idle";
     private ThunderSector mySector;
     public Tesla(int x, int y){
-        for (GreenfootImage image : gif.getImages())
+        size_x = x;
+        size_y = y;
+        super.originGif = new GifImage("Tesla_head.gif");
+        for (GreenfootImage image : originGif.getImages())
         {
             image.scale(x, y);
         }
-        setImage(gif.getCurrentImage());
+        setImage(super.originGif.getCurrentImage());
         super.attach(this);
     }
     
@@ -37,13 +38,19 @@ public class Tesla extends Player implements ActorAction
         switch (sector_state){
             case "idle" : 
                 if (mouse != null && Greenfoot.mousePressed(null)){
-                    mySector = new ThunderSector(getRotation(),100,100, 50);
+                    mySector = new ThunderSector(getRotation(), 5);
                     getWorld().addObject(mySector,getX(),getY());
                     sector_state = "active";
                 }
                 break;
             case "active" : 
-                mySector.updateLocation(getX(),getY());
+                if(Greenfoot.mousePressed(null) || Greenfoot.mouseDragged(null)){
+                    mySector.updateLocation(getX(),getY(),getRotation());
+                }
+                else if(Greenfoot.mouseClicked(null) ){
+                    getWorld().removeObject(mySector);
+                    sector_state = "idle";
+                }
                 break;
         }
         

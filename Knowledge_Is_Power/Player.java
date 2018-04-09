@@ -11,7 +11,8 @@ import java.util.*;
 public class Player extends Actor implements NotBullet,FreezeObj,HasHp
 {
     private ArrayList<ActorAction> actionList = new ArrayList<ActorAction>();
-    //protected GifImage gif = new GifImage("obj_arrow.gif");
+    protected GifImage originGif;
+    protected GifImage transGif;
     /* player state */
     protected String move_state = "wasd";       //wasd, push, freeze
     protected String damage_state = "normal";       //normal, invincible
@@ -210,14 +211,32 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     
     public void invincible_flash(String origin, String trans){
        if (invincible_timer % 20 >= 10){
-           GreenfootImage image = new GreenfootImage(trans);
-           image.scale(size_x, size_y);
-           setImage(image);
+           if(transGif != null){
+               for(GreenfootImage image : transGif.getImages())
+               {
+                   image.scale(size_x, size_y);
+               }
+               setImage(transGif.getCurrentImage());
+           }
+           else{
+               GreenfootImage image = new GreenfootImage(trans);
+               image.scale(size_x, size_y);
+               setImage(image);
+           }
        }
        else{
-           GreenfootImage image = new GreenfootImage(origin);
-           image.scale(size_x, size_y);
-           setImage(image);
+           if(originGif != null){
+               for(GreenfootImage image : originGif.getImages())
+               {
+                   image.scale(size_x, size_y);
+               }
+               setImage(originGif.getCurrentImage());
+           }
+           else{
+               GreenfootImage image = new GreenfootImage(origin);
+               image.scale(size_x, size_y);
+               setImage(image);
+            }
         }
        
        if ((invincible_timer == 0) && damage_state == "invincible") damage_state = "normal";
