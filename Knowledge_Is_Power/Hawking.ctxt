@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Hawking
+comment0.text=\n\ Write\ a\ description\ of\ class\ Hawking\ here.\n\ \n\ @author\ Danlu\ \n\ @version\ v0.1\n
+comment1.params=
+comment1.target=void\ act()
+comment2.params=
+comment2.target=void\ move_fast()
+comment2.text=movement\ control\ using\ key\ 2
+comment3.params=
+comment3.target=void\ blackhole()
+comment4.params=
+comment4.target=void\ explored()
+numComments=5
