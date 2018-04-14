@@ -11,18 +11,14 @@ public class ThunderSector extends Bullet
 {
     private int hand_distance = 60;
     private SimpleTimer damage_timer = new SimpleTimer();
-    public ThunderSector(int r, int d){
-        this(r,200,200,d);
-    }
-    
-    public ThunderSector(int r, int sizeX, int sizeY, int d){
-        damage = 1;
-        fire_rotation = r;
-        size_x = sizeX;
-        size_y = sizeY;
+    private int sizeX = 200;
+    private int sizeY = 200;
+    public ThunderSector(int r, int x, int y, int damage){
+        super.damage = damage;
         GreenfootImage image = getImage();
-        image.scale(size_x, size_y);
+        image.scale(sizeX, sizeY);
         setImage(image);
+        updateLocation(x,y,r);
         damage_timer.mark();
     }
     
@@ -30,7 +26,7 @@ public class ThunderSector extends Bullet
     {
         if(damage_timer.millisElapsed() > 100){
             for (Enermy e: this.getIntersectingObjects(Enermy.class)){
-                e.damage(getX(),getY(),damage, "bullet");
+                e.damage(getX(),getY(),super.damage, "bullet");
             }
             damage_timer.mark();
         }

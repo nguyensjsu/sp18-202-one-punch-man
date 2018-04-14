@@ -10,7 +10,6 @@ import java.util.*;
  */
 public class Player extends Actor implements NotBullet,FreezeObj,HasHp
 {
-    private ArrayList<ActorAction> actionList = new ArrayList<ActorAction>();
     protected GifImage originGif;
     protected GifImage transGif;
     /* player state */
@@ -75,17 +74,6 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
        
        /* game over condition */
        dead();
-       
-       /* other action */
-       for(ActorAction action : actionList){
-           action.doAction();
-       }
-    }
-    public void attach(ActorAction newAction){
-        actionList.add(newAction);
-    }
-    public void detach(ActorAction newAction){
-        actionList.remove(newAction);
     }
 
     /* no use, just for interface */
@@ -210,35 +198,25 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     }
     
     public void invincible_flash(String origin, String trans){
+       GreenfootImage image;
        if (invincible_timer % 20 >= 10){
            if(transGif != null){
-               for(GreenfootImage image : transGif.getImages())
-               {
-                   image.scale(size_x, size_y);
-               }
-               setImage(transGif.getCurrentImage());
+               image = transGif.getCurrentImage();
            }
            else{
-               GreenfootImage image = new GreenfootImage(trans);
-               image.scale(size_x, size_y);
-               setImage(image);
+               image = new GreenfootImage(trans);
            }
        }
        else{
            if(originGif != null){
-               for(GreenfootImage image : originGif.getImages())
-               {
-                   image.scale(size_x, size_y);
-               }
-               setImage(originGif.getCurrentImage());
+               image = originGif.getCurrentImage();
            }
            else{
-               GreenfootImage image = new GreenfootImage(origin);
-               image.scale(size_x, size_y);
-               setImage(image);
+               image = new GreenfootImage(origin);
             }
         }
-       
+       image.scale(size_x, size_y);
+       setImage(image);
        if ((invincible_timer == 0) && damage_state == "invincible") damage_state = "normal";
     }
     
