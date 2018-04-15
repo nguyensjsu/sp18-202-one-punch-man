@@ -24,7 +24,7 @@ public class Tesla extends Player
         
        switch (move_state){
            case "wasd": wasd_move(); break;
-           case "pull": pull(pull_x, pull_y, pull_speed); break;
+           case "push": push(push_x, push_y, push_speed); break;
            default: break;
         }
        base_attack();
@@ -41,7 +41,7 @@ public class Tesla extends Player
        
        /* timer */
        if (attack_timer != 0) attack_timer--;
-       if (pull_timer != 0) pull_timer--;
+       if (push_timer != 0) push_timer--;
        if (invincible_timer != 0) invincible_timer--;
     }   
 }
