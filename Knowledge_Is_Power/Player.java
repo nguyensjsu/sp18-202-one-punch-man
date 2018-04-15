@@ -235,4 +235,7 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
             getWorld().removeObjects(getWorld().getObjects(Actor.class));
         }
     }
+    public List<Enermy> getObjectsInRange(int range){
+        return getObjectsInRange(range, Enermy.class);
+    }
 }

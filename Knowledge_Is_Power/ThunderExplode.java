@@ -20,7 +20,8 @@ public class ThunderExplode extends Bullet
         if (move_state != "freeze"){
             chase();
             // if touch
-            if(isTouching(Enermy.class)){
+            List<Enermy> touchingEnermys = getObjectsInRange(150, Enermy.class);
+            if(touchingEnermys.size() != 0){
                 List<Enermy> enermys = getObjectsInRange(200, Enermy.class);
                 for (int i=0;i<enermys.size();i++){
                     // explode
@@ -47,7 +48,7 @@ public class ThunderExplode extends Bullet
         }
     }
     public void chase(){
-        Enermy chaseEnermy = getNearestEnermy();
+        Enermy chaseEnermy = getNearestEnermy(300);
         if(chaseEnermy != null){
             turnTowards(chaseEnermy.getX(), chaseEnermy.getY());
             fire_rotation = getRotation();
@@ -65,13 +66,12 @@ public class ThunderExplode extends Bullet
     public double getDistance(Actor actor) {
         return Math.hypot(actor.getX() - getX(), actor.getY() - getY());
     }
-    public Enermy getNearestEnermy() {
-        List<Enermy> nearEnermys = getObjectsInRange(300, Enermy.class);
+    public Enermy getNearestEnermy(int range) {
+        List<Enermy> nearEnermys = getObjectsInRange(range, Enermy.class);
         Enermy nearestEnermy = null;
-        double nearestDistance = 300;
-        double distance;
+        double nearestDistance = range;
         for (int i = 0; i < nearEnermys.size(); i++) {
-            distance = getDistance(nearEnermys.get(i));
+            double distance = getDistance(nearEnermys.get(i));
             if (distance < nearestDistance) {
                 nearestEnermy = nearEnermys.get(i);
                 nearestDistance = distance;

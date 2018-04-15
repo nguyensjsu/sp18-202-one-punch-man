@@ -1,6 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import static java.lang.Math.*;
-
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Write a description of class Enermy here.
  * a base enermy class
@@ -35,6 +36,9 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected int wander_y;
     
     protected SimpleTimer freezeTimer = new SimpleTimer();
+    protected int freezeTimeout;
+    protected List<String> neg_state = new ArrayList<>();
+    protected String prevMoveState;
     
     /* constructor */
     public Enermy(){
@@ -69,9 +73,11 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
 
             /* collision avoidance */
             collision_avoidance();
-            
+                
             /* timer */
             timer();
+        }else if(isShocked()){
+            shockToNormal();
         }
         
         /* remove condition */
@@ -181,14 +187,29 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
             getWorld().removeObject(this);
         }
     };
-    public void setNegativeState(String type, int d){
+    
+    public void shockToNormal(){
+        if(freezeTimer.millisElapsed() > freezeTimeout){
+            move_state = prevMoveState;
+            neg_state.remove("shocked");
+        }
+    }
+    public void setNegativeState(String type, int time, int d){
+        freezeTimeout = time;
         switch(type){
             case "shocked":
+                neg_state.add("shocked");
+                prevMoveState = move_state;
+                move_state = "freeze";
+                damage(getX(),getY(),d,"bullet");
                 freezeTimer.mark();
-                if(freezeTimer.millisElapsed()>1000){
-                    
-                }
                 break;
         }
+    }
+    public boolean isShocked(){
+        return neg_state.contains("shocked");
+    }
+    public List<Enermy> getObjectsInRange(int range){
+        return getObjectsInRange(range, Enermy.class);
     }
 }

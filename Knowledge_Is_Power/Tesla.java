@@ -27,9 +27,9 @@ public class Tesla extends Player
         setImage(super.originGif.getCurrentImage());
         /* Attack */
         sectorAttack = new SectorAttack();
-        chainAttack = new ChainAttack();
+        chainAttack = new ChainAttack(this);
         explodeAttack = new ExplodeAttack();
-        currentAttack = explodeAttack;
+        currentAttack = chainAttack;
     }
     
     public void act() 
@@ -56,6 +56,38 @@ public class Tesla extends Player
     public void changeAttack(AttackStrategy s){
         currentAttack.exit();
         currentAttack = s;
+    }
+    
+    public class ChainAttack implements AttackStrategy{
+        private int cooldown = 0;
+        private int timer = 30;
+        private int chainDamage = 5;
+        private Actor current;
+        public ChainAttack(Actor actor){
+            current = actor;
+        }
+        
+        public void attack(){
+            if(timer == 0){
+                MouseInfo mouse = Greenfoot.getMouseInfo();
+                if (mouse != null && Greenfoot.mousePressed(null)){
+                    int centerX = (mouse.getX() + getX())/2;
+                    int centerY = (mouse.getY() + getY())/2;
+                    int width = (int)Math.hypot(mouse.getX() - getX(), mouse.getY() - getY());
+                    getWorld().addObject(new ThunderChain(current, mouse.getX(), mouse.getY(), width, chainDamage), centerX, centerY);
+                    timer = cooldown;
+                }
+            }
+            else{
+                timer--;
+            }
+        }
+        public void exit(){
+
+        }
+        public int getCoolDown(){
+            return timer;
+        }
     }
     
     public class SectorAttack implements AttackStrategy{
@@ -88,31 +120,6 @@ public class Tesla extends Player
         }
         public int getCoolDown(){
             return 0;
-        }
-    }
-    
-    public class ChainAttack implements AttackStrategy{
-        private int cooldown = 0;
-        private int timer = 30;
-        private int chainDamage = 10;
-        
-        public void attack(){
-            if(timer == 0){
-                MouseInfo mouse = Greenfoot.getMouseInfo();
-                if (mouse != null && Greenfoot.mousePressed(null)){
-                    getWorld().addObject(new ThunderChain(getRotation(), chainDamage),getX(),getY());
-                    timer = cooldown;
-                }
-            }
-            else{
-                timer--;
-            }
-        }
-        public void exit(){
-
-        }
-        public int getCoolDown(){
-            return timer;
         }
     }
  

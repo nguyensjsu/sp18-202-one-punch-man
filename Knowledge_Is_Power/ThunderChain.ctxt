@@ -1,18 +1,18 @@
 #BlueJ class context
 comment0.target=ThunderChain
 comment0.text=\n\ Write\ a\ description\ of\ class\ ThunderChain\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=r\ d
-comment1.target=ThunderChain(int,\ int)
-comment2.params=r\ d\ count
-comment2.target=ThunderChain(int,\ int,\ int)
+comment1.params=current\ turnX\ turnY\ sizeX\ damage
+comment1.target=ThunderChain(greenfoot.Actor,\ int,\ int,\ int,\ int)
+comment2.params=current\ turnX\ turnY\ sizeX\ damage\ chainCount\ shockedTime
+comment2.target=ThunderChain(greenfoot.Actor,\ int,\ int,\ int,\ int,\ int,\ int)
 comment3.params=
 comment3.target=void\ act()
 comment4.params=
 comment4.target=void\ dead()
-comment5.params=actor
-comment5.target=void\ showAnimation(greenfoot.Actor)
+comment5.params=startX\ startY\ endX\ endY
+comment5.target=void\ showAnimation(int,\ int,\ int,\ int)
 comment6.params=actor
 comment6.target=double\ getDistance(greenfoot.Actor)
-comment7.params=
-comment7.target=Enermy\ getNearestEnermy()
+comment7.params=distance\ circle
+comment7.target=Enermy\ getNearestEnermy(int,\ boolean)
 numComments=8
