@@ -34,6 +34,8 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected int wander_x;
     protected int wander_y;
     
+    protected SimpleTimer freezeTimer = new SimpleTimer();
+    
     /* constructor */
     public Enermy(){
         this(50,50,"stop","stop");    //default size 50*50
@@ -179,4 +181,14 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
             getWorld().removeObject(this);
         }
     };
+    public void setNegativeState(String type, int d){
+        switch(type){
+            case "shocked":
+                freezeTimer.mark();
+                if(freezeTimer.millisElapsed()>1000){
+                    
+                }
+                break;
+        }
+    }
 }

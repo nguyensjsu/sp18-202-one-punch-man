@@ -93,14 +93,14 @@ public class Tesla extends Player
     
     public class ChainAttack implements AttackStrategy{
         private int cooldown = 0;
-        private int timer = 0;
+        private int timer = 30;
         private int chainDamage = 10;
         
         public void attack(){
             if(timer == 0){
                 MouseInfo mouse = Greenfoot.getMouseInfo();
                 if (mouse != null && Greenfoot.mousePressed(null)){
-                    getWorld().addObject(new ThunderExplode(getRotation(), chainDamage),getX(),getY());
+                    getWorld().addObject(new ThunderChain(getRotation(), chainDamage),getX(),getY());
                     timer = cooldown;
                 }
             }
@@ -118,7 +118,7 @@ public class Tesla extends Player
  
     public class ExplodeAttack implements AttackStrategy{
         private int timer = 0;
-        private int cooldown = 1000;
+        private int cooldown = 500;
         private int explodeDamage = 9999;
         
         public void attack(){
