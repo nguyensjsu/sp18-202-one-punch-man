@@ -27,7 +27,7 @@ public class Tesla extends Player
         setImage(super.originGif.getCurrentImage());
         /* Attack */
         sectorAttack = new SectorAttack();
-        chainAttack = new ChainAttack(this);
+        chainAttack = new ChainAttack();
         explodeAttack = new ExplodeAttack();
         currentAttack = chainAttack;
     }
@@ -62,10 +62,6 @@ public class Tesla extends Player
         private int cooldown = 0;
         private int timer = 30;
         private int chainDamage = 5;
-        private Actor current;
-        public ChainAttack(Actor actor){
-            current = actor;
-        }
         
         public void attack(){
             if(timer == 0){
@@ -74,7 +70,7 @@ public class Tesla extends Player
                     int centerX = (mouse.getX() + getX())/2;
                     int centerY = (mouse.getY() + getY())/2;
                     int width = (int)Math.hypot(mouse.getX() - getX(), mouse.getY() - getY());
-                    getWorld().addObject(new ThunderChain(current, mouse.getX(), mouse.getY(), width, chainDamage), centerX, centerY);
+                    getWorld().addObject(new ThunderChain(getX(), getY(), mouse.getX(), mouse.getY(), width, chainDamage), centerX, centerY);
                     timer = cooldown;
                 }
             }

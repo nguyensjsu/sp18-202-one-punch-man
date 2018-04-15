@@ -14,24 +14,27 @@ public class ThunderChain extends Bullet
     private int shockedTime = 2000;
     private boolean fade = false;
     private int transVal = 255;
-    private Actor current;
+    private int currentX;
+    private int currentY;
     
-    public ThunderChain(Actor current, int turnX, int turnY, int sizeX, int damage){
+    public ThunderChain(int currentX, int currentY, int turnX, int turnY, int sizeX, int damage){
         turnTowards(turnX, turnY);
         this.sizeX = sizeX;
         this.damage = damage;
-        this.current = current;
+        this.currentX = currentX;
+        this.currentY = currentY;
         GreenfootImage image = getImage();
         image.scale(sizeX, sizeY);
         setImage(image);
         fade = true;
     }
     
-    public ThunderChain(Actor current, int turnX, int turnY, int sizeX, int damage, int chainCount, int shockedTime){
+    public ThunderChain(int currentX, int currentY, int turnX, int turnY, int sizeX, int damage, int chainCount, int shockedTime){
         turnTowards(turnX, turnY);
         this.sizeX = sizeX;
         this.damage = damage;
-        this.current = current;
+        this.currentX = currentX;
+        this.currentY = currentY;
         this.chainCount = chainCount;
         this.shockedTime = shockedTime;
         
@@ -53,7 +56,7 @@ public class ThunderChain extends Bullet
             }
             Enermy enermy = getNearestEnermy(searchRange, false);
             if(enermy != null && enermy.getWorld() != null){
-                showAnimation(current.getX(), current.getY(), enermy.getX(), enermy.getY());
+                showAnimation(currentX, currentY, enermy.getX(), enermy.getY());
                 enermy.setNegativeState("shocked", 1000, damage);
                 move_state = "freeze";
                 Enermy nextEnermy = getNearestEnermy(300, true);
@@ -63,7 +66,7 @@ public class ThunderChain extends Bullet
                     int centerY = (enermy.getY() + nextEnermy.getY())/2;
                     int width = (int)Math.hypot(enermy.getX() - nextEnermy.getX(), enermy.getY() - nextEnermy.getY());
                     if (width<30) width = 30;
-                    getWorld().addObject(new ThunderChain(enermy, nextEnermy.getX(), nextEnermy.getY(), width, damage, chainCount, shockedTime), enermy.getX(), enermy.getY());
+                    getWorld().addObject(new ThunderChain(enermy.getX(), enermy.getY(), nextEnermy.getX(), nextEnermy.getY(), width, damage, chainCount, shockedTime), enermy.getX(), enermy.getY());
                 }
             }else{
                 GreenfootImage image = getImage();
