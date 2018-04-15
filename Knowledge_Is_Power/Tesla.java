@@ -14,6 +14,8 @@ public class Tesla extends Player
     private SectorAttack sectorAttack;
     private ChainAttack chainAttack;
     private ExplodeAttack explodeAttack;
+    private TowerAttack towerAttack;
+    private CarAttack carAttack;
     public Tesla(){
         this(60, 60);
     }
@@ -29,12 +31,15 @@ public class Tesla extends Player
         sectorAttack = new SectorAttack();
         chainAttack = new ChainAttack();
         explodeAttack = new ExplodeAttack();
+        towerAttack = new TowerAttack();
+        carAttack = new CarAttack();
         currentAttack = chainAttack;
     }
     
     public void act() 
     {
        if (move_state != "freeze"){
+           waitChanges();
            switch (move_state){
                case "wasd": wasd_move(); break;
                case "push": push(push_x, push_y, push_speed); break;
@@ -47,10 +52,23 @@ public class Tesla extends Player
            timer();
            
            currentAttack.attack();
+           towerAttack.attack();
+           carAttack.attack();
        }
-       
        /* game over condition */
        dead();
+    }
+    
+    public void waitChanges(){
+        if(Greenfoot.isKeyDown("1")){
+            changeAttack(chainAttack);
+        }
+        else if(Greenfoot.isKeyDown("2")){
+            changeAttack(sectorAttack);
+        }
+        else if(Greenfoot.isKeyDown("3")){
+            changeAttack(explodeAttack);
+        }
     }
     
     public void changeAttack(AttackStrategy s){
@@ -67,10 +85,20 @@ public class Tesla extends Player
             if(timer == 0){
                 MouseInfo mouse = Greenfoot.getMouseInfo();
                 if (mouse != null && Greenfoot.mousePressed(null)){
-                    int centerX = (mouse.getX() + getX())/2;
-                    int centerY = (mouse.getY() + getY())/2;
-                    int width = (int)Math.hypot(mouse.getX() - getX(), mouse.getY() - getY());
-                    getWorld().addObject(new ThunderChain(getX(), getY(), mouse.getX(), mouse.getY(), width, chainDamage), centerX, centerY);
+                    int ex = mouse.getX(), ey = mouse.getY();
+                    int sx = getX(), sy = getY();
+                    int width = (int)Math.hypot(sx-ex, sy-ey);
+                    int centerX = (sx+ex)/2;
+                    int centerY = (sy+ey)/2;
+                    if(width > 400){
+                        Double rate = 400.0/width;
+                        centerX = (int)((ex-sx)/2*rate) + sx;
+                        centerY = (int)((ey-sy)/2*rate) + sy;
+                        width = 400;
+                    }
+                    ThunderChain thunderChain = new ThunderChain(sx, sy, ex, ey, width, chainDamage);
+                    thunderChain.setRotation(getRotation());
+                    getWorld().addObject(thunderChain, centerX, centerY);
                     timer = cooldown;
                 }
             }
@@ -121,7 +149,7 @@ public class Tesla extends Player
  
     public class ExplodeAttack implements AttackStrategy{
         private int timer = 0;
-        private int cooldown = 500;
+        private int cooldown = 300;
         private int explodeDamage = 9999;
         
         public void attack(){
@@ -135,6 +163,53 @@ public class Tesla extends Player
                 timer--;
             }
         }
+        public void exit(){
+            
+        }
+        public int getCoolDown(){
+            return timer;
+        }
+    }
+    
+    public class TowerAttack implements AttackStrategy{
+        private int timer = 0;
+        private int cooldown = 300;
+        private int towerDamage = 5;
+        
+        public void attack(){
+            if(timer == 0){
+                if(Greenfoot.isKeyDown("4")){
+                    getWorld().addObject(new TeslaTower(towerDamage), getX(), getY());
+                    timer = cooldown;
+                }
+            }else{
+                timer--;
+            }
+        }
+        
+        public void exit(){
+            
+        }
+        public int getCoolDown(){
+            return timer;
+        }
+    }
+    public class CarAttack implements AttackStrategy{
+        private int timer = 0;
+        private int cooldown = 300;
+        private int carDamage = 10;
+        
+        public void attack(){
+            if(timer == 0){
+                if(Greenfoot.isKeyDown("5")){
+                    getWorld().addObject(new TeslaCar(carDamage), getX(), getY());
+                    timer = cooldown;
+                }
+            }else{
+                timer--;
+            }
+        }
+        
         public void exit(){
             
         }

@@ -198,7 +198,9 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
         freezeTimeout = time;
         switch(type){
             case "shocked":
-                neg_state.add("shocked");
+                if(!isShocked()){
+                    neg_state.add("shocked");
+                }
                 prevMoveState = move_state;
                 move_state = "freeze";
                 damage(getX(),getY(),d,"bullet");

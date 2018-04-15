@@ -8,8 +8,9 @@ import java.util.List;
  */
 public class ThunderChain extends Bullet
 {
+    private GifImage originGif = new GifImage("thunder_chain.gif");
     private int sizeX = 1000;
-    private int sizeY = 100;
+    private int sizeY = 50;
     private int chainCount = 5;
     private int shockedTime = 2000;
     private boolean fade = false;
@@ -18,30 +19,18 @@ public class ThunderChain extends Bullet
     private int currentY;
     
     public ThunderChain(int currentX, int currentY, int turnX, int turnY, int sizeX, int damage){
-        turnTowards(turnX, turnY);
         this.sizeX = sizeX;
         this.damage = damage;
         this.currentX = currentX;
         this.currentY = currentY;
-        GreenfootImage image = getImage();
-        image.scale(sizeX, sizeY);
-        setImage(image);
         fade = true;
+        gifAnimator();
     }
     
     public ThunderChain(int currentX, int currentY, int turnX, int turnY, int sizeX, int damage, int chainCount, int shockedTime){
-        turnTowards(turnX, turnY);
-        this.sizeX = sizeX;
-        this.damage = damage;
-        this.currentX = currentX;
-        this.currentY = currentY;
+        this(currentX, currentY, turnX, turnY, sizeX, damage);
         this.chainCount = chainCount;
         this.shockedTime = shockedTime;
-        
-        GreenfootImage image = getImage();
-        image.scale(sizeX, sizeY);
-        setImage(image);
-        fade = true;
     }
     
     public void act() 
@@ -54,27 +43,45 @@ public class ThunderChain extends Bullet
             else{
                 searchRange = 300;
             }
-            Enermy enermy = getNearestEnermy(searchRange, false);
+            boolean shock = true;
+            if(chainCount == 1){
+                shock = false;
+            }
+            Enermy enermy = getNearestEnermy(searchRange, false, shock);
             if(enermy != null && enermy.getWorld() != null){
-                showAnimation(currentX, currentY, enermy.getX(), enermy.getY());
+                changeAnimation(currentX, currentY, enermy.getX(), enermy.getY());
                 enermy.setNegativeState("shocked", 1000, damage);
                 move_state = "freeze";
-                Enermy nextEnermy = getNearestEnermy(300, true);
+                Enermy nextEnermy = getNearestEnermy(300, true, true);
                 if(nextEnermy != null && --chainCount!= 0){
                     shockedTime -= 400;
-                    int centerX = (enermy.getX() + nextEnermy.getX())/2;
-                    int centerY = (enermy.getY() + nextEnermy.getY())/2;
-                    int width = (int)Math.hypot(enermy.getX() - nextEnermy.getX(), enermy.getY() - nextEnermy.getY());
-                    if (width<30) width = 30;
-                    getWorld().addObject(new ThunderChain(enermy.getX(), enermy.getY(), nextEnermy.getX(), nextEnermy.getY(), width, damage, chainCount, shockedTime), enermy.getX(), enermy.getY());
+                    int ex = nextEnermy.getX(), ey = nextEnermy.getY();
+                    int sx = enermy.getX(), sy = enermy.getY();
+                    int centerX = (sx+ex)/2;
+                    int centerY = (sy+ey)/2;
+                    int width = (int)Math.hypot(sx-ex, sy-ey);
+                    if (width < 10) width = 10;
+                    getWorld().addObject(new ThunderChain(sx, sy, ex, ey, width, damage, chainCount, shockedTime), centerX, centerY);
                 }
-            }else{
-                GreenfootImage image = getImage();
-                image.scale(sizeX, sizeY);
-                setImage(image);
             }
         }
+        gifAnimator();
         dead();
+    }
+    public void gifAnimator(){
+        sizeY = (sizeX-100)/20 + 20;
+        if(sizeY > 50) sizeY = 50;
+        GreenfootImage image = originGif.getCurrentImage();
+        image.scale(sizeX, sizeY);
+        setImage(originGif.getCurrentImage());
+    }
+    public void changeAnimation(int startX, int startY, int endX, int endY){
+        int centerX = (startX + endX)/2;
+        int centerY = (startY + endY)/2;
+        setLocation(centerX, centerY);
+        turnTowards(endX, endY);
+        
+        sizeX = (int)Math.hypot(startX - endX, startY - endY);
     }
     public void dead(){
         if(fade){
@@ -87,22 +94,10 @@ public class ThunderChain extends Bullet
             getImage().setTransparency(transVal);
         }
     }
-    public void showAnimation(int startX, int startY, int endX, int endY){
-        int centerX = (startX + endX)/2;
-        int centerY = (startY + endY)/2;
-        setLocation(centerX, centerY);
-        turnTowards(endX, endY);
-        
-        sizeX = (int)Math.hypot(startX - endX, startY - endY);
-        sizeY = 50;
-        GreenfootImage image = getImage();
-        image.scale(sizeX, sizeY);
-        setImage(image);
-    }
     public double getDistance(Actor actor) {
         return Math.hypot(actor.getX() - getX(), actor.getY() - getY());
     }
-    public Enermy getNearestEnermy(int distance, boolean circle) {
+    public Enermy getNearestEnermy(int distance, boolean circle, boolean shock) {
         List<Enermy> nearEnermys;
         if(circle){
             nearEnermys = getObjectsInRange(distance, Enermy.class);
@@ -113,7 +108,7 @@ public class ThunderChain extends Bullet
         Enermy nearestEnermy = null;
         double nearestDistance = distance;
         for (int i = 0; i < nearEnermys.size(); i++) {
-           if(nearEnermys.get(i).isShocked()){
+           if(shock && nearEnermys.get(i).isShocked()){
                continue;
            }
            double tmpDistance = getDistance(nearEnermys.get(i));
