@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=HpDecorator
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Decorator\ here.\r\n\ a\ subclass\ decorator\ showing\ HP\r\n\ @author\ Karas\r\n\ @version\ 0.1.4\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ Decorator\ here.\n\ a\ subclass\ decorator\ showing\ HP\n\ @author\ Karas\n\ @version\ 0.1.4\n
 comment1.params=a\ current\ max\ offx\ offy\ X\ Y
 comment1.target=HpDecorator(HasHp,\ int,\ int,\ int,\ int,\ int,\ int)
 comment1.text=constructor

@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=BlackHole
+comment0.text=\n\ Write\ a\ description\ of\ class\ Blackhole\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=r
+comment1.target=BlackHole(int)
+comment2.params=r\ sizeX\ sizeY\ d
+comment2.target=BlackHole(int,\ int,\ int,\ int)
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ timer()
+comment5.params=
+comment5.target=void\ dead()
+numComments=6

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=NotBullet
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ NotBullet\ here.\r\n\ a\ interface\ for\ non\ bullet\ actor\r\n\ @author\ Karas\r\n\ @version\ v0.1.3\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ NotBullet\ here.\n\ a\ interface\ for\ non\ bullet\ actor\n\ @author\ Karas\n\ @version\ v0.1.3\n
 comment1.params=source_x\ source_y\ damage_num\ type
 comment1.target=void\ damage(int,\ int,\ int,\ java.lang.String)
 comment2.params=

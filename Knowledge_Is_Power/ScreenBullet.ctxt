@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ScreenBullet
+comment0.text=\n\ Write\ a\ description\ of\ class\ ScreenBullet\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=r
+comment1.target=ScreenBullet(int)
+comment2.params=r\ sizeX\ sizeY\ d
+comment2.target=ScreenBullet(int,\ int,\ int,\ int)
+comment3.params=
+comment3.target=void\ dead()
+comment3.text=override
+numComments=4
