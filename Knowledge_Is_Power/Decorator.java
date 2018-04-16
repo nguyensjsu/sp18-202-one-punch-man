@@ -52,6 +52,10 @@ public class Decorator extends Actor
         setLocation(update_x,update_y);
     }
     
+    public void setDead(){
+        go_die = true;
+    }
+    
     public void dead(){
         if (go_die){
             getWorld().removeObject(this);

@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class ShockedBuff extends BuffState
 {
     public ShockedBuff(Actor actor, int timeout, int damage){
-        super(actor, new ShockedDecorator(), timeout, damage, BuffType.Shocked, "freeze");
+        super(actor, timeout, damage, BuffType.Shocked, "freeze");
         super.BuffMessage = "Shocked by Thunder Chain Attack";
     }
 }

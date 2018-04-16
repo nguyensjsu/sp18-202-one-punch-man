@@ -39,7 +39,8 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected List<IBuffState> buffList = new ArrayList<>();
     protected int effectPeriod = 100;
     protected SimpleTimer effectTimer = new SimpleTimer();
-    
+    protected String prevMoveState = "";
+  
     /* constructor */
     public Enermy(){
         this(50,50,"stop","stop");    //default size 50*50
@@ -51,7 +52,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(image);
-        move_state = move;
+        prevMoveState = move_state = move;
         attack_state = attack;
     }
     
@@ -185,52 +186,72 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     public void dead(){
         if (hp <= 0) {
             getWorld().removeObject(this);
+            clearBuff();
         }
     };
     
     public void buffRefresh(){
-        // display animation
-        for(IBuffState buff : buffList){
-            buff.display(getX(), getY(), getRotation());
-        }
-        int priori
-        for(IBuffState buff : buffList){
-            
-        }
+        List<IBuffState> tempList = new ArrayList<IBuffState>(buffList);
+        // buff cause damage 
         if(effectTimer.millisElapsed() > effectPeriod){
-            for(IBuffState buff : buffList){
-                Actor source = buff.getSource();
-                if(source!=null&&source.getWorld()!=null){
-                    damage(source.getX(), source.getY(), buff.buffDamage(), "bullet");
-                }else{
-                    damage(0, 0, buff.buffDamage(),"bullet");
-                }
-                String changedState = buff.buffMove(move_state);
-                if(changedState != ""){
-                    move_state = changedState;
-                }
-                if(buff.isDead()){
-                    move_state = buff.getPrevMoveState();
-                    buffList.remove(buff);
+            for(IBuffState buff : tempList){
+                int periodDamage = buff.buffDamage();
+                if(periodDamage!=0){
+                    Actor source = buff.getSource();
+                    if(source!=null&&source.getWorld()!=null){
+                        damage(source.getX(), source.getY(), buff.buffDamage(), "bullet");
+                    }else{
+                        damage(0, 0, buff.buffDamage(),"bullet");
+                    }
                 }
             }
             effectTimer.mark();
         }
+        // buff change move state
+        int prioriBuff = 100;
+        String prioriState = "";
+        for(IBuffState buff : tempList){
+            if(prioriBuff > buff.getType().getValue()){
+                prioriBuff = buff.getType().getValue();
+                prioriState = buff.buffMove();
+            }
+        }
+        if(prioriState != ""){
+            move_state = prioriState;
+        }
+        // if buff die
+        for(IBuffState buff : tempList){
+            if(buff.isDead()){
+                if(buff.buffMove() != ""){
+                    move_state = prevMoveState;
+                }
+                removeBuff(buff);
+            }
+        }
     }
     public void addBuff(IBuffState buff){
-        buffList.add(buff);
+        if(buff != null && !hasBuff(buff.getType())){
+            buffList.add(buff);
+        }
     }
     public void removeBuff(IBuffState buff){
+        buff.die();
         buffList.remove(buff);
     }
-    public boolean hasBuff(Class cls){
+    public void clearBuff(){
+        for(IBuffState buff : buffList){
+            buff.die();
+        }
+        buffList.clear();
+    }
+    public boolean hasBuff(BuffType type){
         boolean flag = false;
         for(IBuffState buff : buffList){
-            if(cls.isInstance(buff)){
+            if(buff.getType() == type){
                 flag = true;
             }
         }
-        return false;
+        return flag;
     }
     public List<Enermy> getObjectsInRange(int range){
         return getObjectsInRange(range, Enermy.class);

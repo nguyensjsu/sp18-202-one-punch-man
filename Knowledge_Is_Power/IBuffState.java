@@ -9,10 +9,8 @@ public interface IBuffState
 {
     public Actor getSource();
     public int buffDamage();
-    public boolean changeMove();
-    public String buffMove(String prevMoveState);
-    public String getPrevMoveState();
-    public void display(int x, int y, int r);
+    public String buffMove();
+    public void die();
     public boolean isDead();
-    public String toString();
+    public BuffType getType();
 }

@@ -10,15 +10,11 @@ public class BuffState implements IBuffState
 {
     protected Actor source = null;
     // buff appearance
-    protected Decorator decorator;
+    protected Decorator decorator = null;
     protected String BuffMessage;
     protected double damage = 0.0;
     protected boolean damping = false;
     protected double dampingRate = 0.9;
-    // if buff first time added
-    protected boolean firstTime = true;
-    // origin move state
-    protected String prevMoveState = "";
     // control move state
     protected String moveState = "";
     protected SimpleTimer lifeTimer = new SimpleTimer();
@@ -27,14 +23,16 @@ public class BuffState implements IBuffState
     // buff type
     protected BuffType type;
     
-    public BuffState(Actor source, Decorator decorator, int timeout, int damage, BuffType type, String moveState){
+    public BuffState(Actor source, int timeout, int damage, BuffType type, String moveState){
         this.source = source;
-        this.decorator = decorator;
         this.damage = (double)damage;
         this.timeout = timeout;
         this.moveState = moveState;
         this.type = type;
         lifeTimer.mark();
+    }
+    public void setDecorator(Decorator decorator){
+        this.decorator = decorator;
     }
     public Actor getSource(){
         return source;
@@ -45,18 +43,8 @@ public class BuffState implements IBuffState
         }
         return (int)damage;
     }
-    public String buffMove(String prevMoveState){
-        if(firstTime){
-            firstTime = false;
-            this.prevMoveState = prevMoveState;
-        }
+    public String buffMove(){
         return moveState;
-    }
-    public boolean changeMove(){
-        return moveState != "";
-    }
-    public String getPrevMoveState(){
-        return prevMoveState;
     }
     public void display(int x, int y, int r){
         decorator.setLocation(x, y);
@@ -64,6 +52,14 @@ public class BuffState implements IBuffState
     }
     public boolean isDead(){
         return lifeTimer.millisElapsed() > timeout;
+    }
+    public void die(){
+        if(decorator!=null){
+            decorator.setDead();
+        }
+    }
+    public BuffType getType(){
+        return type;
     }
     public String toString(){
         return BuffMessage;
