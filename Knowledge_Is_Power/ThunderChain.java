@@ -9,6 +9,7 @@ import java.util.List;
 public class ThunderChain extends Bullet
 {
     private GifImage originGif = new GifImage("thunder_chain.gif");
+    private GifImage transGif = new GifImage("thunder_chain_black.gif");
     private int sizeX = 1000;
     private int sizeY = 50;
     private int chainCount = 5;
@@ -47,40 +48,51 @@ public class ThunderChain extends Bullet
             if(chainCount == 1){
                 shock = false;
             }
-            Enermy enermy = getNearestEnermy(searchRange, false, shock);
-            if(enermy != null && enermy.getWorld() != null){
-                changeAnimation(currentX, currentY, enermy.getX(), enermy.getY());
-                
-                ShockedDecorator decorator = new ShockedDecorator(enermy);
-                getWorld().addObject(decorator, enermy.getX(), enermy.getY());
-                ShockedBuff buff = new ShockedBuff(this, shockedTime, 0);
-                buff.setDecorator(decorator);
-                enermy.addBuff(buff);
-                
-                enermy.damage(getX(), getY(), damage, "bullet");
-                move_state = "freeze";
-                Enermy nextEnermy = getNearestEnermy(300, true, true);
-                if(nextEnermy != null && --chainCount!= 0){
-                    shockedTime -= 400;
-                    int ex = nextEnermy.getX(), ey = nextEnermy.getY();
-                    int sx = enermy.getX(), sy = enermy.getY();
-                    int centerX = (sx+ex)/2;
-                    int centerY = (sy+ey)/2;
-                    int width = (int)Math.hypot(sx-ex, sy-ey);
-                    if (width < 10) width = 10;
-                    getWorld().addObject(new ThunderChain(sx, sy, ex, ey, width, damage, chainCount, shockedTime), centerX, centerY);
+            if(chainCount > 0){
+                Enermy enermy = getNearestEnermy(searchRange, false, shock);
+                if(enermy != null && enermy.getWorld() != null){
+                    changeAnimation(currentX, currentY, enermy.getX(), enermy.getY());
+                    // add shocked buff and effect
+                    ShockedBuff buff = new ShockedBuff(this, shockedTime, 0);
+                    if(enermy.hasBuff(BuffType.Shocked)){
+                        enermy.updateBuff(BuffType.Shocked);
+                    }else{
+                        ShockedDecorator decorator = new ShockedDecorator(enermy);
+                        getWorld().addObject(decorator, enermy.getX(), enermy.getY());
+                        buff.setDecorator(decorator);
+                        enermy.addBuff(buff);
+                    }
+                    
+                    enermy.damage(getX(), getY(), damage, "bullet");
+                    move_state = "freeze";
+                    Enermy nextEnermy = getNearestEnermy(300, true, true);
+                    if(nextEnermy != null && --chainCount!= 0){
+                        shockedTime -= 400;
+                        int ex = nextEnermy.getX(), ey = nextEnermy.getY();
+                        int sx = enermy.getX(), sy = enermy.getY();
+                        int centerX = (sx+ex)/2;
+                        int centerY = (sy+ey)/2;
+                        int width = (int)Math.hypot(sx-ex, sy-ey);
+                        if (width < 10) width = 10;
+                        getWorld().addObject(new ThunderChain(sx, sy, ex, ey, width, damage, chainCount, shockedTime), centerX, centerY);
+                    }
                 }
             }
-        }
+       }
         gifAnimator();
         dead();
     }
     public void gifAnimator(){
         sizeY = (sizeX-100)/20 + 20;
         if(sizeY > 50) sizeY = 50;
-        GreenfootImage image = originGif.getCurrentImage();
+        GreenfootImage image;
+        if(chainCount <= 1){
+            image = transGif.getCurrentImage();
+        }else{
+            image = originGif.getCurrentImage();
+        }        
         image.scale(sizeX, sizeY);
-        setImage(originGif.getCurrentImage());
+        setImage(image);
     }
     public void changeAnimation(int startX, int startY, int endX, int endY){
         int centerX = (startX + endX)/2;
