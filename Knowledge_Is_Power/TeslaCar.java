@@ -21,6 +21,7 @@ public class TeslaCar extends Player
     private Actor currentChase;
     private SimpleTimer moveTimer = new SimpleTimer();
     private int currentHP = 100;
+    private boolean isCharged;
     
     public TeslaCar(int damage){
         this.damage = damage;
@@ -28,13 +29,11 @@ public class TeslaCar extends Player
     public void act() 
     {
         if (move_state != "freeze"){
-            Enermy enermy = getNearestEnermy(400);
-            if(enermy != null && enermy.getWorld() != null){
-                currentChase = enermy;
-                chaseX = enermy.getX();
-                chaseY = enermy.getY();
+            switch (move_state){
+               case "wasd": wasd_move(); break;
+               case "push": push(push_x, push_y, push_speed); break;
+               default: break;
             }
-            
         }
         dead();
     }
@@ -79,5 +78,11 @@ public class TeslaCar extends Player
     }
     public void charge(int hp){
         currentHP += hp;
+    }
+    public boolean checkCharged(){
+        return isCharged;
+    }
+    public void setCharged(boolean flag){
+        isCharged = flag;
     }
 }
