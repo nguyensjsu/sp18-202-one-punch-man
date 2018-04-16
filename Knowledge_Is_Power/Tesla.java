@@ -38,6 +38,7 @@ public class Tesla extends Player
     
     public void act() 
     {
+<<<<<<< HEAD
        if (move_state != "freeze"){
            waitChanges();
            switch (move_state){
@@ -219,4 +220,29 @@ public class Tesla extends Player
             return timer;
         }
     }
+=======
+        
+       switch (move_state){
+           case "wasd": wasd_move(); break;
+           case "push": push(push_x, push_y, push_speed); break;
+           default: break;
+        }
+       base_attack();
+       
+       /* invincible flash */
+       if (invincible_timer % 20 >= 10){
+           setImage(new GreenfootImage("red-draught.png"));
+       }
+       else{
+           setImage(gif.getCurrentImage());
+        }
+       
+       if (invincible_timer == 0) damage_state = "normal";
+       
+       /* timer */
+       if (attack_timer != 0) attack_timer--;
+       if (push_timer != 0) push_timer--;
+       if (invincible_timer != 0) invincible_timer--;
+    }   
+>>>>>>> master
 }
