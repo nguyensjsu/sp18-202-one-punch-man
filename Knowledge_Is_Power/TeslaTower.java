@@ -14,8 +14,10 @@ public class TeslaTower extends Player
     private int damage;
     private int lifeTime = 10000;
     private int attackTime = 500;
+    private int chargeTime = 1000;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
+    private SimpleTimer chargeTimer = new SimpleTimer();
     public TeslaTower(int damage){
         this.damage = damage;
         lifeTimer.mark();
@@ -35,8 +37,23 @@ public class TeslaTower extends Player
                 }
                 attackTimer.mark();
             }
+            if(chargeTimer.millisElapsed() > chargeTime){
+                List<TeslaCar> cars = getObjectsInRange(400, TeslaCar.class);
+                if(cars.size() != 0){
+                    charge(cars.get(0));
+                }
+                chargeTimer.mark();
+            }
         }
         dead();
+    }
+    public void charge(TeslaCar car){
+        int sx = getX(), sy = getY();
+        int ex = car.getX(), ey = car.getY();
+        int centerX = (sx+ex)/2;
+        int centerY = (sy+ey)/2;
+        int width = (int)Math.hypot(sx-ex, sy-ey);
+        getWorld().addObject(new ThunderChain(sx, sy, ex, ey, width, 0, 0, 0), centerX, centerY);
     }
     public void dead(){
         if(lifeTimer.millisElapsed() > lifeTime){

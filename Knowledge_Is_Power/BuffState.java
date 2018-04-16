@@ -58,6 +58,9 @@ public class BuffState implements IBuffState
             decorator.setDead();
         }
     }
+    public void update(){
+        lifeTimer.mark();
+    }
     public BuffType getType(){
         return type;
     }

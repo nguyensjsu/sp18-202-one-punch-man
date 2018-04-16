@@ -40,7 +40,10 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected int effectPeriod = 100;
     protected SimpleTimer effectTimer = new SimpleTimer();
     protected String prevMoveState = "";
-  
+    
+    private boolean fade = false;
+    private int transVal = 255;
+    
     /* constructor */
     public Enermy(){
         this(50,50,"stop","stop");    //default size 50*50
@@ -78,9 +81,10 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
             /* timer */
             timer();
         }
-        
-        // refresh buff state
-        buffRefresh();
+        if(!fade){
+            // refresh buff state
+            buffRefresh();
+        }
         /* remove condition */
         dead();
     }
@@ -185,8 +189,18 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     
     public void dead(){
         if (hp <= 0) {
+            fade = true;
+            move_state = "freeze";
+        }
+        if(fade){
+            transVal-=5;
+        }
+        if(transVal <=0){
             getWorld().removeObject(this);
             clearBuff();
+        }
+        else{
+            getImage().setTransparency(transVal);
         }
     };
     
@@ -238,20 +252,33 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
         buff.die();
         buffList.remove(buff);
     }
+    // clear all buff, better call after leaving world
     public void clearBuff(){
         for(IBuffState buff : buffList){
             buff.die();
         }
         buffList.clear();
     }
+    // check if there is a buff
     public boolean hasBuff(BuffType type){
         boolean flag = false;
-        for(IBuffState buff : buffList){
+        List<IBuffState> tempList = new ArrayList<IBuffState>(buffList);
+        for(IBuffState buff : tempList){
             if(buff.getType() == type){
                 flag = true;
             }
         }
         return flag;
+    }
+    // reset lifetime of buff
+    public void updateBuff(BuffType type){
+        List<IBuffState> tempList = new ArrayList<IBuffState>(buffList);
+        for(IBuffState buff : tempList){
+            if(buff.getType() == type){
+                buff.update();
+                break;
+            }
+        }
     }
     public List<Enermy> getObjectsInRange(int range){
         return getObjectsInRange(range, Enermy.class);

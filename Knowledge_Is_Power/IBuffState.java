@@ -10,6 +10,7 @@ public interface IBuffState
     public Actor getSource();
     public int buffDamage();
     public String buffMove();
+    public void update();
     public void die();
     public boolean isDead();
     public BuffType getType();
