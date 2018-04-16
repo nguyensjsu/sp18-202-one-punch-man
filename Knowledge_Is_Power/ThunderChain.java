@@ -50,7 +50,8 @@ public class ThunderChain extends Bullet
             Enermy enermy = getNearestEnermy(searchRange, false, shock);
             if(enermy != null && enermy.getWorld() != null){
                 changeAnimation(currentX, currentY, enermy.getX(), enermy.getY());
-                enermy.setNegativeState("shocked", 1000, damage);
+                enermy.addBuff(new ShockedBuff(this, 2000, 0));
+                enermy.damage(getX(), getY(), damage, "bullet");
                 move_state = "freeze";
                 Enermy nextEnermy = getNearestEnermy(300, true, true);
                 if(nextEnermy != null && --chainCount!= 0){
@@ -108,7 +109,7 @@ public class ThunderChain extends Bullet
         Enermy nearestEnermy = null;
         double nearestDistance = distance;
         for (int i = 0; i < nearEnermys.size(); i++) {
-           if(shock && nearEnermys.get(i).isShocked()){
+           if(shock && nearEnermys.get(i).hasBuff(ShockedBuff.class)){
                continue;
            }
            double tmpDistance = getDistance(nearEnermys.get(i));

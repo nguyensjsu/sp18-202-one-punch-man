@@ -20,6 +20,7 @@ public class TeslaCar extends Player
     private int chaseY;
     private Actor currentChase;
     private SimpleTimer moveTimer = new SimpleTimer();
+    private int maxHP = 100;
     
     public TeslaCar(int damage){
         this.damage = damage;
@@ -75,5 +76,8 @@ public class TeslaCar extends Player
             }
         }
         return nearestEnermy;
+    }
+    public void charge(){
+        
     }
 }

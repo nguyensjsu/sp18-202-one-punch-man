@@ -35,10 +35,10 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected int wander_x;
     protected int wander_y;
     
-    protected SimpleTimer freezeTimer = new SimpleTimer();
-    protected int freezeTimeout;
-    protected List<String> neg_state = new ArrayList<>();
-    protected String prevMoveState;
+    // buff state list
+    protected List<IBuffState> buffList = new ArrayList<>();
+    protected int effectPeriod = 100;
+    protected SimpleTimer effectTimer = new SimpleTimer();
     
     /* constructor */
     public Enermy(){
@@ -76,10 +76,10 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
                 
             /* timer */
             timer();
-        }else if(isShocked()){
-            shockToNormal();
         }
         
+        // refresh buff state
+        buffRefresh();
         /* remove condition */
         dead();
     }
@@ -188,28 +188,49 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
         }
     };
     
-    public void shockToNormal(){
-        if(freezeTimer.millisElapsed() > freezeTimeout){
-            move_state = prevMoveState;
-            neg_state.remove("shocked");
+    public void buffRefresh(){
+        // display animation
+        for(IBuffState buff : buffList){
+            buff.display(getX(), getY(), getRotation());
         }
-    }
-    public void setNegativeState(String type, int time, int d){
-        freezeTimeout = time;
-        switch(type){
-            case "shocked":
-                if(!isShocked()){
-                    neg_state.add("shocked");
+        int priori
+        for(IBuffState buff : buffList){
+            
+        }
+        if(effectTimer.millisElapsed() > effectPeriod){
+            for(IBuffState buff : buffList){
+                Actor source = buff.getSource();
+                if(source!=null&&source.getWorld()!=null){
+                    damage(source.getX(), source.getY(), buff.buffDamage(), "bullet");
+                }else{
+                    damage(0, 0, buff.buffDamage(),"bullet");
                 }
-                prevMoveState = move_state;
-                move_state = "freeze";
-                damage(getX(),getY(),d,"bullet");
-                freezeTimer.mark();
-                break;
+                String changedState = buff.buffMove(move_state);
+                if(changedState != ""){
+                    move_state = changedState;
+                }
+                if(buff.isDead()){
+                    move_state = buff.getPrevMoveState();
+                    buffList.remove(buff);
+                }
+            }
+            effectTimer.mark();
         }
     }
-    public boolean isShocked(){
-        return neg_state.contains("shocked");
+    public void addBuff(IBuffState buff){
+        buffList.add(buff);
+    }
+    public void removeBuff(IBuffState buff){
+        buffList.remove(buff);
+    }
+    public boolean hasBuff(Class cls){
+        boolean flag = false;
+        for(IBuffState buff : buffList){
+            if(cls.isInstance(buff)){
+                flag = true;
+            }
+        }
+        return false;
     }
     public List<Enermy> getObjectsInRange(int range){
         return getObjectsInRange(range, Enermy.class);

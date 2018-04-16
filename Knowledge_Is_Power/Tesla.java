@@ -51,7 +51,9 @@ public class Tesla extends Player
            /* timer */
            timer();
            
+           // mouse operation
            currentAttack.attack();
+           // keyboard operation
            towerAttack.attack();
            carAttack.attack();
        }

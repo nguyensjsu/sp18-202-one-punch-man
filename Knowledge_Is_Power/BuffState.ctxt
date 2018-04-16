@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=BuffState
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ShockedBuff\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=source\ decorator\ timeout\ damage\ type\ moveState
+comment1.target=BuffState(greenfoot.Actor,\ Decorator,\ int,\ int,\ BuffType,\ java.lang.String)
+comment2.params=
+comment2.target=greenfoot.Actor\ getSource()
+comment3.params=
+comment3.target=int\ buffDamage()
+comment4.params=prevMoveState
+comment4.target=java.lang.String\ buffMove(java.lang.String)
+comment5.params=
+comment5.target=boolean\ changeMove()
+comment6.params=
+comment6.target=java.lang.String\ getPrevMoveState()
+comment7.params=x\ y\ r
+comment7.target=void\ display(int,\ int,\ int)
+comment8.params=
+comment8.target=boolean\ isDead()
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=10
