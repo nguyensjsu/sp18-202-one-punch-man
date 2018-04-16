@@ -25,7 +25,7 @@ public class BaseWorld extends World
     public void prepare()
     {
         /* create player */
-        Player player = new Player(50,50);  //size 50*50
+        Player player = new Tesla();  //size 50*50
         addObject(player, 800, 400);
         HpDecorator player_hp = new HpDecorator(player,100,100,0,40,50,10);   // hp 100-100, offset(0,40), size 50*10
         addObject(player_hp, 10000, 10000);

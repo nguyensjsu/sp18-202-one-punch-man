@@ -21,7 +21,6 @@ public class Decorator extends Actor
     public Decorator(){
         this(1,1,0,0);
     }
-    
     public Decorator(int X, int Y, int s, int r){
         size_x = X;
         size_y = Y;
@@ -51,6 +50,10 @@ public class Decorator extends Actor
         
         /* move */
         setLocation(update_x,update_y);
+    }
+    
+    public void setDead(){
+        go_die = true;
     }
     
     public void dead(){
