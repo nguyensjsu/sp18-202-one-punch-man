@@ -204,6 +204,7 @@ public class Tesla extends Player
         public void attack(){
             if(timer == 0){
                 if(Greenfoot.isKeyDown("5")){
+                    move_state = "freeze"; 
                     getWorld().addObject(new TeslaCar(carDamage), getX(), getY());
                     timer = cooldown;
                 }

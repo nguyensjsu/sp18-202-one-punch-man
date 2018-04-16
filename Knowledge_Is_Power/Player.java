@@ -60,7 +60,7 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
                case "wasd": wasd_move(); break;
                case "push": push(push_x, push_y, push_speed); break;
                default: break;
-            }
+           }
            
            /* ability */
            base_attack();
