@@ -13,7 +13,7 @@ public class TeslaTower extends Player
     private int transVal = 255;
     private int damage;
     private int lifeTime = 100000;
-    private int attackTime = 500;
+    private int attackTime = 100;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
     public TeslaTower(int damage){
@@ -52,6 +52,7 @@ public class TeslaTower extends Player
             int centerY = (sy+ey)/2;
             ThunderCharger thunderCharger = new ThunderCharger(this, car);
             getWorld().addObject(thunderCharger, centerX, centerY);
+            thunderCharger.turnTowards(ex, ey);
         }
     }
     public void dead(){

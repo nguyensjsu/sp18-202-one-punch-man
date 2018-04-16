@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ThunderCharger extends Bullet
 {
-     private GifImage originGif = new GifImage("thunder_chain_yellow.gif");
+     private GifImage originGif = new GifImage("thunder_charge.gif");
     private int sizeX = 1000;
     private int sizeY = 50;
     private int chargeSpeed = 1;
