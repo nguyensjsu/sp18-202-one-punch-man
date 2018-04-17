@@ -288,13 +288,18 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
                 prioriState = buff.buffMove();
             }
         }
-        if(prioriState != ""){
-            move_state = prioriState;
+        if(!prioriState.isEmpty()){
+            if(prioriState.equals("freeze")){
+                freeze_state = true;
+            }else{
+                move_state = prioriState;;
+            }
         }
         // if buff die
         for(IBuffState buff : tempList){
             if(buff.isDead()){
-                if(buff.buffMove() != ""){
+                freeze_state = false;
+                if(!buff.buffMove().isEmpty() && !buff.buffMove().equals("freeze")){
                     move_state = prevMoveState;
                 }
                 removeBuff(buff);

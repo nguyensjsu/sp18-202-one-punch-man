@@ -1,19 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class ShockedDecorator here.
+ * Write a description of class FlameDecorator here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ShockedDecorator extends Decorator
+public class FlameDecorator extends Decorator
 {
-    private GifImage originGif = new GifImage("state_shocked.gif");
+    private GifImage originGif = new GifImage("flame_hit.gif");
     private Actor bindActor;
-    public ShockedDecorator(Actor bindActor){
-        this(bindActor, 75, 75);
+    public FlameDecorator(Actor bindActor){
+        this(bindActor, 95, 95);
     }
-    public ShockedDecorator(Actor bindActor, int width, int height){
+    public FlameDecorator(Actor bindActor, int width, int height){
         this.bindActor = bindActor;
         size_x = width;
         size_y = height;

@@ -24,16 +24,18 @@ public class ThunderCharger extends Bullet
         changeAnimation();
     }
     public void act(){
-        if(checkValid()){
-            if(charge_timer.millisElapsed() > 100){
-                teslaCar.charge(chargeSpeed);
+        if(!fade){
+            if(checkValid()){
+                if(charge_timer.millisElapsed() > 100){
+                    teslaCar.charge(chargeSpeed);
+                    charge_timer.mark();
+                }
+                changeAnimation();
+            }else{
+                teslaCar.setCharged(false);
+                fade = true;
             }
-            changeAnimation();
         }else{
-            teslaCar.setCharged(false);
-            fade = true;
-        }
-        if(fade){
             dead();
         }
     }
