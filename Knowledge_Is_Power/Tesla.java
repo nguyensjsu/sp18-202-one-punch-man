@@ -205,7 +205,10 @@ public class Tesla extends Player
             if(timer == 0){
                 if(Greenfoot.isKeyDown("5")){
                     freeze_state = true; 
-                    getWorld().addObject(new TeslaCar(carDamage), getX(), getY());
+                    TeslaCar car = new TeslaCar(carDamage);
+                    getWorld().addObject(car, getX(), getY());
+                    HpDecorator car_hp = new HpDecorator(car,100,100,0,40,50,10);
+                    getWorld().addObject(car_hp, car.getX(), car.getY());
                     timer = cooldown;
                 }
             }else{

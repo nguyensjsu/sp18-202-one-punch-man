@@ -57,7 +57,7 @@ public class ThunderChain extends Bullet
                     if(enermy.hasBuff(BuffType.Shocked)){
                         enermy.updateBuff(BuffType.Shocked);
                     }else{
-                        FlameDecorator decorator = new FlameDecorator(enermy);
+                        ShockedDecorator decorator = new ShockedDecorator(enermy);
                         getWorld().addObject(decorator, enermy.getX(), enermy.getY());
                         buff.setDecorator(decorator);
                         enermy.addBuff(buff);

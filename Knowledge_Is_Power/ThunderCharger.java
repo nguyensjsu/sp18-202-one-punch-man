@@ -40,7 +40,7 @@ public class ThunderCharger extends Bullet
         }
     }
     public boolean checkValid(){
-        return teslaCar!=null&&teslaCar.getWorld()!=null&&teslaTower!=null&&teslaTower.getWorld()!=null&&getDistance(teslaTower,teslaCar)<300;
+        return teslaCar!=null&&teslaCar.getWorld()!=null&&teslaTower!=null&&teslaTower.getWorld()!=null&&getDistance(teslaTower,teslaCar)<300&&!teslaCar.checkFullHP();
     }
     public double getDistance(Actor actor1, Actor actor2) {
         return Math.hypot(actor1.getX() - actor2.getX(), actor1.getY() - actor2.getY());
@@ -51,9 +51,9 @@ public class ThunderCharger extends Bullet
         int centerX = (sx+ex)/2;
         int centerY = (sy+ey)/2;
         int sizeX = (int)Math.hypot(sx-ex, sy-ey);
-        if(sizeX<10)sizeX = 10;
-        sizeY = (sizeX-100)/20 + 20;
-        if(sizeY > 50) sizeY = 50;
+        if(sizeX < 10)sizeX = 10;
+        sizeY = (sizeX-100)/20 + 10;
+        if(sizeY > 20) sizeY = 20;
         setLocation(centerX, centerY);
         turnTowards(ex, ey);
         GreenfootImage image = originGif.getCurrentImage();
@@ -63,7 +63,7 @@ public class ThunderCharger extends Bullet
     
     public void dead(){
         if(fade){
-            transVal-=5;
+            transVal-=10;
         }
         if(transVal <=0){
             getWorld().removeObject(this);

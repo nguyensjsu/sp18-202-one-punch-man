@@ -43,7 +43,7 @@ public class TeslaTower extends Player
         dead();
     }
     public void charge(TeslaCar car){
-        if(!car.checkCharged())
+        if(!car.checkCharged() && !car.checkFullHP())
         {
             car.setCharged(true);
             int ex = getX(), ey = getY();

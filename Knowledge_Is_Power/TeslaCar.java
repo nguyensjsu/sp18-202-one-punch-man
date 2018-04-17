@@ -20,11 +20,11 @@ public class TeslaCar extends Player
     private int chaseY;
     private Actor currentChase;
     private SimpleTimer moveTimer = new SimpleTimer();
-    private int currentHP = 100;
     private boolean isCharged;
     
     public TeslaCar(int damage){
         this.damage = damage;
+        hp = 1;
     }
     public void act() 
     {
@@ -34,6 +34,9 @@ public class TeslaCar extends Player
                case "push": push(push_x, push_y, push_speed); break;
                default: break;
             }
+            
+            /* timer */
+            timer();
         }
         dead();
     }
@@ -77,12 +80,20 @@ public class TeslaCar extends Player
         return nearestEnermy;
     }
     public void charge(int hp){
-        currentHP += hp;
+        if(this.hp < MAX_HP ){
+            this.hp += hp;
+        }
+        if(this.hp > MAX_HP){
+            this.hp = MAX_HP;
+        }
     }
     public boolean checkCharged(){
         return isCharged;
     }
     public void setCharged(boolean flag){
         isCharged = flag;
+    }
+    public boolean checkFullHP(){
+        return hp == MAX_HP;
     }
 }
