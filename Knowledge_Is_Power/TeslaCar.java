@@ -28,7 +28,7 @@ public class TeslaCar extends Player
     }
     public void act() 
     {
-        if (move_state != "freeze"){
+        if (!freeze_state){
             switch (move_state){
                case "wasd": wasd_move(); break;
                case "push": push(push_x, push_y, push_speed); break;

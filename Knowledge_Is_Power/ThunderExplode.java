@@ -17,7 +17,7 @@ public class ThunderExplode extends Bullet
     }
     public void act() 
     {
-        if (move_state != "freeze"){
+        if (!freeze_state){
             chase();
             // if touch
             List<Enermy> touchingEnermys = getObjectsInRange(150, Enermy.class);
@@ -28,7 +28,7 @@ public class ThunderExplode extends Bullet
                     getWorld().removeObject(enermys.get(i));
                     if(i==enermys.size()-1){
                         fade = true;
-                        move_state = "freeze";
+                        freeze_state = true;
                     }
                 }
             }

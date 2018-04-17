@@ -22,7 +22,7 @@ public class TeslaTower extends Player
     }
     public void act() 
     {
-        if (move_state != "freeze"){
+        if (!freeze_state){
             if(attackTimer.millisElapsed() > attackTime){
                 Enermy enermy = getNearestEnermy(400);
                 if(enermy != null && enermy.getWorld() != null){

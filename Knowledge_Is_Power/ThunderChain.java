@@ -36,7 +36,7 @@ public class ThunderChain extends Bullet
     
     public void act() 
     {
-        if (move_state != "freeze"){
+        if (!freeze_state){
             int searchRange;
             if(chainCount == 5 && sizeX > 500){
                 searchRange = sizeX/2;
@@ -64,7 +64,7 @@ public class ThunderChain extends Bullet
                     }
                     
                     enermy.damage(getX(), getY(), damage, "bullet");
-                    move_state = "freeze";
+                    freeze_state = true;
                     Enermy nextEnermy = getNearestEnermy(300, true, true);
                     if(nextEnermy != null && --chainCount!= 0){
                         shockedTime -= 400;
