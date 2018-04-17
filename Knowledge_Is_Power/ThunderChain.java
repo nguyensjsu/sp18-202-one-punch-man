@@ -36,7 +36,7 @@ public class ThunderChain extends Bullet
     
     public void act() 
     {
-        if (move_state != "freeze"){
+        if (!freeze_state){
             int searchRange;
             if(chainCount == 5 && sizeX > 500){
                 searchRange = sizeX/2;
@@ -57,14 +57,14 @@ public class ThunderChain extends Bullet
                     if(enermy.hasBuff(BuffType.Shocked)){
                         enermy.updateBuff(BuffType.Shocked);
                     }else{
-                        ShockedDecorator decorator = new ShockedDecorator(enermy);
+                        FlameDecorator decorator = new FlameDecorator(enermy);
                         getWorld().addObject(decorator, enermy.getX(), enermy.getY());
                         buff.setDecorator(decorator);
                         enermy.addBuff(buff);
                     }
                     
                     enermy.damage(getX(), getY(), damage, "bullet");
-                    move_state = "freeze";
+                    freeze_state = true;
                     Enermy nextEnermy = getNearestEnermy(300, true, true);
                     if(nextEnermy != null && --chainCount!= 0){
                         shockedTime -= 400;

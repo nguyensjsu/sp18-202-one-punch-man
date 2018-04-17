@@ -38,7 +38,7 @@ public class Tesla extends Player
     
     public void act() 
     {
-       if (move_state != "freeze"){
+       if (!freeze_state){
            waitChanges();
            switch (move_state){
                case "wasd": wasd_move(); break;
@@ -204,7 +204,7 @@ public class Tesla extends Player
         public void attack(){
             if(timer == 0){
                 if(Greenfoot.isKeyDown("5")){
-                    move_state = "freeze"; 
+                    freeze_state = true; 
                     getWorld().addObject(new TeslaCar(carDamage), getX(), getY());
                     timer = cooldown;
                 }

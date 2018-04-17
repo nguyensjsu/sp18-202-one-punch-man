@@ -12,8 +12,8 @@ public class TeslaTower extends Player
     private int sizeY = 100;
     private int transVal = 255;
     private int damage;
-    private int lifeTime = 100000;
-    private int attackTime = 100;
+    private int lifeTime = 10000;
+    private int attackTime = 500;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
     public TeslaTower(int damage){
@@ -22,7 +22,7 @@ public class TeslaTower extends Player
     }
     public void act() 
     {
-        if (move_state != "freeze"){
+        if (!freeze_state){
             if(attackTimer.millisElapsed() > attackTime){
                 Enermy enermy = getNearestEnermy(400);
                 if(enermy != null && enermy.getWorld() != null){

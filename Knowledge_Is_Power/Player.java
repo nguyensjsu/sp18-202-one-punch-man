@@ -13,7 +13,8 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     protected GifImage originGif;
     protected GifImage transGif;
     /* player state */
-    protected String move_state = "wasd";       //wasd, push, freeze
+    protected boolean freeze_state = false;      //pause
+    protected String move_state = "wasd";       //wasd, push
     protected String damage_state = "normal";       //normal, invincible
     
     /* player stat */
@@ -55,7 +56,7 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     
     public void act() 
     {   /* update move */
-       if (move_state != "freeze"){
+       if (!freeze_state){
            switch (move_state){
                case "wasd": wasd_move(); break;
                case "push": push(push_x, push_y, push_speed); break;
@@ -72,6 +73,8 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
            timer();
        }
        
+       /* animation timer */
+       animation_timer();
        /* game over condition */
        dead();
     }
@@ -83,6 +86,7 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     
     public int get_hp(){return hp;}
     public String get_damage_state(){return damage_state;}
+    public void set_freeze_state(boolean b){freeze_state = b;}
     public void set_move_state(String s){move_state = s;}
     
     /* movement control using WASD */
@@ -225,6 +229,8 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
        if (push_timer != 0) push_timer--;
        if (invincible_timer != 0) invincible_timer--;
     }
+    
+    public void animation_timer(){}
     
     public void dead(){
         if(hp <= 0){
