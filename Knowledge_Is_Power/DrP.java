@@ -69,6 +69,9 @@ public class DrP extends Player
         if(Greenfoot.isKeyDown("3")){
             BaseWorld.getInstance().freeze_all(true);
             ult_animation_timer = 180;
+            for (Enermy enermy: getWorld().getObjects(Enermy.class)){
+                getWorld().addObject(new DrPPaperDecorator(enermy.getX(),enermy.getY(),10,0),getX(),getY());
+            }
         }
     }
     
