@@ -44,7 +44,7 @@ public class BaseWorld extends World
         }
         
         /* create 1 wandering enermy that does not attack */
-        Enermy enermy = new Enermy(50,50,"wander","stop");
+        Enermy enermy = new TestEnermy(50,50,"wander","stop");
         addObject(enermy, (int)(1600*random()), (int)(900*random()));
         HpDecorator enermy_hp = new HpDecorator(enermy,20,20,0,40,50,10);   //hp 20-20, offset(0,40), size 50*10
         addObject(enermy_hp, 10000, 10000);

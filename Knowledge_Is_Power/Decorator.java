@@ -34,6 +34,8 @@ public class Decorator extends Actor
         draw();
         move();
         
+        /* timer */
+        timer();
         /* remove condition */
         dead();
     }
@@ -51,6 +53,8 @@ public class Decorator extends Actor
         /* move */
         setLocation(update_x,update_y);
     }
+    
+     public void timer(){}
     
     public void setDead(){
         go_die = true;
