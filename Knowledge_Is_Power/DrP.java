@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import static java.lang.Math.*;
 
 /**
  * Write a description of class DrP here.
@@ -9,7 +10,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class DrP extends Player
 {
     protected String player_image = "man.png";
+    
+    /* Dr.P state*/
+    protected boolean decorator_pattern_state = false;
+    protected boolean factory_method_pattern_state = false;
+    
+    /* timer */
     protected int ult_animation_timer = 0;
+    protected int skill_one_duration_timer = 0;
+    protected int skill_one_cd_timer = 0;
+    protected int skill_two_duration_timer = 0;
+    protected int skill_two_cd_timer = 0;
     
     public DrP(){
         this(50,50);    //default size 50*50
@@ -36,7 +47,7 @@ public class DrP extends Player
            /* ability */
            base_attack();
            skill_one();
-           skill_one();
+           skill_two();
            ult();
            
            /* invincible flash */
@@ -44,6 +55,7 @@ public class DrP extends Player
            
            /* timer */
            timer();
+           additional_timer();
        }
        
 
@@ -61,9 +73,29 @@ public class DrP extends Player
         }
     }
     
-    public void skill_one(){}
+    public void skill_one(){
+        if (skill_one_cd_timer == 0){
+            if(Greenfoot.isKeyDown("1")){
+                decorator_pattern_state = true;
+                getWorld().addObject(new DecoratorPatternDecorator(this,180,150),getX(),getY());
+                
+                skill_one_duration_timer = 180;
+                skill_one_cd_timer = 360;
+            }
+        }
+    }
     
-    public void skill_two(){}
+    public void skill_two(){
+        if (skill_two_cd_timer == 0){
+            if(Greenfoot.isKeyDown("2")){
+                factory_method_pattern_state = true;
+                getWorld().addObject(new FactoryMethodPatternDecorator(this,180,300),getX(),getY());
+                
+                skill_two_duration_timer = 300;
+                skill_two_cd_timer = 600;
+            }
+        }
+    }
     
     public void ult(){
         if(Greenfoot.isKeyDown("3")){
@@ -73,6 +105,17 @@ public class DrP extends Player
                 getWorld().addObject(new DrPPaperDecorator(enermy.getX(),enermy.getY(),10,0),getX(),getY());
             }
         }
+    }
+    
+    public void additional_timer(){
+        if (skill_one_duration_timer == 1){decorator_pattern_state = false;}
+        if (skill_one_duration_timer != 0){skill_one_duration_timer--;}
+        
+        if (skill_two_duration_timer == 1){factory_method_pattern_state = false;}
+        if (skill_two_duration_timer != 0){skill_one_duration_timer--;}
+        
+        if (skill_one_cd_timer != 0){skill_one_cd_timer--;}
+        if (skill_two_cd_timer != 0){skill_two_cd_timer--;}
     }
     
     public void animation_timer(){
