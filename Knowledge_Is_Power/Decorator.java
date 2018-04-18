@@ -35,10 +35,12 @@ public class Decorator extends Actor
         if(!freeze_state){
             draw();
             move();
-            
+            update();
+
             /* timer */
             timer();
         }
+
         /* remove condition */
         dead();
     }
@@ -57,6 +59,8 @@ public class Decorator extends Actor
         setLocation(update_x,update_y);
     }
     
+    public void update(){}
+
     public void timer(){}
     
     public void setDead(){
