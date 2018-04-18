@@ -15,6 +15,10 @@ public class DrP extends Player
     protected boolean decorator_pattern_state = false;
     protected boolean factory_method_pattern_state = false;
     
+    /* Dr,P stat */
+    protected int attack_speed = 15;
+    protected int bullet_damage = 5;
+    
     /* timer */
     protected int ult_animation_timer = 0;
     protected int skill_one_duration_timer = 0;
@@ -68,7 +72,7 @@ public class DrP extends Player
     
     public void bullet_attack(){
         if (attack_timer == 0){
-            getWorld().addObject(new DrPBaseAttack(getRotation(), 20, 20, bullet_damage),getX(),getY());
+            getWorld().addObject(new DrPSuperAttack(getRotation(), 20, 20, bullet_damage, false),getX(),getY());
             attack_timer = attack_speed;
         }
     }
@@ -76,8 +80,8 @@ public class DrP extends Player
     public void skill_one(){
         if (skill_one_cd_timer == 0){
             if(Greenfoot.isKeyDown("1")){
-                decorator_pattern_state = true;
-                getWorld().addObject(new DecoratorPatternDecorator(this,180,150),getX(),getY());
+                factory_method_pattern_state = true;
+                getWorld().addObject(new FactoryMethodPatternDecorator(this,180,100),getX(),getY());
                 
                 skill_one_duration_timer = 180;
                 skill_one_cd_timer = 360;
@@ -88,9 +92,10 @@ public class DrP extends Player
     public void skill_two(){
         if (skill_two_cd_timer == 0){
             if(Greenfoot.isKeyDown("2")){
-                factory_method_pattern_state = true;
-                getWorld().addObject(new FactoryMethodPatternDecorator(this,180,300),getX(),getY());
-                
+                decorator_pattern_state = true;
+                getWorld().addObject(new DecoratorPatternDecorator(300,200),
+                                                                   (int)(getX() + 200*cos(toRadians(getRotation()))),
+                                                                   (int)(getY() + 200*sin(toRadians(getRotation()))));
                 skill_two_duration_timer = 300;
                 skill_two_cd_timer = 600;
             }
@@ -99,7 +104,7 @@ public class DrP extends Player
     
     public void ult(){
         if(Greenfoot.isKeyDown("3")){
-            BaseWorld.getInstance().freeze_all(true);
+            ((BaseWorld)getWorld()).freeze_all(true);
             ult_animation_timer = 180;
             for (Enermy enermy: getWorld().getObjects(Enermy.class)){
                 getWorld().addObject(new DrPPaperDecorator(enermy.getX(),enermy.getY(),10,0),getX(),getY());
@@ -121,7 +126,7 @@ public class DrP extends Player
     public void animation_timer(){
         /* ult effect */
         if (ult_animation_timer == 1){
-            BaseWorld.getInstance().freeze_all(false);
+            ((BaseWorld)getWorld()).freeze_all(false);
             for (Enermy enermy: getWorld().getObjects(Enermy.class)){
                 enermy.damage(getY(), getX(), 200, "bullet");
             }
