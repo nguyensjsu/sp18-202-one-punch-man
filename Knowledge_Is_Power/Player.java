@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import static java.lang.Math.*;
+import java.util.*;
 
 /**
  * Write a description of class Obj here.
@@ -9,9 +10,11 @@ import static java.lang.Math.*;
  */
 public class Player extends Actor implements NotBullet,FreezeObj,HasHp
 {
-    //protected GifImage gif = new GifImage("obj_arrow.gif");
+    protected GifImage originGif;
+    protected GifImage transGif;
     /* player state */
-    protected String move_state = "wasd";       //wasd, push, freeze
+    protected boolean freeze_state = false;      //pause
+    protected String move_state = "wasd";       //wasd, push
     protected String damage_state = "normal";       //normal, invincible
     
     /* player stat */
@@ -50,16 +53,15 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
         setImage(image);
     }
     
-    /* method */
-    public void act(){
-       //setImage(gif.getCurrentImage());      
-       /* update move */
-       if (move_state != "freeze"){
+    
+    public void act() 
+    {   /* update move */
+       if (!freeze_state){
            switch (move_state){
                case "wasd": wasd_move(); break;
                case "push": push(push_x, push_y, push_speed); break;
                default: break;
-            }
+           }
            
            /* ability */
            base_attack();
@@ -71,9 +73,11 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
            timer();
        }
        
+       /* animation timer */
+       animation_timer();
        /* game over condition */
        dead();
-    }    
+    }
 
     /* no use, just for interface */
     public int interface_getX(){return getX();}
@@ -82,6 +86,7 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     
     public int get_hp(){return hp;}
     public String get_damage_state(){return damage_state;}
+    public void set_freeze_state(boolean b){freeze_state = b;}
     public void set_move_state(String s){move_state = s;}
     
     /* movement control using WASD */
@@ -197,17 +202,25 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     }
     
     public void invincible_flash(String origin, String trans){
+       GreenfootImage image;
        if (invincible_timer % 20 >= 10){
-           GreenfootImage image = new GreenfootImage(trans);
-           image.scale(size_x, size_y);
-           setImage(image);
+           if(transGif != null){
+               image = transGif.getCurrentImage();
+           }
+           else{
+               image = new GreenfootImage(trans);
+           }
        }
        else{
-           GreenfootImage image = new GreenfootImage(origin);
-           image.scale(size_x, size_y);
-           setImage(image);
+           if(originGif != null){
+               image = originGif.getCurrentImage();
+           }
+           else{
+               image = new GreenfootImage(origin);
+            }
         }
-       
+       image.scale(size_x, size_y);
+       setImage(image);
        if ((invincible_timer == 0) && damage_state == "invincible") damage_state = "normal";
     }
     
@@ -217,6 +230,8 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
        if (invincible_timer != 0) invincible_timer--;
     }
     
+    public void animation_timer(){}
+    
     public void dead(){
         if(hp <= 0){
             /* game over phase */
@@ -225,5 +240,8 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
             /* clear all */
             getWorld().removeObjects(getWorld().getObjects(Actor.class));
         }
+    }
+    public List<Enermy> getObjectsInRange(int range){
+        return getObjectsInRange(range, Enermy.class);
     }
 }

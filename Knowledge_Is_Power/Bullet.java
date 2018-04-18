@@ -10,7 +10,7 @@ import static java.lang.Math.*;
 public class Bullet extends Actor implements FreezeObj
 {
     /* bullet state */
-    protected String move_state = "normal";     //normal, freeze
+    protected boolean freeze_state = false;
     /* bullet stat */
     protected String bullet_image;
     protected int size_x;
@@ -22,6 +22,9 @@ public class Bullet extends Actor implements FreezeObj
     protected int fire_rotation;
    
     /* constructor */
+    public Bullet(){
+    }
+    
     public Bullet(int r){
         this(r,20,20,20);        //default size 20*20, not through, 20 damage
     }
@@ -39,7 +42,7 @@ public class Bullet extends Actor implements FreezeObj
     
     /* method */
     public void act(){
-        if (move_state != "freeze"){
+        if (!freeze_state){
             move();
 
             /* timer */
@@ -54,9 +57,7 @@ public class Bullet extends Actor implements FreezeObj
     public int interface_getX(){return getX();}
     public int interface_getY(){return getY();}
     
-    public void set_move_state(String s){
-        move_state = s;
-    }
+    public void set_freeze_state(boolean b){freeze_state = b;}
     
     public void move(){
         int update_x;

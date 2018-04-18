@@ -26,6 +26,14 @@ public class PlayerBullet extends Bullet
             }
             getWorld().removeObject(this);
         }
+        /* if hit enermy and type is through */
+        /* ATTENTION: through damage must be very small */
+        else if (getOneIntersectingObject(Enermy.class) != null && through){
+            for (Enermy e: this.getIntersectingObjects(Enermy.class)){
+                e.damage(getX(),getY(),damage, "bullet");
+                break;
+            }
+        }
         /* delete if hit world edge */
         else if (this.isAtEdge()){
             getWorld().removeObject(this);
