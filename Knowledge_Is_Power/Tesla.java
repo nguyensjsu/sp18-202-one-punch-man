@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import static java.lang.Math.*;
-
+import java.util.*;
 /**
  * Write a description of class Tesla here.
  * Tesla Special Operation
@@ -55,8 +55,9 @@ public class Tesla extends Player
            currentAttack.attack();
            // keyboard operation
            towerAttack.attack();
-           carAttack.attack();
        }
+       // car state need to be observered
+       carAttack.attack();
        /* game over condition */
        dead();
     }
@@ -198,21 +199,53 @@ public class Tesla extends Player
     }
     public class CarAttack implements AttackStrategy{
         private int timer = 0;
-        private int cooldown = 300;
+        private int cooldown = 100;
+        private boolean carStarted = false;
         private int carDamage = 10;
-        
+        private TeslaCar teslaCar;
+        private HpDecorator teslaHP;
+        private int carX;
+        private int carY;
         public void attack(){
             if(timer == 0){
-                if(Greenfoot.isKeyDown("5")){
+                if(!carStarted && Greenfoot.isKeyDown("5")){
+                    // freeze and hide tesla
+                    List<HpDecorator> hpList = getWorld().getObjects(HpDecorator.class);
+                    for(HpDecorator hp:hpList){
+                        if(hp.getActor().getClass() == Tesla.class){
+                            teslaHP = hp;
+                            break;
+                        }
+                    }
+                    teslaHP.setFreeze();
+                    teslaHP.getImage().setTransparency(0);
+                    getImage().setTransparency(0);
                     freeze_state = true; 
-                    TeslaCar car = new TeslaCar(carDamage);
-                    getWorld().addObject(car, getX(), getY());
-                    HpDecorator car_hp = new HpDecorator(car,100,100,0,40,50,10);
-                    getWorld().addObject(car_hp, car.getX(), car.getY());
+                    // create new car
+                    teslaCar = new TeslaCar(carDamage);
+                    getWorld().addObject(teslaCar, getX(), getY());
+                    HpDecorator car_hp = new HpDecorator(teslaCar,100,100,0,40,50,10);
+                    getWorld().addObject(car_hp, getX(), getY());
+                    carStarted = true;
+                    // set cd
                     timer = cooldown;
                 }
             }else{
                 timer--;
+            }
+            if(carStarted){
+                if(teslaCar == null || teslaCar.getWorld() == null || Greenfoot.isKeyDown("e")){
+                    // delete car
+                    teslaCar.exit();
+                    // retrieve tesla state
+                    carStarted = false;
+                    freeze_state = false;
+                    teslaHP.resetFreeze();
+                    getImage().setTransparency(255);
+                    carX = teslaCar.getX();
+                    carY = teslaCar.getY();
+                    setLocation(carX, carY);
+                } 
             }
         }
         

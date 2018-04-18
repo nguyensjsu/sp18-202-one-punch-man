@@ -16,8 +16,6 @@ public class TeslaCar extends Player
     private int acceleration = 1;
     private int velocity = 1;
     private int maxVelocity = 12;
-    private int chaseX;
-    private int chaseY;
     private Actor currentChase;
     private SimpleTimer moveTimer = new SimpleTimer();
     private boolean isCharged;
@@ -47,13 +45,9 @@ public class TeslaCar extends Player
             velocity -= acceleration;
         }
     }
-    public void chase(Actor actor){
-        turnTowards(chaseX, chaseY);
-        move(velocity);
-    }
     public void dead(){
         if(fade){
-            transVal-=5;
+            transVal-=10;
         }
         if(transVal <= 0){
             getWorld().removeObject(this);
@@ -61,6 +55,10 @@ public class TeslaCar extends Player
         else{
             getImage().setTransparency(transVal);
         }
+    }
+    public void exit(){
+        fade = true;
+        freeze_state = true;
     }
     public double getDistance(Actor actor) {
         return Math.hypot(actor.getX() - getX(), actor.getY() - getY());
