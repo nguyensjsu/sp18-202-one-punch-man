@@ -34,7 +34,10 @@ public class HpDecorator extends Decorator
             
             /* draw remain hp */
             int remain_x = (int)(size_x * current_hp / max_hp);
-            if (remain_x > 0){
+            if (current_hp != 0){
+                if(remain_x <= 0){
+                    remain_x = 1;
+                }
                 GreenfootImage hp = new GreenfootImage(remain_x,size_y);
                 hp.setColor(Color.GREEN);
                 hp.fill();
@@ -43,5 +46,9 @@ public class HpDecorator extends Decorator
             else go_die = true;
         }
         else go_die = true;
+    }
+    
+    public Actor getActor(){
+        return (Actor)actor;
     }
 }
