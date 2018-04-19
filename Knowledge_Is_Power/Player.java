@@ -40,6 +40,8 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     protected final int INVINCIBLE_TIME = 60;
     protected int invincible_timer = 0;
     
+ 
+    
     /* constructor */
     public Player(){
         this(50,50);    //default size 50*50
