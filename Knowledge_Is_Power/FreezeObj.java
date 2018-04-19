@@ -6,7 +6,7 @@
  */
 public interface FreezeObj
 {
-    public void set_move_state(String s);
+    public void set_freeze_state(boolean b);
     public int interface_getX();
     public int interface_getY();
 }

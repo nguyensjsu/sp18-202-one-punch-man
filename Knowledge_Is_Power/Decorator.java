@@ -12,6 +12,7 @@ public class Decorator extends Actor
     /* decorator stat */
     protected int size_x;
     protected int size_y;
+    protected boolean freeze_state;
     protected int move_speed = 0;
     protected int rotation = 0;
     /* remove flag */
@@ -21,7 +22,6 @@ public class Decorator extends Actor
     public Decorator(){
         this(1,1,0,0);
     }
-    
     public Decorator(int X, int Y, int s, int r){
         size_x = X;
         size_y = Y;
@@ -32,9 +32,15 @@ public class Decorator extends Actor
     /* method */
     public void act() 
     {
-        draw();
-        move();
-        
+        if(!freeze_state){
+            draw();
+            move();
+            update();
+
+            /* timer */
+            timer();
+        }
+
         /* remove condition */
         dead();
     }
@@ -53,9 +59,23 @@ public class Decorator extends Actor
         setLocation(update_x,update_y);
     }
     
+    public void update(){}
+
+    public void timer(){}
+    
+    public void setDead(){
+        go_die = true;
+    }
+    
     public void dead(){
         if (go_die){
             getWorld().removeObject(this);
         }
+    }
+    public void setFreeze(){
+        freeze_state = true;
+    }
+    public void resetFreeze(){
+        freeze_state = false;
     }
 }
