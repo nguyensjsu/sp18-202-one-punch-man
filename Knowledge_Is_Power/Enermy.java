@@ -218,7 +218,8 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
        switch (type){
                 case "push":
                     /* bounce away */
-                    prev_state = move_state;
+                    if (move_state != "push")
+                        prev_state = move_state;
                     move_state = "push";
                     int dx = source_x - getX();
                     int dy = source_y - getY();

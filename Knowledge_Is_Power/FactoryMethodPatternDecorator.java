@@ -76,11 +76,12 @@ public class FactoryMethodPatternDecorator extends Decorator
                     int x = (int)(sin(toRadians(i*angle))*(radius-20-15));
                     int y = (int)(cos(toRadians(i*angle))*(radius-20-15));
                     
-                    new_bullet = new DrPSuperAttack(i*angle,bullet.size_x,bullet.size_y,bullet.damage,bullet.chase_state);
+                    new_bullet = new DrPSuperAttack(i*angle+90,bullet.size_x,bullet.size_y,bullet.damage,bullet.chase_state);
                     image = new GreenfootImage("balloon3.png");
                     image.scale(bullet.size_x, bullet.size_y);
                     new_bullet.setImage(image);
                     new_bullet.life_timer = 30;
+                    new_bullet.damage_type = "push";
                     
                     getWorld().addObject(new_bullet,getX()-x,getY()+y);
                 }

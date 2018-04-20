@@ -20,7 +20,7 @@ public class BlackHole extends Bullet
     
     
     public void act(){
-        if (move_state != "freeze"){
+        if (!freeze_state){
             //move();
           
             List<Enermy> nearEnermy = getObjectsInRange(200, Enermy.class);
