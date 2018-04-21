@@ -30,32 +30,39 @@ public class BaseWorld extends World
     public void prepare()
     {
         /* setting actor order*/
-        setActOrder(/* skill effect */
+        setActOrder(/* effect under actor */
+                    BlackHoleDecorator.class,
                     DecoratorPatternDecorator.class,
                     FactoryMethodPatternDecorator.class,
                     /* enermy */
                     Enermy.class,
                     /* player */
-                    DrP.class,
-                    /* mob hp */
+                    Player.class,
+                    /* effect over actor */
                     HpDecorator.class,
+                    Bullet.class,
+                    FlameDecorator.class,
+                    ShockedDecorator.class,
+                    DrPPaperDecorator.class,
                     /* UI picture*/
                     UIPictureDecorator.class,
                     UICDDecorator.class,
                     UIHpDecorator.class,
                     /* UI frame */
-                    UIFrameDecorator.class
+                    UIFrameDecorator.class,
+                    /* ult cutscence */
+                    UltDecorator.class
         );            
 
-        /* actor creation */
         /* create player */
         playerCreate();
         /* create enermy */
         enermyCreate();
-        /* create UI */
-        UICreate();        
+        /* create player UI */
+        playerUICreate();
+        
     }
-    
+ 
     public void playerCreate(){
         Player player = new DrP();  //size 50*50
         //Player player = new Hawking(); //for test
@@ -87,7 +94,7 @@ public class BaseWorld extends World
         addObject(enermy_hp, 10000, 10000);
     }
     
-    public void UICreate(){
+    public void playerUICreate(){
         /* player head pic*/
         addObject(new UIPictureDecorator(150,150,0,0,player_pic),150,750);
         
@@ -104,9 +111,9 @@ public class BaseWorld extends World
         /* skill 123 cooldown */
         /* choose one code to add into your player's skill, right after it press the key and successfully use */
         /*
-        getWorld().addObject(new UICDDecorator(100,100,1200,775,360,360),0,0);    //skill 1: cd 360
-        getWorld().addObject(new UICDDecorator(100,100,1350,775,600,600),0,0);    //skill 2: cd 600
-        getWorld().addObject(new UICDDecorator(100,100,1500,775,1800,1800),0,0);    //skill 3: cd 1800
+        getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);    //skill 1: cd 360 (only modify last parameter)
+        getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);    //skill 2: cd 600
+        getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);    //skill 3: cd 1800
         */
        
         /* UI frame */

@@ -27,20 +27,24 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     protected int hp = MAX_HP;
     protected int bullet_damage = 10;
     protected int attack_speed = 30;  //2 per sec
-    protected int attack_timer = 0;
     
     /* push stat */
     protected int push_x;
     protected int push_y;
     protected int push_rotation;
     protected int push_speed = 0;
-    protected int push_timer = 0;
     
     /* damage stat */
     protected final int INVINCIBLE_TIME = 60;
-    protected int invincible_timer = 0;
     
- 
+    /* timer */
+    protected int attack_timer = 0;
+    protected int push_timer = 0;
+    protected int invincible_timer = 0;
+    protected int ult_cutscence_timer = 0;
+    
+    /* ult trigger flag */
+    protected boolean ult_trigger = false;
     
     /* constructor */
     public Player(){
@@ -233,6 +237,27 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     }
     
     public void animation_timer(){}
+    
+    public void ult_cutscence(String player_pic, String sentence_pic){
+        /* middle back */
+        getWorld().addObject(new UltDecorator(2400,1350,0,11,"board.jpg",120),800,450);
+        
+        /* player */
+        getWorld().addObject(new UltDecorator(800,800,-30,11,player_pic,120),1600,605);
+        
+        /* sentence */
+        getWorld().addObject(new UltDecorator(600,600,-45,11,sentence_pic,120),1600,605);
+        
+        /* side backs */
+        getWorld().addObject(new UltDecorator(900,400,0,30,"board.jpg",120),1300,50);
+        getWorld().addObject(new UltDecorator(2000,300,0,352,"board.jpg",120),1000,900);
+        
+        /* two lines */
+        getWorld().addObject(new UltDecorator(1600,30,0,30,"bluerock.jpg",120),1200,225);
+        getWorld().addObject(new UltDecorator(2400,30,0,352,"bluerock.jpg",120),800,788);
+        
+        ult_cutscence_timer = 150;
+    }
     
     public void dead(){
         if(hp <= 0){

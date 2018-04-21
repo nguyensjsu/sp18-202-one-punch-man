@@ -8,14 +8,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class UICDDecorator extends UIPictureDecorator
 {
+    protected Player player;
     protected int remain_cd;
     protected int max_cd;
     protected int loc_x;
     protected int loc_y;
     
-    public UICDDecorator(int X, int Y, int loc_X, int loc_Y, int remain_CD, int max_CD){
+    public UICDDecorator(Player p, int X, int Y, int loc_X, int loc_Y,int max_CD){
         super(X,Y,0,0,"no pic");
-        remain_cd = remain_CD;
+        player = p;
+        remain_cd = max_CD;
         max_cd = max_CD;
         loc_x = loc_X;
         loc_y = loc_Y;
@@ -36,7 +38,9 @@ public class UICDDecorator extends UIPictureDecorator
     }
 
     public void timer(){
-        if (remain_cd != 0) remain_cd--;
-        else go_die = true;
+        if (!player.freeze_state){
+            if (remain_cd != 0) remain_cd--;
+            else go_die = true;
+        }
     }
 }
