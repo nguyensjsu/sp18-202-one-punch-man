@@ -64,7 +64,7 @@ public class BaseWorld extends World
     }
 
     public void playerCreate(){
-        Player player = new DrP();  //size 50*50
+        Player player = new Tesla();  //size 50*50
         //Player player = new Hawking(); //for test
         //Player player = new Tesla();
         addObject(player, 800, 700);
@@ -80,7 +80,7 @@ public class BaseWorld extends World
 
     public void enermyCreate(){
         /* create 3 chasing enermies that shots bullets */
-        for (int i=0; i<3; i++){
+        for (int i=0; i<100; i++){
             Enermy enermy = new TestEnermy(50,50,"chase","bullet");
             addObject(enermy, (int)(800*random()+400), (int)(400*random())+100);
             HpDecorator enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
