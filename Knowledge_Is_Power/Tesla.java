@@ -201,7 +201,7 @@ public class Tesla extends Player
         private int timer = 0;
         private int cooldown = 100;
         private boolean carStarted = false;
-        private int carDamage = 10;
+        private int carDamage = 5;
         private TeslaCar teslaCar;
         private HpDecorator teslaHP;
         private int carX;
