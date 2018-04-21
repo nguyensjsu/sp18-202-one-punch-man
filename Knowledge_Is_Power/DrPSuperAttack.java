@@ -46,10 +46,14 @@ public class DrPSuperAttack extends PlayerBullet
     }
     
     public void dead(){
+        /* delete if hit world edge */
+        if (this.isAtEdge()){
+            getWorld().removeObject(this);
+        }
         /* delete if hit enermy and type is not through */
-        if (getOneIntersectingObject(Enermy.class) != null && !through){
+        else if (getOneIntersectingObject(Enermy.class) != null && !through){
             for (Enermy e: this.getIntersectingObjects(Enermy.class)){
-                e.damage(getX(),getY(),damage, "bullet");
+                e.damage(getX(),getY(),damage, damage_type);
                 break;
             }
             getWorld().removeObject(this);
@@ -58,13 +62,9 @@ public class DrPSuperAttack extends PlayerBullet
         /* ATTENTION: through damage must be very small */
         else if (getOneIntersectingObject(Enermy.class) != null && through){
             for (Enermy e: this.getIntersectingObjects(Enermy.class)){
-                e.damage(getX(),getY(),damage, "bullet");
+                e.damage(getX(),getY(),damage, damage_type);
                 break;
             }
-        }
-        /* delete if hit world edge */
-        else if (this.isAtEdge()){
-            getWorld().removeObject(this);
         }
         /* delete if life runs out */
         else if (life_timer == 0){

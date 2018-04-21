@@ -18,6 +18,7 @@ public class Bullet extends Actor implements FreezeObj
     protected int move_speed = 10;
     protected boolean through = false;
     protected int damage = 20;
+    protected String damage_type = "bullet";
     /* bullet direction */
     protected int fire_rotation;
    

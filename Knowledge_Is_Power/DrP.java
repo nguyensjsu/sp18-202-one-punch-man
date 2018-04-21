@@ -25,6 +25,7 @@ public class DrP extends Player
     protected int skill_one_cd_timer = 0;
     protected int skill_two_duration_timer = 0;
     protected int skill_two_cd_timer = 0;
+    protected int ult_cd_timer = 0;
     
     public DrP(){
         this(50,50);    //default size 50*50
@@ -52,7 +53,9 @@ public class DrP extends Player
            base_attack();
            skill_one();
            skill_two();
+           ult_animation();
            ult();
+
            
            /* invincible flash */
            invincible_flash(player_image,trans_image);
@@ -61,7 +64,6 @@ public class DrP extends Player
            timer();
            additional_timer();
        }
-       
 
        /* animation timer */
        animation_timer();
@@ -85,6 +87,7 @@ public class DrP extends Player
                 
                 skill_one_duration_timer = 180;
                 skill_one_cd_timer = 360;
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
             }
         }
     }
@@ -98,17 +101,34 @@ public class DrP extends Player
                                                                    (int)(getY() + 200*sin(toRadians(getRotation()))));
                 skill_two_duration_timer = 300;
                 skill_two_cd_timer = 600;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
             }
         }
     }
     
+    public void ult_animation(){
+        if (ult_cd_timer == 0){
+            if(Greenfoot.isKeyDown("3")){
+                /* ult cutscence */
+                ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                ult_cd_timer = 10000;
+                ((BaseWorld)getWorld()).freeze_all(true);
+            }
+        }
+    }
+        
     public void ult(){
-        if(Greenfoot.isKeyDown("3")){
+        if (ult_trigger){
+            ult_trigger = false;
+            /* ult effect */
             ((BaseWorld)getWorld()).freeze_all(true);
             ult_animation_timer = 180;
             for (Enermy enermy: getWorld().getObjects(Enermy.class)){
                 getWorld().addObject(new DrPPaperDecorator(enermy.getX(),enermy.getY(),10,0),getX(),getY());
             }
+            
+            ult_cd_timer = 1800;
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);
         }
     }
     
@@ -121,9 +141,15 @@ public class DrP extends Player
         
         if (skill_one_cd_timer != 0){skill_one_cd_timer--;}
         if (skill_two_cd_timer != 0){skill_two_cd_timer--;}
+        
+        if (ult_cd_timer != 0){ult_cd_timer--;}
     }
     
     public void animation_timer(){
+        /* ult cutscence */
+        if (ult_cutscence_timer != 0) ult_cutscence_timer--;
+        if (ult_cutscence_timer == 1){ ult_trigger = true;((BaseWorld)getWorld()).freeze_all(false);}
+        
         /* ult effect */
         if (ult_animation_timer == 1){
             ((BaseWorld)getWorld()).freeze_all(false);
