@@ -15,13 +15,14 @@ public class Darwin extends Player
     private GreenfootImage humanState= new GreenfootImage("darwin.png");
     private GreenfootImage monkeyState = new GreenfootImage("monkey.png");
     private GreenfootImage apemanState= new GreenfootImage("apeman.png");
-    
+        
     protected String player_image = "darwin.png";
     protected String trans_image = "red-draught.png";
     
     /* constructor */
-    public Darwin(){
-        this(50,50);    //default size 50*50
+    public Darwin(){ 
+        this(100,100);  
+        //hp = 10000;
     }
     
     public Darwin(int x, int y){
@@ -30,13 +31,13 @@ public class Darwin extends Player
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(humanState);
+        
     }
-    
     
     /* method */
     public void act(){
        transform();
-       //setImage(gif.getCurrentImage());      
+            
        /* update move */
        if (move_state != "freeze"){
            switch (move_state){
@@ -47,15 +48,15 @@ public class Darwin extends Player
               
            /* ability */
            base_attack();
+           ult();
            
            /* invincible flash */
            invincible_flash(player_image,trans_image);
            
-           ult();
-           
            /* timer */
            timer();
        }
+       animation_timer();
        
        /* game over condition */
        dead();
@@ -70,7 +71,10 @@ public class Darwin extends Player
             else if (getState()=="apeman"){
                 getWorld().addObject(new ApemanBullet(getRotation(), 20, 20, bullet_damage),getX(),getY());
             }
-            else {
+            else if (getState()=="human"){
+                getWorld().addObject(new DarwinBullet(20, 20),getX(),getY());
+            }
+            else{
                 getWorld().addObject(new DarwinBullet(20, 20),getX(),getY());
             }
                 
@@ -96,15 +100,24 @@ public class Darwin extends Player
             state="apeman";
             player_image = "apeman.png";
         }
+       else if (Greenfoot.isKeyDown("UP")) {
+            setImage(apemanState);
+            state="human";
+            player_image = "darwin.png";
+        }
+        
 
     }
+   
     
     public void ult(){
         if (Greenfoot.isKeyDown("3")){
+            ((BaseWorld)getWorld()).freeze_all(true);
             String inputValue = JOptionPane.showInputDialog("YOU HAVE THE CONTROL:");
             
             if (inputValue.equals("sudo rm -rf /")) {
                 getWorld().removeObjects(getWorld().getObjects(TestEnermy.class));
+                getWorld().removeObjects(getWorld().getObjects(Bullet.class));           
             }
         }   
     }
@@ -113,8 +126,6 @@ public class Darwin extends Player
         return state;
     }
     
-    
-
 }
 
 
