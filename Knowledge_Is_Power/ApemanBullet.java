@@ -9,8 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class ApemanBullet extends Bullet
 {   
-    //private GreenfootImage apemanBullet= new GreenfootImage("flame_hit.gif");
-    private GifImage apemanBullet = new GifImage("flame.gif");
+    private GifImage apemanBullet = new GifImage("flame_hit.gif");
+    private int sizeX = 200;
+    private int sizeY = 120;
     
     protected boolean through = true;
     
@@ -20,6 +21,12 @@ public class ApemanBullet extends Bullet
     
     public ApemanBullet(int r, int sizeX, int sizeY, int d){
         super(r,sizeX,sizeY,d);
+        gifAnimator();
+    }
+    
+    public void gifAnimator(){
+        GreenfootImage image = apemanBullet.getCurrentImage();
+        image.scale(sizeX, sizeY);
         setImage(apemanBullet.getCurrentImage());
     }
     

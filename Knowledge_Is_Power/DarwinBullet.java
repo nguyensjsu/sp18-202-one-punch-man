@@ -1,18 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
-/**
- * Write a description of class DarwinBullet here.
- * 
- * @author Yifan  
- * @version v1.0
- */
-
 public class DarwinBullet extends Bullet
 {
     private GifImage originGif = new GifImage("man_bullet.gif");
     private int sizeX = 200;
-    private int sizeY = 121;
+    private int sizeY = 120;
     private int prevRotation;
     private int transVal = 255;
     private boolean fade = false;
