@@ -24,6 +24,7 @@ public class TeslaCar extends Player
     private SimpleTimer moveTimer = new SimpleTimer();
     private SimpleTimer driftEndTimer = new SimpleTimer();
     private boolean isCharged;
+    private final int LOCAL_INVINCIBLE_TIME = 10;
     
     public TeslaCar(int damage){
         this.damage = damage;
@@ -35,7 +36,8 @@ public class TeslaCar extends Player
     {
         if (!freeze_state){
             wasd_move();
-            
+            attack();
+            if ((invincible_timer == 0) && damage_state.equals("invincible")) damage_state = "normal";
             /* timer */
             timer();
         }
@@ -96,7 +98,47 @@ public class TeslaCar extends Player
             enermy.update(getX(),getY());
         }
     }
-    
+    public void attack(){
+        for (NotBullet intersect_obj: this.getIntersectingObjects(NotBullet.class)){
+            /* melee attack player */
+            if(intersect_obj instanceof Enermy){
+                if(abs(velocity)>3){
+                    intersect_obj.damage(getX(),getY(),damage,"push");
+                }
+            }
+        }
+    }
+    public void damage(int source_x,int source_y, int damage_num, String type){
+        if (damage_state != "invincible"){
+            switch (type){
+                case "push":
+                    /* bounce away */
+                    move_state = "push";
+                    int dx = source_x - getX();
+                    int dy = source_y - getY();
+                    push_x = getX() - (int)(100*dx/sqrt(dx*dx+dy*dy));
+                    push_y = getY() - (int)(100*dy/sqrt(dx*dx+dy*dy));
+                    push_speed = 10;
+                    push_timer = 20;
+                    /* take damage */
+                    hp -= 1;
+                    /* invincible time */
+                    invincible_timer = LOCAL_INVINCIBLE_TIME;
+                    damage_state = "invincible";
+                    break;
+                    
+                case "bullet":
+                    /* take damage */
+                    hp -= 1;
+                    /* invincible time */
+                    invincible_timer = LOCAL_INVINCIBLE_TIME;
+                    damage_state = "invincible";
+                    break;
+                    
+                default: break;
+            }
+        }
+    }
     public void accelerate(boolean speedup){
         if(velocity < maxVelocity && speedup){
             velocity += acceleration;
