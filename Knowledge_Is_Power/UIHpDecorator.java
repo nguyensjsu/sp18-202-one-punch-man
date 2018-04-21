@@ -1,35 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Decorator here.
- * a subclass decorator showing HP
- * @author Karas
- * @version 0.1.4
+ * Write a description of class UIHpDecorator here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
  */
-public class HpDecorator extends Decorator
+public class UIHpDecorator extends HpDecorator
 {
-    /* hp */
-    protected HasHp actor;
-    protected int max_hp;
-    protected int current_hp;
-    protected int offset_x;
-    protected int offset_y;
+    protected int loc_x;
+    protected int loc_y;
     
-    /* constructor */
-    public HpDecorator(HasHp a, int current,int max, int offx, int offy, int X, int Y){
-        super(X,Y,0,0);
-        actor = a;
-        current_hp = current;
-        max_hp = max;
-        offset_x = offx;
-        offset_y = offy;
+    public UIHpDecorator(HasHp a, int current, int max, int X, int Y, int loc_X, int loc_Y){
+        super(a, current, max, 0, 0, X, Y);
+        loc_x = loc_X;
+        loc_y = loc_Y;
     }
     
-    /* override */
     public void draw(){
         if(actor.interface_getWorld() != null){
-            /* draw under actor */
-            setLocation(actor.interface_getX() + offset_x, actor.interface_getY() + offset_y);
             current_hp = actor.get_hp();
             
             /* draw remain hp */
@@ -46,11 +35,9 @@ public class HpDecorator extends Decorator
                 setImage(hp);
             }
             else go_die = true;
+            
+            setLocation(loc_x + (size_x * current_hp / max_hp / 2) - 200,loc_y);
         }
         else go_die = true;
-    }
-    
-    public Actor getActor(){
-        return (Actor)actor;
     }
 }

@@ -27,6 +27,7 @@ public class Decorator extends Actor
         size_y = Y;
         move_speed = s;
         rotation = r;
+        setRotation(r);
     }
     
     /* method */
@@ -50,6 +51,7 @@ public class Decorator extends Actor
     public void move(){
         int update_x;
         int update_y;
+        setRotation(rotation);
         
         /* update */
         update_x = (int)(getX() + move_speed*cos(toRadians(rotation)));
