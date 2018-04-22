@@ -58,6 +58,7 @@ public class Tesla extends Player
        }
        // car state need to be observered
        carAttack.attack();
+       animation_timer();
        /* game over condition */
        dead();
     }
@@ -161,6 +162,7 @@ public class Tesla extends Player
                 if (mouse != null && Greenfoot.mousePressed(null)){
                     getWorld().addObject(new ThunderExplode(getRotation(), explodeDamage),getX(),getY());
                     timer = cooldown;
+                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1200,775,cooldown),0,0);
                 }
             }else{
                 timer--;
@@ -177,13 +179,14 @@ public class Tesla extends Player
     public class TowerAttack implements AttackStrategy{
         private int timer = 0;
         private int cooldown = 300;
-        private int towerDamage = 5;
+        private int towerDamage = 2;
         
         public void attack(){
             if(timer == 0){
                 if(Greenfoot.isKeyDown("4")){
                     getWorld().addObject(new TeslaTower(towerDamage), getX(), getY());
                     timer = cooldown;
+                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1350,775,cooldown),0,0);
                 }
             }else{
                 timer--;
@@ -199,19 +202,27 @@ public class Tesla extends Player
     }
     public class CarAttack implements AttackStrategy{
         private int timer = 0;
-        private int cooldown = 100;
+        private int cooldown = 1800;
         private boolean carStarted = false;
         private int carDamage = 5;
         private TeslaCar teslaCar;
-        private HpDecorator teslaHP;
+        private UIHpDecorator teslaHP;
         private int carX;
-        private int carY;
+        private int carY;    
+        
         public void attack(){
+            if (ult_trigger){
+                ult_trigger = false;
+                getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1500,775,cooldown),0,0);
+            }
             if(timer == 0){
                 if(!carStarted && Greenfoot.isKeyDown("5")){
+                    ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                    timer = cooldown;
+                    ((BaseWorld)getWorld()).freeze_all(true);
                     // freeze and hide tesla
-                    List<HpDecorator> hpList = getWorld().getObjects(HpDecorator.class);
-                    for(HpDecorator hp:hpList){
+                    List<UIHpDecorator> hpList = getWorld().getObjects(UIHpDecorator.class);
+                    for(UIHpDecorator hp:hpList){
                         if(hp.getActor().getClass() == Tesla.class){
                             teslaHP = hp;
                             break;
@@ -223,8 +234,10 @@ public class Tesla extends Player
                     freeze_state = true; 
                     // create new car
                     teslaCar = new TeslaCar(carDamage);
+                    carX = getX();
+                    carY = getY();
                     getWorld().addObject(teslaCar, getX(), getY());
-                    HpDecorator car_hp = new HpDecorator(teslaCar,100,100,0,40,50,10);
+                    UIHpDecorator car_hp = new UIHpDecorator(teslaCar,teslaCar.hp,teslaCar.MAX_HP,400,27,450,800);
                     getWorld().addObject(car_hp, getX(), getY());
                     carStarted = true;
                     // set cd
@@ -242,10 +255,12 @@ public class Tesla extends Player
                     freeze_state = false;
                     teslaHP.resetFreeze();
                     getImage().setTransparency(255);
+                    setLocation(carX, carY);
+                }
+                else{
                     carX = teslaCar.getX();
                     carY = teslaCar.getY();
-                    setLocation(carX, carY);
-                } 
+                }
             }
         }
         
@@ -254,6 +269,15 @@ public class Tesla extends Player
         }
         public int getCoolDown(){
             return timer;
+        }
+    }
+    public void animation_timer(){
+        /* ult cutscence */
+        if (ult_cutscence_timer != 0) ult_cutscence_timer--;
+        if (ult_cutscence_timer == 1){ 
+            ult_trigger = true;
+            ((BaseWorld)getWorld()).freeze_all(false);
+            freeze_state = true;
         }
     }
 }

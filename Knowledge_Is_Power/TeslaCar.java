@@ -147,6 +147,10 @@ public class TeslaCar extends Player
         }
     }
     public void dead(){
+        if(hp <= 0){
+            freeze_state = true;
+            fade = true;
+        }
         if(fade){
             transVal-=10;
         }

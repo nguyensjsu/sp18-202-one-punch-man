@@ -12,19 +12,21 @@ public class TeslaTower extends Player
     private int sizeY = 100;
     private int transVal = 255;
     private int damage;
-    private int lifeTime = 10000;
+    private int attack_range = 200;
+    private int lifeTime = 100000;
     private int attackTime = 500;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
     public TeslaTower(int damage){
         this.damage = damage;
+        this.hp = 60;
         lifeTimer.mark();
     }
     public void act() 
     {
         if (!freeze_state){
             if(attackTimer.millisElapsed() > attackTime){
-                Enermy enermy = getNearestEnermy(400);
+                Enermy enermy = getNearestEnermy(attack_range);
                 if(enermy != null && enermy.getWorld() != null){
                     int sx = getX(), sy = getY();
                     int ex = enermy.getX(), ey = enermy.getY();
@@ -35,11 +37,13 @@ public class TeslaTower extends Player
                 }
                 attackTimer.mark();
             }
-            List<TeslaCar> cars = getObjectsInRange(300, TeslaCar.class);
+            List<TeslaCar> cars = getObjectsInRange(attack_range, TeslaCar.class);
             if(cars.size() != 0){
                 charge(cars.get(0));
             }
+            if ((invincible_timer == 0) && damage_state == "invincible") damage_state = "normal";
         }
+        timer();
         dead();
     }
     public void charge(TeslaCar car){
@@ -56,7 +60,7 @@ public class TeslaTower extends Player
         }
     }
     public void dead(){
-        if(lifeTimer.millisElapsed() > lifeTime){
+        if(lifeTimer.millisElapsed() > lifeTime || hp <= 0){
             transVal-=5;
         }
         if(transVal <= 0){
