@@ -1,17 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import static java.lang.Math.*;
-import java.util.List;
 
 /**
- * Write a description of class BlackHoleDecorator here.
+ * Write a description of class BigBangDecorator here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BlackHoleDecorator extends Decorator
+public class BigBangDecorator extends Decorator
 {
-    private int sizeX = 100;
-    private int sizeY = 100;
+    private int sizeX;
+    private int sizeY;
     private int damage;
     private int lifeTime = 2000;
     private int attackTime = 500;
@@ -19,14 +17,14 @@ public class BlackHoleDecorator extends Decorator
     private SimpleTimer attackTimer = new SimpleTimer();
     
     
-    public BlackHoleDecorator(int sizeX, int sizeY, int d){
+    public BigBangDecorator(int sizeX, int sizeY, int d){
         
         this.size_x = sizeX;
         this.size_y = sizeY;
         this.damage = d;
         rotation = 0;
         GreenfootImage image = getImage();
-        image.scale(400, 400);
+        image.scale(900, 900);
         setImage(image);
 
         lifeTimer.mark();
@@ -41,13 +39,13 @@ public class BlackHoleDecorator extends Decorator
             rotation+=2;
             
             if(attackTimer.millisElapsed() > attackTime){
-               
-                List<Enermy> nearEnermy = getObjectsInRange(400, Enermy.class);
-                 for(Enermy enermy: nearEnermy)
-                 {
-                     enermy.damage(getX(),getY(),damage, "pull");
-                 }
-
+                
+                for (Enermy enermy: getWorld().getObjects(Enermy.class)){
+                    enermy.setLocation(getX(), getY());
+                    enermy.damage(getX(),getY(),damage, "pull");
+                
+                }
+         
                 attackTimer.mark();
             }
         }
@@ -63,5 +61,4 @@ public class BlackHoleDecorator extends Decorator
     
  
     }
-    
 }

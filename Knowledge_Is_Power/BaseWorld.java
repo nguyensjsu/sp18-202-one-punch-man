@@ -64,7 +64,7 @@ public class BaseWorld extends World
     }
 
     public void playerCreate(){
-        Player player = new Tesla();  //size 50*50
+        Player player = new DrP();  //size 50*50
         //Player player = new Hawking(); //for test
         //Player player = new Tesla();
         addObject(player, 800, 700);

@@ -231,6 +231,21 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
                     hp -= damage_num;
                     break;
                     
+                 case "pull":
+                    /* pull */
+                    if (move_state != "push")
+                        prev_state = move_state;
+                    move_state = "push";
+                    int px = source_x - getX();
+                    int py = source_y - getY();
+                    push_x = getX() - (int)(100*px/sqrt(px*px+py*py));
+                    push_y = getY() - (int)(100*py/sqrt(px*px+py*py));
+                    push_speed = -1;
+                    push_timer = 29;
+                    /* take damage */
+                    hp -= damage_num;
+                    break;
+                    
                 case "bullet":
                     /* take damage */
                     hp -= damage_num;
