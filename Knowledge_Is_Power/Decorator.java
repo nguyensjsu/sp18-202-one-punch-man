@@ -22,12 +22,22 @@ public class Decorator extends Actor
     public Decorator(){
         this(1,1,0,0);
     }
+    
     public Decorator(int X, int Y, int s, int r){
         size_x = X;
         size_y = Y;
         move_speed = s;
         rotation = r;
         setRotation(r);
+    }
+    
+    public Decorator(int X, int Y, String pic_name){
+        this(X,Y,0,0);
+        setRotation(0);
+        
+        GreenfootImage image = new GreenfootImage(pic_name);
+        image.scale(size_x, size_y);
+        setImage(image);
     }
     
     /* method */

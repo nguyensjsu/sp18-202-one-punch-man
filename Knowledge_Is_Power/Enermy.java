@@ -14,7 +14,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected boolean freeze_state = false;
     protected String attack_state = "stop";     //stop, bullet
     protected String move_state = "stop";       //stop, wander, chase, push
-    protected String damage_state = "normal";   //normal
+    protected String damage_state = "normal";   //normal, invincible
     protected String prev_state;
     
     /* enermy stat */
@@ -22,7 +22,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected int size_x;
     protected int size_y;
     protected int move_speed = 3;
-    protected final int MAX_HP = 20;
+    protected int MAX_HP = 20;
     protected int hp = MAX_HP;
     protected int attack_speed = 60;  //1 per sec
     protected int attack_timer = 0;
@@ -61,6 +61,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     public Enermy(int sizeX, int sizeY, String move, String attack){
         size_x = sizeX;
         size_y = sizeY;
+        
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(image);

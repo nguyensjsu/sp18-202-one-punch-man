@@ -10,30 +10,25 @@ import static java.lang.Math.*;
 
 public class BaseWorld extends World
 {
-    protected String player_pic;
-    protected String skill_one_pic;
-    protected String skill_two_pic;
-    protected String ult_pic;
+    protected static Player player;
+    protected static String player_pic;
+    protected static String skill_one_pic;
+    protected static String skill_two_pic;
+    protected static String ult_pic;
+    
+    /* UI pic */
+    protected String UI_frame_pic = "bluerock.jpg";
+    
+    /* BGM */
+    protected static GreenfootSound bossMusic = new GreenfootSound("boss_fight.mp3");
 
     public BaseWorld()
     {
-        // Create a new world with 1600x900 cells with a cell size of 1x1 pixels.
         super(1600, 900, 1);
-        prepare();
-
-    }
-
-    /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
-     */
-    public void prepare()
-    {
+        
         /* setting actor order*/
         setActOrder(/* effect under actor */
-                    BlackHoleDecorator.class,
-                    DecoratorPatternDecorator.class,
-                    FactoryMethodPatternDecorator.class,
+                    Decorator.class,
                     /* enermy */
                     Enermy.class,
                     /* player */
@@ -41,8 +36,7 @@ public class BaseWorld extends World
                     /* effect over actor */
                     HpDecorator.class,
                     Bullet.class,
-                    FlameDecorator.class,
-                    ShockedDecorator.class,
+                    AttachEffectDecorator.class,
                     DrPPaperDecorator.class,
                     /* UI picture*/
                     UIPictureDecorator.class,
@@ -53,49 +47,26 @@ public class BaseWorld extends World
                     /* ult cutscence */
                     UltDecorator.class
         );
-
-        /* create player */
-        playerCreate();
-        /* create enermy */
-        enermyCreate();
-        /* create player UI */
-        playerUICreate();
-
+        
+        GreenfootImage image = new GreenfootImage("rivets.jpg");
+        //image.scale(1600, 900);
+        setBackground(image);
+        
+        prepare();
     }
 
-    public void playerCreate(){
-<<<<<<< HEAD
-        Player player = new Newton();  //size 50*50
-=======
-        Player player = new DrP();  //size 50*50
->>>>>>> c3e46c7fce41b0904c957aef34589c116118e52c
+    public void prepare(){}
+
+    public void playerCreate(String pic, String one_pic, String two_pic, String u_pic){
         //Player player = new Hawking(); //for test
         //Player player = new Tesla();
-        addObject(player, 800, 700);
-        //HpDecorator player_hp = new HpDecorator(player,player.hp,player.MAX_HP,0,player.size_x-10,player.size_x,10);   // hp 100-100, offset(0,40), size 50*10
-        //addObject(player_hp, 10000, 10000);
+        addObject(player, 800, 850);
 
         /* player ui */
-        player_pic = "board.jpg";
-        skill_one_pic = "board.jpg";
-        skill_two_pic = "board.jpg";
-        ult_pic = "board.jpg";
-    }
-
-    public void enermyCreate(){
-        /* create 3 chasing enermies that shots bullets */
-        for (int i=0; i<100; i++){
-            Enermy enermy = new TestEnermy(50,50,"chase","bullet");
-            addObject(enermy, (int)(800*random()+400), (int)(400*random())+100);
-            HpDecorator enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
-            addObject(enermy_hp, 10000, 10000);
-        }
-
-        /* create 1 wandering enermy that does not attack */
-        Enermy enermy = new TestEnermy(50,50,"wander","stop");
-        addObject(enermy, (int)(800*random()+400), (int)(400*random())+100);
-        HpDecorator enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
-        addObject(enermy_hp, 10000, 10000);
+        player_pic = pic;
+        skill_one_pic = one_pic;
+        skill_two_pic = two_pic;
+        ult_pic = u_pic;
     }
 
     public void playerUICreate(){
@@ -122,19 +93,21 @@ public class BaseWorld extends World
 
         /* UI frame */
         /* player pic */
-        makeSquare(150,150,150,750,20,"bluerock.jpg");
+        makeSquare(150,150,150,750,20,UI_frame_pic);
         /* hp bar */
-        addObject(new UIFrameDecorator(400+20,10,0,0,"bluerock.jpg"),450,800+18);
-        addObject(new UIFrameDecorator(400+20,10,0,0,"bluerock.jpg"),450,800-18);
-        addObject(new UIFrameDecorator(10,25+20,0,0,"bluerock.jpg"),450+205,800);
-        addObject(new UIFrameDecorator(10,25+20,0,0,"bluerock.jpg"),450-205,800);
+        addObject(new UIFrameDecorator(400+20,10,0,0,UI_frame_pic),450,800+18);
+        addObject(new UIFrameDecorator(400+20,10,0,0,UI_frame_pic),450,800-18);
+        addObject(new UIFrameDecorator(10,25+20,0,0,UI_frame_pic),450+205,800);
+        addObject(new UIFrameDecorator(10,25+20,0,0,UI_frame_pic),450-205,800);
         /* skill pic */
-        makeSquare(100,100,1200,775,10,"bluerock.jpg");
-        makeSquare(100,100,1350,775,10,"bluerock.jpg");
-        makeSquare(100,100,1500,775,10,"bluerock.jpg");
+        makeSquare(100,100,1200,775,10,UI_frame_pic);
+        makeSquare(100,100,1350,775,10,UI_frame_pic);
+        makeSquare(100,100,1500,775,10,UI_frame_pic);
 
     }
 
+    public void enermyCreate(){}
+    
     public void makeSquare(int size_X, int size_Y, int loc_X, int loc_Y, int thick, String frame_pic)
     {
         addObject(new UIFrameDecorator(size_X+2*thick,thick,0,0,frame_pic),loc_X,loc_Y + ((size_Y + thick)/2));
