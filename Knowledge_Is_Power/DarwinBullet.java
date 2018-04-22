@@ -12,21 +12,22 @@ public class DarwinBullet extends Bullet
     public DarwinBullet(int r, int d){
         fire_rotation = r;
         damage = d;
-        move_speed = 1;
+        move_speed = 5;
         gifAnimator();
     }
     
     public void act() 
     {
         if (!freeze_state){
-            chase();
+            move();
             // if touch
             List<Enermy> touchingEnermys = getObjectsInRange(150, Enermy.class);
             if(touchingEnermys.size() != 0){
                 List<Enermy> enermys = getObjectsInRange(200, Enermy.class);
                 for (int i=0;i<enermys.size();i++){
                     // explode
-                    getWorld().removeObject(enermys.get(i));
+                    enermys.get(i).damage(getX(),getY(),damage,"bullet");
+                    //getWorld().removeObject(enermys.get(i));
                     if(i==enermys.size()-1){
                         fade = true;
                         freeze_state = true;
@@ -48,18 +49,6 @@ public class DarwinBullet extends Bullet
         else{
             getImage().setTransparency(transVal);
         }
-    }
-    
-    public void chase(){
-        Enermy chaseEnermy = getNearestEnermy(300);
-        if(chaseEnermy != null){
-            turnTowards(chaseEnermy.getX(), chaseEnermy.getY());
-            fire_rotation = getRotation();
-        }else{
-            turn(fire_rotation);
-        }
-        move(move_speed);
-        setRotation(0);
     }
     
     public void gifAnimator(){

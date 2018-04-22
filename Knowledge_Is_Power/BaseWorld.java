@@ -55,9 +55,6 @@ public class BaseWorld extends World
         );
 
         /* create player */
-<<<<<<< HEAD
-        Player player = new Darwin();  //size 50*50
-=======
         playerCreate();
         /* create enermy */
         enermyCreate();
@@ -67,10 +64,9 @@ public class BaseWorld extends World
     }
 
     public void playerCreate(){
-        Player player = new DrP();  //size 50*50
+        Player player = new Darwin();  //size 50*50
         //Player player = new Hawking(); //for test
         //Player player = new Tesla();
->>>>>>> master
         addObject(player, 800, 700);
         //HpDecorator player_hp = new HpDecorator(player,player.hp,player.MAX_HP,0,player.size_x-10,player.size_x,10);   // hp 100-100, offset(0,40), size 50*10
         //addObject(player_hp, 10000, 10000);
