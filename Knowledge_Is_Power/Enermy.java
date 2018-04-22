@@ -46,7 +46,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     
     // buff state list
     protected List<IBuffState> buffList = new ArrayList<>();
-    protected int effectPeriod = 100;
+    protected int effectPeriod = 500;
     protected SimpleTimer effectTimer = new SimpleTimer();
     protected String prevMoveState = "";
     

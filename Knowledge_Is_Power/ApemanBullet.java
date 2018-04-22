@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class ApemanBullet here.
  * 
@@ -12,7 +12,7 @@ public class ApemanBullet extends Bullet
     private GifImage apemanBullet=new GifImage("flame_hit.gif");
     private int sizeX = 200;
     private int sizeY = 120;
-    private Actor intercept_enermy =null;
+    private List<Actor> intersect_enermy = new ArrayList<>();
     protected boolean through = true;
     
     public ApemanBullet(int r){
@@ -49,11 +49,17 @@ public class ApemanBullet extends Bullet
         if (getOneIntersectingObject(Enermy.class) != null && !through){
             for (Enermy e: this.getIntersectingObjects(Enermy.class)){
                 e.damage(getX(),getY(),damage, "bullet");
-                FlameDecorator decorator = new FlameDecorator(e);
-                getWorld().addObject(decorator,e.getX(),e.getY());
-                FlameBuff buff = new FlameBuff(this,2000,10);
-                buff.setDecorator(decorator);
-                e.addBuff(buff);
+                // flame buff effect
+                FlameBuff buff = new FlameBuff(this,2000,2);
+                if(e.hasBuff(BuffType.Burning)){
+                    e.updateBuff(BuffType.Burning);
+                }else{
+                    FlameDecorator decorator = new FlameDecorator(e);
+                    getWorld().addObject(decorator,e.getX(),e.getY());
+                    buff.setDecorator(decorator);
+                    e.addBuff(buff);
+                }
+                
                 getWorld().removeObject(this);
                 break;
             }
@@ -61,24 +67,33 @@ public class ApemanBullet extends Bullet
         }
         /* if hit enermy and type is through */
         /* ATTENTION: through damage must be very small */
-        else if (getOneIntersectingObject(Enermy.class) != null && through && intercept_enermy== null){
+        else if (getOneIntersectingObject(Enermy.class) != null && through){
             for (Enermy e: this.getIntersectingObjects(Enermy.class)){
-                intercept_enermy = e;
+                // check if new intersect
+                if(intersect_enermy.contains(e))
+                    continue;
+                intersect_enermy.add(e);
+                // flame buff effect
+                FlameBuff buff = new FlameBuff(this,2000,2);
+                if(e.hasBuff(BuffType.Burning)){
+                    e.updateBuff(BuffType.Burning);
+                }else{
+                    FlameDecorator decorator = new FlameDecorator(e);
+                    getWorld().addObject(decorator,e.getX(),e.getY());
+                    buff.setDecorator(decorator);
+                    e.addBuff(buff);
+                }
                 e.damage(getX(),getY(),damage, "bullet");
-                FlameDecorator decorator = new FlameDecorator(e);
-                getWorld().addObject(decorator,e.getX(),e.getY());
-                FlameBuff buff = new FlameBuff(this,2000,0);
-                buff.setDecorator(decorator);
-                e.addBuff(buff);
                 break;
             }
-        }
-        if(intercept_enermy!=null&&!intersects(intercept_enermy)){
-            intercept_enermy = null;
         }
         /* delete if hit world edge */
         else if (this.isAtEdge()){
             getWorld().removeObject(this);
+        }
+        for (Actor e : new ArrayList<Actor>(intersect_enermy)){
+            if(!intersects(e))
+                intersect_enermy.remove(e);
         }
     }
         

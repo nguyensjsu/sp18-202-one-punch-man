@@ -22,7 +22,7 @@ public class Darwin extends Player
     
     /* constructor */
     public Darwin(){ 
-        this(100,100);  
+        this(100,100);
     }
     
     public Darwin(int x, int y){
@@ -33,7 +33,7 @@ public class Darwin extends Player
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(humanState);
-        
+        hp=10000;
     }
     
     /* method */
