@@ -18,16 +18,18 @@ public class Darwin extends Player
         
     protected String player_image = "darwin.png";
     protected String trans_image = "red-draught.png";
+    protected int ult_cd_timer = 0;
     
     /* constructor */
     public Darwin(){ 
         this(100,100);  
-        //hp = 10000;
     }
     
     public Darwin(int x, int y){
         size_x = x;
         size_y = y;
+        
+        ult_cd_timer = 0;
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(humanState);
@@ -39,7 +41,7 @@ public class Darwin extends Player
        transform();
             
        /* update move */
-       if (move_state != "freeze"){
+       if (!freeze_state){
            switch (move_state){
                case "wasd": wasd_move(); break;
                case "push": push(push_x, push_y, push_speed); break;
@@ -48,6 +50,7 @@ public class Darwin extends Player
               
            /* ability */
            base_attack();
+           ult_animation();
            ult();
            
            /* invincible flash */
@@ -72,10 +75,10 @@ public class Darwin extends Player
                 getWorld().addObject(new ApemanBullet(getRotation(), 20, 20, bullet_damage),getX(),getY());
             }
             else if (getState()=="human"){
-                getWorld().addObject(new DarwinBullet(20, 20),getX(),getY());
+                getWorld().addObject(new DarwinBullet(getRotation(), 5),getX(),getY());
             }
             else{
-                getWorld().addObject(new DarwinBullet(20, 20),getX(),getY());
+                getWorld().addObject(new DarwinBullet(getRotation(), 5),getX(),getY());
             }
                 
             attack_timer = attack_speed;
@@ -86,6 +89,8 @@ public class Darwin extends Player
        if (attack_timer != 0) attack_timer--;
        if (push_timer != 0) push_timer--;
        if (invincible_timer != 0) invincible_timer--;
+       
+       if (ult_cd_timer != 0){ult_cd_timer--;}
     }
     
     //transform player states: default-man,1-monkey,2-apeman
@@ -109,17 +114,39 @@ public class Darwin extends Player
 
     }
    
+    public void ult_animation(){
+        if (ult_cd_timer == 0){
+            if(Greenfoot.isKeyDown("3")){
+                /* ult cutscence */
+                ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                ult_cd_timer = 10000;
+                ((BaseWorld)getWorld()).freeze_all(true);
+            }
+        }
+    }
     
     public void ult(){
-        if (Greenfoot.isKeyDown("3")){
-            ((BaseWorld)getWorld()).freeze_all(true);
+        if (ult_trigger){
+            ult_trigger = false;
+
             String inputValue = JOptionPane.showInputDialog("YOU HAVE THE CONTROL:");
             
             if (inputValue.equals("sudo rm -rf /")) {
                 getWorld().removeObjects(getWorld().getObjects(TestEnermy.class));
                 getWorld().removeObjects(getWorld().getObjects(Bullet.class));           
             }
+            else{}
+            
+            
+            ult_cd_timer = 1800;
+            
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);
         }   
+    }
+    
+    public void animation_timer(){
+        if (ult_cutscence_timer != 0) ult_cutscence_timer--;
+        if (ult_cutscence_timer == 1){ ult_trigger = true;((BaseWorld)getWorld()).freeze_all(false);};
     }
     
     public String getState(){  
