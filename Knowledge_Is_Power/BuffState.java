@@ -14,7 +14,7 @@ public class BuffState implements IBuffState
     protected String BuffMessage;
     protected double damage = 0.0;
     protected boolean damping = false;
-    protected double dampingRate = 0.9;
+    protected double dampingRate = 0.75;
     // control move state
     protected String moveState = "";
     protected SimpleTimer lifeTimer = new SimpleTimer();
@@ -60,6 +60,9 @@ public class BuffState implements IBuffState
     }
     public void update(){
         lifeTimer.mark();
+        if(decorator!=null){
+            decorator.update();
+        }
     }
     public BuffType getType(){
         return type;
