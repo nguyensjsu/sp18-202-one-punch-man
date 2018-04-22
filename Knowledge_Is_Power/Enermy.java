@@ -46,7 +46,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     
     // buff state list
     protected List<IBuffState> buffList = new ArrayList<>();
-    protected int effectPeriod = 100;
+    protected int effectPeriod = 500;
     protected SimpleTimer effectTimer = new SimpleTimer();
     protected String prevMoveState = "";
     
@@ -227,6 +227,21 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
                     push_y = getY() - (int)(100*dy/sqrt(dx*dx+dy*dy));
                     push_speed = 10;
                     push_timer = 20;
+                    /* take damage */
+                    hp -= damage_num;
+                    break;
+                    
+                 case "pull":
+                    /* pull */
+                    if (move_state != "push")
+                        prev_state = move_state;
+                    move_state = "push";
+                    int px = source_x - getX();
+                    int py = source_y - getY();
+                    push_x = getX() - (int)(100*px/sqrt(px*px+py*py));
+                    push_y = getY() - (int)(100*py/sqrt(px*px+py*py));
+                    push_speed = -1;
+                    push_timer = 29;
                     /* take damage */
                     hp -= damage_num;
                     break;
