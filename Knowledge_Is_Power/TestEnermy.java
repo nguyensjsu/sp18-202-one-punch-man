@@ -14,7 +14,7 @@ public class TestEnermy extends Enermy
     
     public TestEnermy(int sizeX, int sizeY, String move, String attack){
         super(sizeX,sizeY,move,attack);
-        attack_speed = 26;
+        attack_speed = 30;
         MAX_HP = 200;
         hp = 200;
         

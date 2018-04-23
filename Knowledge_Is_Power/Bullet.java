@@ -15,7 +15,7 @@ public class Bullet extends Actor implements FreezeObj
     protected String bullet_image;
     protected int size_x;
     protected int size_y;
-    protected int move_speed = 10;
+    protected double move_speed = 10.0;
     protected boolean through = false;
     protected int damage = 20;
     protected String damage_type = "bullet";
