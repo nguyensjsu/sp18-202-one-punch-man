@@ -28,7 +28,7 @@ public class TeslaCar extends Player
     
     public TeslaCar(int damage){
         this.damage = damage;
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("Car_Purple_Front.png");
         image.scale(sizeX, sizeY);
         setImage(image);
     }

@@ -20,6 +20,9 @@ public class TeslaTower extends Player
     public TeslaTower(int damage){
         this.damage = damage;
         this.hp = 60;
+        GreenfootImage image = new GreenfootImage("tesla_tower.png");
+        image.scale(sizeX, sizeY);
+        setImage(image);
         lifeTimer.mark();
     }
     public void act() 

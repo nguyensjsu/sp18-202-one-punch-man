@@ -15,7 +15,7 @@ public class ThunderSector extends Bullet
     private int sizeY = 200;
     public ThunderSector(int r, int x, int y, int damage){
         super.damage = damage;
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("thunder_sector.png");
         image.scale(sizeX, sizeY);
         setImage(image);
         updateLocation(x,y,r);
