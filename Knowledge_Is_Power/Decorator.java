@@ -40,6 +40,14 @@ public class Decorator extends Actor
         setImage(image);
     }
     
+    public Decorator(int X, int Y, GreenfootImage img){
+        this(X,Y,0,0);
+        setRotation(0);
+        
+        img.scale(size_x, size_y);
+        setImage(img);
+    }
+    
     /* method */
     public void act() 
     {

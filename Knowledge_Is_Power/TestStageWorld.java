@@ -15,16 +15,14 @@ public class TestStageWorld extends BaseWorld
 
     public void prepare(){
         /* create player */
-        player = new DrP();
-        //player = new Hawking(); //for test
-        //player = new Tesla();
-        //player = new Newton();
-        //player = new Darwin();
+        player = new Hawking(); //init player
         playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
         /* create player UI */
         playerUICreate();
         /* create enermy */
         enermyCreate();
+        /* create exit */
+        exitCreate();
     }
     
     public void enermyCreate(){
@@ -54,7 +52,9 @@ public class TestStageWorld extends BaseWorld
         addObject(enermy, 1200, 425);
         enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
         addObject(enermy_hp, 0, 0);
-        
+    }
+    
+    public void exitCreate(){
         /* create enter arrow */
         addObject(new Decorator(100,100,"board.jpg"),800,125);
         /* create next stage */
@@ -62,8 +62,52 @@ public class TestStageWorld extends BaseWorld
     }
     
     public void act(){
+        /* player selection */
+        if(Greenfoot.isKeyDown("f1")){
+            removeObject(player);
+            player = new Hawking();
+            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            /* create player UI */
+            playerUICreate();
+        }
+        if(Greenfoot.isKeyDown("f2")){
+            removeObject(player);
+            player = new Darwin();
+            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            /* create player UI */
+            playerUICreate();
+        }
+        if(Greenfoot.isKeyDown("f3")){
+            removeObject(player);
+            player = new Newton();
+            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            /* create player UI */
+            playerUICreate();
+        }
+        if(Greenfoot.isKeyDown("f4")){
+            removeObject(player);
+            player = new Tesla();
+            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            /* create player UI */
+            playerUICreate();
+        }
+        if(Greenfoot.isKeyDown("f5")){
+            removeObject(player);
+            player = new DrP();
+            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            /* create player UI */
+            playerUICreate();
+        }
+        
+        /* Enermy Refresh */
+         if(Greenfoot.isKeyDown("r")){
+            removeObjects(getObjects(Enermy.class));
+            enermyCreate();    
+        }
+        
+        /* enter exit to mob stage */
         if (player.getX()>700 && player.getX()<900 && player.getY()<50){
-            Greenfoot.setWorld(new BossStageWorld());
+            Greenfoot.setWorld(new MobStageWorld());
         }
     }
 }

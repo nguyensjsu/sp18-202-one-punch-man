@@ -281,5 +281,26 @@ public class BossEnermy extends Enermy
                 collision_obj.damage(getX(),getY(),push_damage,"push");      //damage = 20
             }
         }
-    }  
+    }
+    
+     public void dead(){
+        if (hp <= 0) {
+            fade = true;
+            freeze_state = true;
+        }
+        if(fade){
+            transVal-=5;
+        }
+        if(transVal <=0){
+            getWorld().removeObjects(getWorld().getObjects(Yin.class));
+            getWorld().removeObjects(getWorld().getObjects(Yang.class));
+            getWorld().removeObjects(getWorld().getObjects(EnermyBullet.class));
+            
+            getWorld().removeObject(this);
+            clearBuff();
+        }
+        else{
+            getImage().setTransparency(transVal);
+        }
+    };
 }

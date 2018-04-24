@@ -20,7 +20,7 @@ public class BaseWorld extends World
     protected String UI_frame_pic = "bluerock.jpg";
     
     /* BGM */
-    protected static GreenfootSound bossMusic = new GreenfootSound("boss_fight.mp3");
+    protected GreenfootSound BGM;
 
     public BaseWorld()
     {
@@ -58,8 +58,7 @@ public class BaseWorld extends World
     public void prepare(){}
 
     public void playerCreate(String pic, String one_pic, String two_pic, String u_pic){
-        //Player player = new Hawking(); //for test
-        //Player player = new Tesla();
+        /* player position */
         addObject(player, 800, 850);
 
         /* player ui */

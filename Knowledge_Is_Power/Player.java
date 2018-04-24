@@ -23,7 +23,7 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     protected int size_x;
     protected int size_y;
     protected int move_speed = 5;
-    protected final int MAX_HP = 20000;
+    protected final int MAX_HP = 200;
     protected int hp = MAX_HP;
     protected int bullet_damage = 10;
     protected int attack_speed = 30;  //2 per sec
@@ -261,11 +261,7 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     
     public void dead(){
         if(hp <= 0){
-            /* game over phase */
-            getWorld().showText("GAME OVER",800,450);
-            
-            /* clear all */
-            getWorld().removeObjects(getWorld().getObjects(Actor.class));
+            Greenfoot.setWorld(new GameOver());
         }
     }
     public List<Enermy> getObjectsInRange(int range){

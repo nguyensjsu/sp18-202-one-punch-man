@@ -279,6 +279,8 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
         }
     };
     
+    
+    /* buff state */
     public void buffRefresh(){
         List<IBuffState> tempList = new ArrayList<IBuffState>(buffList);
         // buff cause damage 
