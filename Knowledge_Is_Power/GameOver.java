@@ -10,7 +10,9 @@ public class GameOver extends NonBattle
 {
     public GameOver()
     {
-        super();    
+        super();
+        if (BaseWorld.BGM.isPlaying())
+            BaseWorld.BGM.stop();
     }
     
     public void prepare(){

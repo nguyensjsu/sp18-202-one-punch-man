@@ -43,7 +43,7 @@ public class BossEnermy extends Enermy
         MAX_HP = 2960;
         hp = 50;
         
-        GreenfootImage image = new GreenfootImage("man01.png");
+        GreenfootImage image = new GreenfootImage("boss.png");
         image.scale(size_x, size_y);
         setImage(image);
     }

@@ -7,9 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class NonBattle extends World
-{
-    protected GreenfootSound BGM;
-    
+{   
     public NonBattle()
     {    
         super(1600, 900, 1);

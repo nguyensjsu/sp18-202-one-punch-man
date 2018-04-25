@@ -54,16 +54,10 @@ public class TestStageWorld extends BaseWorld
         addObject(enermy_hp, 0, 0);
     }
     
-    public void exitCreate(){
-        /* create enter arrow */
-        addObject(new Decorator(100,100,"board.jpg"),800,125);
-        /* create next stage */
-        addObject(new Decorator(200,50,"board.jpg"),800,25);
-    }
-    
     public void act(){
         /* player selection */
         if(Greenfoot.isKeyDown("f1")){
+            playerUIRemove();
             removeObject(player);
             player = new Hawking();
             playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
@@ -71,6 +65,7 @@ public class TestStageWorld extends BaseWorld
             playerUICreate();
         }
         if(Greenfoot.isKeyDown("f2")){
+            playerUIRemove();
             removeObject(player);
             player = new Darwin();
             playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
@@ -78,6 +73,7 @@ public class TestStageWorld extends BaseWorld
             playerUICreate();
         }
         if(Greenfoot.isKeyDown("f3")){
+            playerUIRemove();
             removeObject(player);
             player = new Newton();
             playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
@@ -85,6 +81,7 @@ public class TestStageWorld extends BaseWorld
             playerUICreate();
         }
         if(Greenfoot.isKeyDown("f4")){
+            playerUIRemove();
             removeObject(player);
             player = new Tesla();
             playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
@@ -92,9 +89,10 @@ public class TestStageWorld extends BaseWorld
             playerUICreate();
         }
         if(Greenfoot.isKeyDown("f5")){
+            playerUIRemove();
             removeObject(player);
             player = new DrP();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("DrP_head.jpg","yellow circle.jpg","red circle.png","DrPUltIcon.png");
             /* create player UI */
             playerUICreate();
         }

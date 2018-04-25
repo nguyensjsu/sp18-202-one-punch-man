@@ -23,9 +23,9 @@ public class BossStageWorld extends BaseWorld
         /* create boss */
         enermyCreate();
         /* create boss bgm */
-        BGM = new GreenfootSound("boss_fight.mp3");
-        BGM.playLoop();
-        BGM.setVolume(20);
+        BaseWorld.BGM = new GreenfootSound("boss_fight.mp3");
+        BaseWorld.BGM.playLoop();
+        BaseWorld.BGM.setVolume(20);
         /* create boss UI */
         enermyUIcreate();
     }
@@ -36,7 +36,8 @@ public class BossStageWorld extends BaseWorld
     
     public void enermyUIcreate(){
         /* boss head pic*/
-        addObject(new UIPictureDecorator(150,150,0,0,"board.jpg"),150,100);
+        addObject(new UIPictureDecorator(150,150,0,0,"white.png"),150,100);
+        addObject(new UIPictureDecorator(150,150,0,0,"boss.png"),150,100);
 
         /* boss hp bar */
         BossEnermy boss = getObjects(BossEnermy.class).get(0);
@@ -51,13 +52,6 @@ public class BossStageWorld extends BaseWorld
         addObject(new UIFrameDecorator(1200+20,10,0,0,UI_frame_pic),850,50-18);
         addObject(new UIFrameDecorator(10,25+20,0,0,UI_frame_pic),850+605,50);
         addObject(new UIFrameDecorator(10,25+20,0,0,UI_frame_pic),850-605,50);
-    }
-    
-    public void exitCreate(){
-        /* create enter arrow */
-        addObject(new Decorator(100,100,"board.jpg"),800,125);
-        /* create next stage */
-        addObject(new Decorator(200,50,"board.jpg"),800,25);
     }
     
     public void act(){

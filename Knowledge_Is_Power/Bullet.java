@@ -70,6 +70,7 @@ public class Bullet extends Actor implements FreezeObj
         
         /* move */
         setLocation(update_x,update_y);
+        setRotation(fire_rotation);
     }
     
     public void timer(){

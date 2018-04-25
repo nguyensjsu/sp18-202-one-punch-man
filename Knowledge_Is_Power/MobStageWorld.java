@@ -32,13 +32,6 @@ public class MobStageWorld extends BaseWorld
     public void enermyCreate(){
     }
     
-    public void exitCreate(){
-        /* create enter arrow */
-        addObject(new Decorator(100,100,"board.jpg"),800,125);
-        /* create next stage */
-        addObject(new Decorator(200,50,"board.jpg"),800,25);
-    }
-    
     public void act(){
         if (die_count == 0){    //total enermy in this stage
             if (!exit_shown){

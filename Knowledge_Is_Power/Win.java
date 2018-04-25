@@ -10,7 +10,9 @@ public class Win extends NonBattle
 {
      public Win()
     {
-        super();    
+        super();
+        if (BaseWorld.BGM.isPlaying())
+            BaseWorld.BGM.stop();
     }
     
     public void prepare(){
