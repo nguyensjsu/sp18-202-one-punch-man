@@ -21,6 +21,9 @@ public class BaseWorld extends World
     
     /* BGM */
     protected static GreenfootSound BGM;
+    
+    /* Background */
+    protected static GreenfootImage background = new GreenfootImage("background.jpg");
 
     public BaseWorld()
     {
@@ -48,9 +51,8 @@ public class BaseWorld extends World
                     UltDecorator.class
         );
         
-        GreenfootImage image = new GreenfootImage("rivets.jpg");
-        //image.scale(1600, 900);
-        setBackground(image);
+        background.scale(1600, 900);
+        setBackground(background);
         
         prepare();
     }

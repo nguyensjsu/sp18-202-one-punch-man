@@ -96,7 +96,7 @@ public class BossEnermy extends Enermy
             if(current_beat <=52){
                 setRotation(angle);
                 for(int i=0;i<11;i++){
-                    getWorld().addObject(new BossSmallBullet(5/cos(toRadians(angle-90)),getRotation(),"red-draught.png"),50+i*150,100);
+                    getWorld().addObject(new BossSmallBullet(5/cos(toRadians(angle-90)),getRotation(),"fire.png"),50+i*150,100);
                 }
                 angle += angle_modifier;
                 if (angle>=120 || angle<=60) angle_modifier*=-1;
@@ -125,7 +125,7 @@ public class BossEnermy extends Enermy
             if (current_beat <= 13){
                 for(int j=0;j<360;j+=30)    
                     for(int i=0;i<5;i++){
-                        getWorld().addObject(new BossSmallBullet(9-i,(int)(30*random())+j+4*i,"red-draught.png"),getX(),getY());
+                        getWorld().addObject(new BossSmallBullet(9-i,(int)(30*random())+j+4*i,"green bullet.png"),getX(),getY());
                     }
             } 
             

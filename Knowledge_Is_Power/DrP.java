@@ -9,7 +9,7 @@ import static java.lang.Math.*;
  */
 public class DrP extends Player
 {
-    protected String player_image = "DrP_head.jpg";
+    protected String player_image = "DrP.png";
     
     /* Dr.P state*/
     protected boolean decorator_pattern_state = false;
@@ -28,7 +28,7 @@ public class DrP extends Player
     protected int ult_cd_timer = 0;
     
     public DrP(){
-        this(50,50);    //default size 50*50
+        this(50,40);    //default size 50*40
     }
     
     public DrP(int x, int y){

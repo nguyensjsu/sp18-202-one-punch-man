@@ -21,7 +21,7 @@ public class Yin extends Enermy
         move_speed = 1;
         boss = Boss;
         
-        GreenfootImage image = new GreenfootImage("bomb.png");
+        GreenfootImage image = new GreenfootImage("black ball.png");
         image.scale(size_x, size_y);
         setImage(image);
     }
@@ -60,7 +60,7 @@ public class Yin extends Enermy
     public void bullet_attack(){
         if (attack_timer == 0){
             turnTowards(player_x, player_y);
-            getWorld().addObject(new YinYangBullet(getRotation(),"bomb.png"),getX(),getY());
+            getWorld().addObject(new YinYangBullet(getRotation(),"black ball.png"),getX(),getY());
             attack_timer = attack_speed;
         }
     }

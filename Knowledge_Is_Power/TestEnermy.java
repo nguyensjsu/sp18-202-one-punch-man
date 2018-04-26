@@ -18,7 +18,7 @@ public class TestEnermy extends Enermy
         MAX_HP = 200;
         hp = 200;
         
-        GreenfootImage image = new GreenfootImage("man01.png");
+        GreenfootImage image = new GreenfootImage("testenermy.png");
         image.scale(size_x, size_y);
         setImage(image);
     }

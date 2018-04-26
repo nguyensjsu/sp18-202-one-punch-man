@@ -12,7 +12,7 @@ public class HugeEnermyBullet extends EnermyBullet
         super(r,200,200,10);
         move_speed = s;
         
-        GreenfootImage image = new GreenfootImage("gold-ball.png");
+        GreenfootImage image = new GreenfootImage("blue bullet.png");
         image.scale(size_x, size_y);
         setImage(image);
     }

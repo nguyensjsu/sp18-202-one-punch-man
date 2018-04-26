@@ -21,7 +21,7 @@ public class Yang extends Enermy
         move_speed = 1;
         boss = Boss;
         
-        GreenfootImage image = new GreenfootImage("gold-ball.png");
+        GreenfootImage image = new GreenfootImage("white ball.png");
         image.scale(size_x, size_y);
         setImage(image);
     }
@@ -60,7 +60,7 @@ public class Yang extends Enermy
     public void bullet_attack(){
         if (attack_timer == 0){
             turnTowards(player_x, player_y);
-            getWorld().addObject(new YinYangBullet(getRotation(),"gold-ball.png"),getX(),getY());
+            getWorld().addObject(new YinYangBullet(getRotation(),"white ball.png"),getX(),getY());
             attack_timer = attack_speed;
         }
     }
