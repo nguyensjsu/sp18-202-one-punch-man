@@ -9,10 +9,12 @@ import java.util.*;
  */
 public class ThunderSector extends Bullet
 {
-    private int hand_distance = 60;
+    private int hand_distance = 80;
     private SimpleTimer damage_timer = new SimpleTimer();
     private int sizeX = 200;
     private int sizeY = 200;
+    private int transVal = 250;
+    private boolean fade_out = true;
     public ThunderSector(int r, int x, int y, int damage){
         super.damage = damage;
         GreenfootImage image = new GreenfootImage("thunder_sector.png");
@@ -24,12 +26,25 @@ public class ThunderSector extends Bullet
     
     public void act() 
     {
+        animator();
         if(damage_timer.millisElapsed() > 100){
             for (Enermy e: this.getIntersectingObjects(Enermy.class)){
                 e.damage(getX(),getY(),super.damage, "bullet");
             }
             damage_timer.mark();
         }
+    }
+    
+    public void animator(){
+        if(fade_out)
+            transVal-=10;
+        else
+            transVal+=10;
+        if(transVal <= 80)
+            fade_out = false;
+        if(transVal >= 240)
+            fade_out = true;
+        getImage().setTransparency(transVal);
     }
     
     public void updateLocation(int x, int y, int r){
