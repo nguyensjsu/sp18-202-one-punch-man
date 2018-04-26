@@ -17,6 +17,7 @@ public class ThunderCharger extends Bullet
     private SimpleTimer charge_timer = new SimpleTimer();
     private int transVal = 255;
     private boolean fade = false;
+    private GreenfootSound charge_sound = new GreenfootSound("thunder_sector.mp3");
     
     public ThunderCharger(TeslaTower source, TeslaCar target){
         teslaTower= source;
@@ -26,6 +27,9 @@ public class ThunderCharger extends Bullet
     public void act(){
         if(!freeze_state){
             if(!fade){
+                if(!charge_sound.isPlaying()){
+                    charge_sound.play();
+                }
                 if(checkValid()){
                     if(charge_timer.millisElapsed() > 100){
                         teslaCar.charge(chargeSpeed);
@@ -65,6 +69,7 @@ public class ThunderCharger extends Bullet
     
     public void dead(){
         if(fade){
+            charge_sound.stop();
             transVal-=10;
         }
         if(transVal <=0){

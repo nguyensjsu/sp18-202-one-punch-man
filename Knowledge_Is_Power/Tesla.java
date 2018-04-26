@@ -81,10 +81,9 @@ public class Tesla extends Player
     }
     
     public class ChainAttack implements AttackStrategy{
-        private int cooldown = 0;
-        private int timer = 30;
+        private int timer = 0;
+        private int cooldown = 50;
         private int chainDamage = 5;
-        
         public void attack(){
             if(timer == 0){
                 MouseInfo mouse = Greenfoot.getMouseInfo();
@@ -121,8 +120,8 @@ public class Tesla extends Player
     public class SectorAttack implements AttackStrategy{
         private String sector_state = "idle";
         private ThunderSector mySector;
-        private int sectorDamage = 1;
-        
+        private int sectorDamage = 2;
+        private GreenfootSound sector_sound = new GreenfootSound("thunder_sector.mp3");
         public void attack(){
             MouseInfo mouse = Greenfoot.getMouseInfo();
             switch (sector_state){
@@ -131,6 +130,7 @@ public class Tesla extends Player
                         mySector = new ThunderSector(getRotation(),getX(),getY(),sectorDamage);
                         getWorld().addObject(mySector,getX(),getY());
                         sector_state = "active";
+                        sector_sound.playLoop();
                     }
                     break;
                 case "active" : 
@@ -138,6 +138,7 @@ public class Tesla extends Player
                     if(Greenfoot.mouseClicked(null) ){
                         getWorld().removeObject(mySector);
                         sector_state = "idle";
+                        sector_sound.stop();
                     }
                     break;
             }
@@ -154,8 +155,7 @@ public class Tesla extends Player
     public class ExplodeAttack implements AttackStrategy{
         private int timer = 0;
         private int cooldown = 300;
-        private int explodeDamage = 9999;
-        
+        private int explodeDamage = 100;
         public void attack(){
             if(timer == 0){
                 MouseInfo mouse = Greenfoot.getMouseInfo();
@@ -179,7 +179,7 @@ public class Tesla extends Player
     public class TowerAttack implements AttackStrategy{
         private int timer = 0;
         private int cooldown = 300;
-        private int towerDamage = 2;
+        private int towerDamage = 5;
         
         public void attack(){
             if(timer == 0){
@@ -217,9 +217,6 @@ public class Tesla extends Player
             }
             if(timer == 0){
                 if(!carStarted && Greenfoot.isKeyDown("5")){
-                    ult_cutscence("tesla_full.gif","tesla_full.gif");   //player, sentence
-                    timer = cooldown;
-                    ((BaseWorld)getWorld()).freeze_all(true);
                     // freeze and hide tesla
                     List<UIHpDecorator> hpList = getWorld().getObjects(UIHpDecorator.class);
                     for(UIHpDecorator hp:hpList){
@@ -242,6 +239,9 @@ public class Tesla extends Player
                     carStarted = true;
                     // set cd
                     timer = cooldown;
+                    // show ultimate animation
+                    ult_cutscence("tesla_full.gif","tesla_full.gif");   //player, sentence
+                    ((BaseWorld)getWorld()).freeze_all(true);
                 }
             }else{
                 timer--;

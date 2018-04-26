@@ -17,6 +17,7 @@ public class TeslaTower extends Player
     private int attackTime = 500;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
+    
     public TeslaTower(int damage){
         this.damage = damage;
         this.hp = 60;
