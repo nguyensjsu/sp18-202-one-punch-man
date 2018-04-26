@@ -17,17 +17,37 @@ public class Decorator extends Actor
     protected int rotation = 0;
     /* remove flag */
     protected boolean go_die = false;
+    /* gif */
+    protected GifImage gif;
     
     /* constructor */
     public Decorator(){
         this(1,1,0,0);
     }
+    
     public Decorator(int X, int Y, int s, int r){
         size_x = X;
         size_y = Y;
         move_speed = s;
         rotation = r;
         setRotation(r);
+    }
+    
+    public Decorator(int X, int Y, String pic_name){
+        this(X,Y,0,0);
+        setRotation(0);
+        
+        GreenfootImage image = new GreenfootImage(pic_name);
+        image.scale(size_x, size_y);
+        setImage(image);
+    }
+    
+    public Decorator(int X, int Y, GreenfootImage img){
+        this(X,Y,0,0);
+        setRotation(0);
+        
+        img.scale(size_x, size_y);
+        setImage(img);
     }
     
     /* method */
@@ -41,7 +61,10 @@ public class Decorator extends Actor
             /* timer */
             timer();
         }
-
+        
+        /* gif refresh */
+        if (gif != null)
+            gifAnimator();
         /* remove condition */
         dead();
     }
@@ -59,6 +82,12 @@ public class Decorator extends Actor
         
         /* move */
         setLocation(update_x,update_y);
+    }
+    
+     public void gifAnimator(){
+        GreenfootImage image = gif.getCurrentImage();
+        image.scale(size_x, size_y);
+        setImage(image);
     }
     
     public void update(){}

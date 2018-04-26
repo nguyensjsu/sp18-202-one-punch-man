@@ -9,7 +9,7 @@ import static java.lang.Math.*;
  */
 public class DrP extends Player
 {
-    protected String player_image = "man.png";
+    protected String player_image = "DrP_head.jpg";
     
     /* Dr.P state*/
     protected boolean decorator_pattern_state = false;
@@ -34,7 +34,8 @@ public class DrP extends Player
     public DrP(int x, int y){
         size_x = x;
         size_y = y;
-        GreenfootImage image = getImage();
+        
+        GreenfootImage image = new GreenfootImage(player_image);
         image.scale(size_x, size_y);
         setImage(image);
     }
@@ -96,12 +97,12 @@ public class DrP extends Player
         if (skill_two_cd_timer == 0){
             if(Greenfoot.isKeyDown("2")){
                 decorator_pattern_state = true;
-                getWorld().addObject(new DecoratorPatternDecorator(300,200),
+                getWorld().addObject(new DecoratorPatternDecorator(500,200),
                                                                    (int)(getX() + 200*cos(toRadians(getRotation()))),
                                                                    (int)(getY() + 200*sin(toRadians(getRotation()))));
-                skill_two_duration_timer = 300;
-                skill_two_cd_timer = 600;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
+                skill_two_duration_timer = 500;
+                skill_two_cd_timer = 800;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,800),0,0);
             }
         }
     }
@@ -110,7 +111,7 @@ public class DrP extends Player
         if (ult_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
                 /* ult cutscence */
-                ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                ult_cutscence("DrP_head_reverse.png","midterm.png");   //player, sentence
                 ult_cd_timer = 10000;
                 ((BaseWorld)getWorld()).freeze_all(true);
             }

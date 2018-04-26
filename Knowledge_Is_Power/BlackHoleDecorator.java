@@ -18,14 +18,17 @@ public class BlackHoleDecorator extends Decorator
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
     
+    
     public BlackHoleDecorator(int sizeX, int sizeY, int d){
         
         this.size_x = sizeX;
         this.size_y = sizeY;
         this.damage = d;
+        rotation = 0;
         GreenfootImage image = getImage();
-        image.scale(size_x, size_y);
+        image.scale(400, 400);
         setImage(image);
+
         lifeTimer.mark();
     }
     
@@ -33,21 +36,25 @@ public class BlackHoleDecorator extends Decorator
     public void act() 
     {
         if (!freeze_state){
+            
+            setRotation(rotation);
+            rotation+=2;
+            
             if(attackTimer.millisElapsed() > attackTime){
                
                 List<Enermy> nearEnermy = getObjectsInRange(400, Enermy.class);
                  for(Enermy enermy: nearEnermy)
                  {
-                     enermy.setLocation(getX(), getY());
-                     enermy.damage(getX(),getY(),0, "bullet");
-        
+                     enermy.damage(getX(),getY(),damage, "pull");
                  }
 
                 attackTimer.mark();
             }
         }
+        
         dead();
     }
+    
     
     public void dead(){
         if(lifeTimer.millisElapsed() > lifeTime){

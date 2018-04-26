@@ -14,12 +14,13 @@ public class Hawking extends Player
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
    
-    protected String player_image = "man01.png";
+    protected String player_image = "hawking.png";
    
     protected int attack_speed = 15;
     protected int bullet_damage = 5;
     
     /* timer */
+    //protected int ult_animation_timer = 0;
     protected int skill_one_duration_timer = 0;
     protected int skill_one_cd_timer = 0;
     protected int skill_two_duration_timer = 0;
@@ -30,7 +31,7 @@ public class Hawking extends Player
 
     
     public Hawking() {
-        this(50,50);
+        this(80,80);
     }
     
     public Hawking(int x, int y) {
@@ -59,10 +60,11 @@ public class Hawking extends Player
            base_attack();
            skill_one();
            skill_two();
+           ult_animation();
            ult();
            
            /* invincible flash */
-           //invincible_flash(player_image,trans_image);
+           invincible_flash(player_image,trans_image);
            
              /* timer */
            timer(); 
@@ -71,7 +73,7 @@ public class Hawking extends Player
        }
        
       /* animation timer */
-      // animation_timer();
+       animation_timer();
        
        /* game over condition */
        dead();
@@ -91,14 +93,13 @@ public class Hawking extends Player
     public void skill_one(){
         if (skill_one_cd_timer == 0){
             if(Greenfoot.isKeyDown("1")){
-              
-                //MouseInfo mouse = Greenfoot.getMouseInfo();
+    
                  int update_x = (int)(getX() + 200*cos(toRadians(getRotation())));
                  int update_y = (int)(getY() + 200*sin(toRadians(getRotation())));
                  getWorld().addObject(new BlackHoleDecorator(100,100,bullet_damage),update_x, update_y);
-                
               
                 skill_one_cd_timer = 360;
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
             }
         }
     }
@@ -125,29 +126,47 @@ public class Hawking extends Player
                 }
                 
                 skill_two_cd_timer = 360;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
             }
         }
     }
     
     public void ult(){
+        if (ult_trigger){
+            ult_trigger = false;
+            
+            MouseInfo mouse = Greenfoot.getMouseInfo();
+            int update_x = (int)(getX() + 200*cos(toRadians(getRotation())));
+            int update_y = (int)(getY() + 200*sin(toRadians(getRotation())));
+            getWorld().addObject(new BigBangDecorator(1600, 900, 300),update_x, update_y);
+        
+            ult_cd_timer = 1800;
+            
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);
+        }
+        
+    }
+   
+        
+    public void ult_animation(){
         if (ult_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
-                MouseInfo mouse = Greenfoot.getMouseInfo();
-                 int update_x = (int)(getX() + 200*cos(toRadians(getRotation())));
-                 int update_y = (int)(getY() + 200*sin(toRadians(getRotation())));
-                 getWorld().addObject(new BlackHoleDecorator(200, 200, bullet_damage),update_x, update_y);
-                 for (Enermy enermy: getWorld().getObjects(Enermy.class)){
-                        enermy.setLocation(getX(), getY());
-                        enermy.damage(getX(),getY(),bullet_damage, "bullet");
-                    
-                 }
-               
-                 
-                 ult_cd_timer = 360;
-                
-                
+                /* ult cutscence */
+                ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                ult_cd_timer = 10000;
+                ((BaseWorld)getWorld()).freeze_all(true);
             }
         }
+    }
+    
+    
+    public void animation_timer(){
+        /* ult cutscence */
+        if (ult_cutscence_timer != 0) ult_cutscence_timer--;
+        if (ult_cutscence_timer == 1){ ult_trigger = true;((BaseWorld)getWorld()).freeze_all(false);}
+        
+       
+    
     }
     
     public void additional_timer(){
