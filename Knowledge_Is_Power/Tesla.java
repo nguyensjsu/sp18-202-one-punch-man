@@ -217,7 +217,7 @@ public class Tesla extends Player
             }
             if(timer == 0){
                 if(!carStarted && Greenfoot.isKeyDown("5")){
-                    ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                    ult_cutscence("tesla_full.gif","tesla_full.gif");   //player, sentence
                     timer = cooldown;
                     ((BaseWorld)getWorld()).freeze_all(true);
                     // freeze and hide tesla
