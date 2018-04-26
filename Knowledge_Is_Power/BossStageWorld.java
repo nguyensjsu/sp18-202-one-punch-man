@@ -62,7 +62,7 @@ public class BossStageWorld extends BaseWorld
             }
             /* enter exit to win */
             if (player.getX()>700 && player.getX()<900 && player.getY()<50){
-                BGM.stop();
+                BaseWorld.BGM.stop();
                 Greenfoot.setWorld(new Win());
             }
         }

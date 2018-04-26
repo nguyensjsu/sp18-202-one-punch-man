@@ -18,7 +18,11 @@ public class MainMenu extends NonBattle
         image.setColor(new Color(0,0,0));
         image.scale(1600, 900);
         image.fill();
-        setBackground(image);    
+        setBackground(image);
+        
+        BaseWorld.BGM = new GreenfootSound("menu.mp3");
+        BaseWorld.BGM.playLoop();
+        BaseWorld.BGM.setVolume(20);
         
         addObject(new Decorator(1000,300,"theme.png"),800,300);
         addObject(new Decorator(450,75,new GreenfootImage("Start new game",450,Color.LIGHT_GRAY,Color.BLACK)),800,600);
@@ -28,7 +32,10 @@ public class MainMenu extends NonBattle
     public void act(){
         MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null && Greenfoot.mousePressed(null)) {
-            if (mouse.getX()>=575 && mouse.getX()<=1025 && mouse.getY()>=563 && mouse.getY()<=637) Greenfoot.setWorld(new TestStageWorld());
+            if (mouse.getX()>=575 && mouse.getX()<=1025 && mouse.getY()>=563 && mouse.getY()<=637){
+                BaseWorld.BGM.stop();
+                Greenfoot.setWorld(new TestStageWorld());
+            }
             else if (mouse.getX()>=750 && mouse.getX()<=850 && mouse.getY()>=663 && mouse.getY()<=737) System.exit(0);
         }
     }

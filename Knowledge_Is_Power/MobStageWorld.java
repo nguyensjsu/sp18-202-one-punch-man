@@ -14,13 +14,13 @@ public class MobStageWorld extends BaseWorld
     public MobStageWorld(){
         super();
         player.hp = player.MAX_HP;      //recover hp at the start of the stage
-        /*
-        mobMusic.playLoop();
-        mobMusic.setVolume(15);
-        */
     }
 
     public void prepare(){
+        BaseWorld.BGM = new GreenfootSound("mob_fight.mp3");
+        BaseWorld.BGM.playLoop();
+        BaseWorld.BGM.setVolume(20);
+        
         /* create player */
         addObject(player, 800, 850);
         /* create player UI */
@@ -40,7 +40,8 @@ public class MobStageWorld extends BaseWorld
             }
             /* enter exit to boss stage */
             if (player.getX()>700 && player.getX()<900 && player.getY()<50){
-                Greenfoot.setWorld(new BossStageWorld());
+                BaseWorld.BGM.stop();
+                Greenfoot.setWorld(new TestStageTwoWorld());
             }
         }
     }
