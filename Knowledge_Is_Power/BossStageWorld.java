@@ -23,7 +23,7 @@ public class BossStageWorld extends BaseWorld
         /* create boss */
         enermyCreate();
         /* create boss bgm */
-        BaseWorld.BGM = new GreenfootSound("boss_fight.mp3");
+        //BaseWorld.BGM = new GreenfootSound("boss_fight.mp3");
         BaseWorld.BGM.playLoop();
         BaseWorld.BGM.setVolume(20);
         /* create boss UI */

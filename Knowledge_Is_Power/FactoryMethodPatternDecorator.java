@@ -45,10 +45,12 @@ public class FactoryMethodPatternDecorator extends Decorator
             }
             for(DrPSuperAttack bullet: getObjectsInRange(radius-60-15, DrPSuperAttack.class)){
                 /* chase blue bullet */
-                bullet.chase_state = true;
-                image = new GreenfootImage("DrPPaperBlue.png");
-                image.scale(bullet.size_x, bullet.size_y);
-                bullet.setImage(image);
+                if (!bullet.chase_state){
+                    bullet.chase_state = true;
+                    image = new GreenfootImage("DrPPaperBlue.png");
+                    image.scale(bullet.size_x, bullet.size_y);
+                    bullet.setImage(image);
+                }
             }
         }
         else{
