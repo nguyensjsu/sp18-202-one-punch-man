@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  */
 public class Darwin extends Player
 {
-    private String state;
+    private String state="human";
     
     private GreenfootImage humanState= new GreenfootImage("darwin_head.png");
     private GreenfootImage monkeyState = new GreenfootImage("monkey.png");
@@ -28,18 +28,13 @@ public class Darwin extends Player
     public Darwin(int x, int y){
         size_x = x;
         size_y = y;
-        
-        ult_cd_timer = 0;
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(humanState);
-        //hp=10000;
     }
     
     /* method */
-    public void act(){
-       transform();
-            
+    public void act(){       
        /* update move */
        if (!freeze_state){
            switch (move_state){
@@ -50,6 +45,7 @@ public class Darwin extends Player
               
            /* ability */
            base_attack();
+           transform();
            ult_animation();
            ult();
            
@@ -93,25 +89,32 @@ public class Darwin extends Player
        if (ult_cd_timer != 0){ult_cd_timer--;}
     }
     
-    //transform player states: default-man,1-monkey,2-apeman
+    //transform: "1"-downgrade, "2"-upgrade
+    //human->"1"->apeman
+    //apeman->"2"->human
+    //apeman->"1"->monkey
+    //monkey->"2"->apeman
     public void transform(){
-       if (Greenfoot.isKeyDown("1")) {
-            setImage(monkeyState);
-            state="monkey";
-            player_image = "monkey.png";
-        }
-        else if (Greenfoot.isKeyDown("2")) {
+       if (Greenfoot.isKeyDown("1") && state.equals("human")) {
             setImage(apemanState);
             state="apeman";
             player_image = "apeman.png";
         }
-       else if (Greenfoot.isKeyDown("UP")) {
-            setImage(apemanState);
-            state="human";
-            player_image = "darwin.png";
+        else if (Greenfoot.isKeyDown("1") && state.equals("apeman")) {
+            setImage(monkeyState);
+            state="monkey";
+            player_image = "monkey.png";
         }
-        
-
+        else if (Greenfoot.isKeyDown("2") && state.equals("apeman")){
+            setImage(humanState);
+            state="human";
+            player_image = "darwin_head.png";
+        }
+        else if (Greenfoot.isKeyDown("2") && state.equals("monkey")){
+            setImage(apemanState);
+            state="apeman";
+            player_image = "apeman.png";
+        }
     }
    
     public void ult_animation(){
