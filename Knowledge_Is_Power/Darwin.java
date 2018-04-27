@@ -33,7 +33,7 @@ public class Darwin extends Player
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(humanState);
-        hp=10000;
+        //hp=10000;
     }
     
     /* method */
