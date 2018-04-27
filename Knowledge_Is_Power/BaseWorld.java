@@ -64,7 +64,7 @@ public class BaseWorld extends World
     }
 
     public void playerCreate(){
-        Player player = new Tesla();  //size 50*50
+        Player player = new Darwin();  //size 50*50
         //Player player = new Hawking(); //for test
         //Player player = new Tesla();
         addObject(player, 800, 700);
@@ -72,10 +72,10 @@ public class BaseWorld extends World
         //addObject(player_hp, 10000, 10000);
 
         /* player ui */
-        player_pic = "board.jpg";
-        skill_one_pic = "board.jpg";
-        skill_two_pic = "board.jpg";
-        ult_pic = "board.jpg";
+        player_pic = "darwin.png";
+        skill_one_pic = "evolution_monkey.png";
+        skill_two_pic = "evolution_human.png";
+        ult_pic = "programmer.png";
     }
 
     public void enermyCreate(){

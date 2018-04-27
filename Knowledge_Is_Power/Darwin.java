@@ -12,11 +12,11 @@ public class Darwin extends Player
 {
     private String state;
     
-    private GreenfootImage humanState= new GreenfootImage("darwin.png");
+    private GreenfootImage humanState= new GreenfootImage("darwin_head.png");
     private GreenfootImage monkeyState = new GreenfootImage("monkey.png");
     private GreenfootImage apemanState= new GreenfootImage("apeman.png");
         
-    protected String player_image = "darwin.png";
+    protected String player_image = "darwin_head.png";
     protected String trans_image = "red-draught.png";
     protected int ult_cd_timer = 0;
     
@@ -33,7 +33,7 @@ public class Darwin extends Player
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(humanState);
-        hp=10000;
+        //hp=10000;
     }
     
     /* method */
