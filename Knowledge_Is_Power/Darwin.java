@@ -18,6 +18,13 @@ public class Darwin extends Player
 
     protected String player_image = "darwin_head.png";
     protected String trans_image = "red-draught.png";
+
+    /* timer */
+    protected int ult_animation_timer = 0;
+    protected int skill_one_duration_timer = 0;
+    protected int skill_one_cd_timer = 0;
+    protected int skill_two_duration_timer = 0;
+    protected int skill_two_cd_timer = 0;
     protected int ult_cd_timer = 0;
 
     /* constructor */
@@ -31,6 +38,7 @@ public class Darwin extends Player
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(humanState);
+        //hp=10000;
     }
 
     /* method */
@@ -45,7 +53,8 @@ public class Darwin extends Player
 
            /* ability */
            base_attack();
-           transform();
+           skill_one();
+           skill_two();
            ult_animation();
            ult();
 
@@ -54,6 +63,7 @@ public class Darwin extends Player
 
            /* timer */
            timer();
+           additional_timer();
        }
        animation_timer();
 
@@ -74,19 +84,70 @@ public class Darwin extends Player
                 getWorld().addObject(new DarwinBullet(getRotation(), 5),getX(),getY());
             }
             else{
-                getWorld().addObject(new DarwinBullet(getRotation(), 5),getX(),getY());
+                //getWorld().addObject(new DarwinBullet(getRotation(), 5),getX(),getY());
             }
 
             attack_timer = attack_speed;
         }
     }
 
-    public void timer(){
-       if (attack_timer != 0) attack_timer--;
-       if (push_timer != 0) push_timer--;
-       if (invincible_timer != 0) invincible_timer--;
+    public void skill_one(){
+        if (skill_one_cd_timer==0){
+            if (Greenfoot.isKeyDown("1") && state.equals("human")) {
+                setImage(apemanState);
+                state="apeman";
+                player_image = "apeman.png";
 
-       if (ult_cd_timer != 0){ult_cd_timer--;}
+                skill_one_duration_timer = 180;
+                skill_one_cd_timer = 360;
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+
+            }
+            else if (Greenfoot.isKeyDown("1") && state.equals("apeman")) {
+                setImage(monkeyState);
+                state="monkey";
+                player_image = "monkey.png";
+
+                skill_one_duration_timer = 180;
+                skill_one_cd_timer = 360;
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+            }
+            else{}
+        }
+    }
+
+    public void skill_two(){
+        if (skill_two_cd_timer==0){
+            if (Greenfoot.isKeyDown("2") && state.equals("apeman")){
+                setImage(humanState);
+                state="human";
+                player_image = "darwin_head.png";
+
+                skill_two_duration_timer = 180;
+                skill_two_cd_timer = 360;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
+            }
+            else if (Greenfoot.isKeyDown("2") && state.equals("monkey")){
+                setImage(apemanState);
+                state="apeman";
+                player_image = "apeman.png";
+
+                skill_two_duration_timer = 180;
+                skill_two_cd_timer = 360;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
+            }
+            else{}
+        }
+    }
+
+    public void additional_timer(){
+        if (skill_one_duration_timer != 0){skill_one_duration_timer--;}
+        if (skill_two_duration_timer != 0){skill_one_duration_timer--;}
+
+        if (skill_one_cd_timer != 0){skill_one_cd_timer--;}
+        if (skill_two_cd_timer != 0){skill_two_cd_timer--;}
+
+        if (ult_cd_timer != 0){ult_cd_timer--;}
     }
 
     //transform: "1"-downgrade, "2"-upgrade
@@ -94,7 +155,7 @@ public class Darwin extends Player
     //apeman->"2"->human
     //apeman->"1"->monkey
     //monkey->"2"->apeman
-    public void transform(){
+    /*public void transform(){
        if (Greenfoot.isKeyDown("1") && state.equals("human")) {
             setImage(apemanState);
             state="apeman";
@@ -115,7 +176,7 @@ public class Darwin extends Player
             state="apeman";
             player_image = "apeman.png";
         }
-    }
+    }*/
 
     public void ult_animation(){
         if (ult_cd_timer == 0){
