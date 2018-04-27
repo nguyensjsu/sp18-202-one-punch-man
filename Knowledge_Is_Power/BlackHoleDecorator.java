@@ -25,7 +25,8 @@ public class BlackHoleDecorator extends Decorator
         this.size_y = sizeY;
         this.damage = d;
         rotation = 0;
-        GreenfootImage image = getImage();
+   
+        GreenfootImage image = new GreenfootImage("blackhole.png");
         image.scale(400, 400);
         setImage(image);
 

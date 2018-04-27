@@ -23,7 +23,7 @@ public class BigBangDecorator extends Decorator
         this.size_y = sizeY;
         this.damage = d;
         rotation = 0;
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("bigblackhole.png");
         image.scale(900, 900);
         setImage(image);
 
