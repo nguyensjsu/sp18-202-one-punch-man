@@ -16,6 +16,9 @@ public class ScreenBullet extends Bullet
     
     public ScreenBullet(int r, int sizeX, int sizeY, int d){
         super(r,sizeX,sizeY,d);
+        GreenfootImage image = new GreenfootImage("screen.png");
+        image.scale(sizeX, sizeY);
+        setImage(image);
     }
     
    

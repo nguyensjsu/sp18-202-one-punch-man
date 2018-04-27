@@ -152,7 +152,7 @@ public class Hawking extends Player
         if (ult_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
                 /* ult cutscence */
-                ult_cutscence("bigbang.png","bigbang.png");   //player, sentence
+                ult_cutscence("bigbang1.png","bigbang.png");   //player, sentence
                 ult_cd_timer = 10000;
                 ((BaseWorld)getWorld()).freeze_all(true);
             }
