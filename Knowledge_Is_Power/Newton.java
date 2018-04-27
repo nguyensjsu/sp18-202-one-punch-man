@@ -1,6 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import static java.lang.Math.*;
-import java.util.Random;
 
 /**
  * Write a description of class Newton here.
@@ -22,15 +21,14 @@ public class Newton extends Player
     protected int size_x;
     protected int size_y;
     protected int move_speed = 5;
+    protected final int MAX_HP = 100;
+    protected int hp = MAX_HP;
     protected int bullet_damage = 10;
     protected int attack_speed = 30;  //2 per sec
     protected int radius = 150;
     protected int attack_timer = 0;
     protected int prism_cd_timer = 0;
     protected int appleSatellite_cd_timer = 0;
-    protected int appleRain_cd_timer = 0;
-    protected int appleRain_duration = 0;
-    protected int appleRain_duration_helper = 0;
 
     /* push stat */
     protected int push_x;
@@ -60,7 +58,7 @@ public class Newton extends Player
     public void act(){
        //setImage(gif.getCurrentImage());
        /* update move */
-       if (!freeze_state){
+       if (move_state != "freeze"){
            switch (move_state){
                case "wasd": wasd_move(); break;
                case "push": push(push_x, push_y, push_speed); break;
@@ -69,9 +67,8 @@ public class Newton extends Player
 
            /* ability */
            base_attack();
-           skill_1();
-           skill_2();
-           skill_3();
+           appleSatellite();
+           prism();
 
            /* invincible flash */
            invincible_flash(player_image,trans_image);
@@ -93,9 +90,8 @@ public class Newton extends Player
     public String get_damage_state(){return damage_state;}
     public void set_move_state(String s){move_state = s;}
 
-    /* Newton's skills */
-    /* AppleSatellite */
-    public void skill_1(){
+    /*Newton's skills */
+    public void appleSatellite(){
          if(Greenfoot.isKeyDown("1")){
             if (appleSatellite_cd_timer == 0){
                 //getWorld().addObject(new Prism(40),getX(),getY());
@@ -111,8 +107,7 @@ public class Newton extends Player
         }
     }
 
-    /* Prism */
-    public void skill_2(){
+    public void prism(){
         if(Greenfoot.isKeyDown("2")){
             if (prism_cd_timer == 0){
                 //getWorld().addObject(new Prism(40),getX(),getY());
@@ -125,22 +120,6 @@ public class Newton extends Player
 
                 getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),0,0);
             }
-        }
-    }
-
-     /* AppleRain */
-    public void skill_3(){
-        if(Greenfoot.isKeyDown("3")){
-            if (appleRain_cd_timer == 0){
-                appleRain_duration = 300;
-                appleRain_cd_timer = 600;
-            }
-        }
-        if(appleRain_duration != 0 && appleRain_duration_helper == 0){
-            Random rand = new Random();
-            int x = rand.nextInt(1580) + 10;
-            getWorld().addObject(new AppleRain(),x,10);
-            appleRain_duration_helper = 15;
         }
     }
 
@@ -251,11 +230,6 @@ public class Newton extends Player
                     damage_state = "invincible";
                     break;
 
-                case "heal":
-                    if ((hp += damage_num) > MAX_HP)
-                        hp = MAX_HP;
-                    break;
-
                 default: break;
             }
         }
@@ -282,9 +256,6 @@ public class Newton extends Player
        if (invincible_timer != 0) invincible_timer--;
        if (prism_cd_timer != 0) prism_cd_timer--;
        if(appleSatellite_cd_timer !=0) appleSatellite_cd_timer--;
-       if (appleRain_cd_timer !=0) appleRain_cd_timer--;
-       if (appleRain_duration !=0) appleRain_duration--;
-       if (appleRain_duration_helper !=0) appleRain_duration_helper--;
     }
 
     public void dead(){

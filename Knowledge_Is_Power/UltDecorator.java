@@ -14,12 +14,15 @@ public class UltDecorator extends UIPictureDecorator
     public UltDecorator(int X, int Y, int s, int r, String pic_name, int d){
         super(X,Y,s,r,pic_name);
         duration_timer = d;
-    }  
-    
-    public UltDecorator(int X, int Y, int s, int r, String pic_name, String gif_type, int d){
-        super(X,Y,s,r,pic_name,gif_type);
-        duration_timer = d;
     }
+    /*
+    public UltDecorator(int X, int Y, int s, int r, String pic_name, int d{
+        super(X,Y,s,r,pic_name);
+        duration_timer = d;
+        tar_x = tar_X;
+        tar_y = tar_Y;
+    }
+    */
 
     public void move(){
         int update_x;

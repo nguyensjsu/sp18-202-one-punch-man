@@ -18,13 +18,4 @@ public class UIPictureDecorator extends Decorator
             setImage(UIimage);
         }
     }
-    
-    public UIPictureDecorator(int X, int Y, int s, int r, String pic_name, String gif_type){
-        super(X,Y,s,r);
-        
-        gif = new GifImage(pic_name);
-        GreenfootImage image = gif.getCurrentImage();
-        image.scale(size_x, size_y);
-        setImage(image);
-    }
 }

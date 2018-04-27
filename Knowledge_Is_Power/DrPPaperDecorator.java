@@ -18,7 +18,7 @@ public class DrPPaperDecorator extends Decorator
         target_x = targetX;
         target_y = targetY;
         
-        GreenfootImage image = new GreenfootImage("DrPPaperRed.png");
+        GreenfootImage image = getImage();
         image.scale(30,30);
         setImage(image);
     }

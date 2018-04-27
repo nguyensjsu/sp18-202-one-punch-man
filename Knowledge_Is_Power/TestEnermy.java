@@ -14,20 +14,5 @@ public class TestEnermy extends Enermy
     
     public TestEnermy(int sizeX, int sizeY, String move, String attack){
         super(sizeX,sizeY,move,attack);
-        attack_speed = 30;
-        MAX_HP = 200;
-        hp = 200;
-        
-        GreenfootImage image = new GreenfootImage("man01.png");
-        image.scale(size_x, size_y);
-        setImage(image);
-    }
-    
-    public void bullet_attack(){
-        if (attack_timer == 0){
-            setRotation(90);
-            getWorld().addObject(new EnermyTestBullet(getRotation()),getX(),getY());
-            attack_timer = attack_speed;
-        }
     }
 }

@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class DecoratorPatternDecorator extends Decorator
 {
-    protected int rotation = 0;
+
     protected int duration;
     protected int radius;
     
@@ -20,15 +20,16 @@ public class DecoratorPatternDecorator extends Decorator
     
     /* override */
     public void draw(){
-        GreenfootImage image = new GreenfootImage("red circle.png");
-        image.scale(radius,radius);
+        GreenfootImage image = new  GreenfootImage(radius, radius);
+        for (int r=0;r<15;r++){
+            image.setColor(Color.RED);
+            image.drawOval(r, r, radius-2*r, radius-2*r);
+           // image.fillOval(r, r, radius-2*r, radius-2*r);
+        }
         setImage(image);
     }
     
     public void update(){
-        rotation++;
-        setRotation(rotation);
-        
         for(DrPSuperAttack bullet: getObjectsInRange(radius-60-15, DrPSuperAttack.class)){
             bullet.size_x = 60;
             bullet.size_y = 60;

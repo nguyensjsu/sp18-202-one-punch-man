@@ -14,7 +14,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected boolean freeze_state = false;
     protected String attack_state = "stop";     //stop, bullet
     protected String move_state = "stop";       //stop, wander, chase, push
-    protected String damage_state = "normal";   //normal, invincible
+    protected String damage_state = "normal";   //normal
     protected String prev_state;
     
     /* enermy stat */
@@ -22,11 +22,11 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected int size_x;
     protected int size_y;
     protected int move_speed = 3;
-    protected int MAX_HP = 20;
+    protected final int MAX_HP = 20;
     protected int hp = MAX_HP;
     protected int attack_speed = 60;  //1 per sec
     protected int attack_timer = 0;
-    protected int push_damage = 10;     //push attack damage
+    protected int push_damage = 20;     //push attack damage
     
     /* push stat */
     protected int push_x;
@@ -50,8 +50,8 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected SimpleTimer effectTimer = new SimpleTimer();
     protected String prevMoveState = "";
     
-    protected boolean fade = false;
-    protected int transVal = 255;
+    private boolean fade = false;
+    private int transVal = 255;
     
     /* constructor */
     public Enermy(){
@@ -61,7 +61,6 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     public Enermy(int sizeX, int sizeY, String move, String attack){
         size_x = sizeX;
         size_y = sizeY;
-        
         GreenfootImage image = getImage();
         image.scale(size_x, size_y);
         setImage(image);
@@ -232,21 +231,6 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
                     hp -= damage_num;
                     break;
                     
-                 case "pull":
-                    /* pull */
-                    if (move_state != "push")
-                        prev_state = move_state;
-                    move_state = "push";
-                    int px = source_x - getX();
-                    int py = source_y - getY();
-                    push_x = getX() - (int)(100*px/sqrt(px*px+py*py));
-                    push_y = getY() - (int)(100*py/sqrt(px*px+py*py));
-                    push_speed = -1;
-                    push_timer = 29;
-                    /* take damage */
-                    hp -= damage_num;
-                    break;
-                    
                 case "bullet":
                     /* take damage */
                     hp -= damage_num;
@@ -279,8 +263,6 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
         }
     };
     
-    
-    /* buff state */
     public void buffRefresh(){
         List<IBuffState> tempList = new ArrayList<IBuffState>(buffList);
         // buff cause damage 

@@ -15,7 +15,7 @@ public class Bullet extends Actor implements FreezeObj
     protected String bullet_image;
     protected int size_x;
     protected int size_y;
-    protected double move_speed = 10.0;
+    protected int move_speed = 10;
     protected boolean through = false;
     protected int damage = 20;
     protected String damage_type = "bullet";
@@ -70,7 +70,6 @@ public class Bullet extends Actor implements FreezeObj
         
         /* move */
         setLocation(update_x,update_y);
-        setRotation(fire_rotation);
     }
     
     public void timer(){
