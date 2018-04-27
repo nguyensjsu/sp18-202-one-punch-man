@@ -8,11 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BossStageWorld extends BaseWorld
 {   
+    protected boolean exit_shown = false;
+    
     public BossStageWorld(){
         super();
         player.hp = player.MAX_HP;      //recover hp at the start of the stage
-        bossMusic.playLoop();
-        bossMusic.setVolume(15);
     }
 
     public void prepare(){
@@ -22,6 +22,10 @@ public class BossStageWorld extends BaseWorld
         playerUICreate();
         /* create boss */
         enermyCreate();
+        /* create boss bgm */
+        BaseWorld.BGM = new GreenfootSound("boss_fight.mp3");
+        BaseWorld.BGM.playLoop();
+        BaseWorld.BGM.setVolume(20);
         /* create boss UI */
         enermyUIcreate();
     }
@@ -32,7 +36,8 @@ public class BossStageWorld extends BaseWorld
     
     public void enermyUIcreate(){
         /* boss head pic*/
-        addObject(new UIPictureDecorator(150,150,0,0,"board.jpg"),150,100);
+        addObject(new UIPictureDecorator(150,150,0,0,"white.png"),150,100);
+        addObject(new UIPictureDecorator(150,150,0,0,"boss.png"),150,100);
 
         /* boss hp bar */
         BossEnermy boss = getObjects(BossEnermy.class).get(0);
@@ -47,5 +52,19 @@ public class BossStageWorld extends BaseWorld
         addObject(new UIFrameDecorator(1200+20,10,0,0,UI_frame_pic),850,50-18);
         addObject(new UIFrameDecorator(10,25+20,0,0,UI_frame_pic),850+605,50);
         addObject(new UIFrameDecorator(10,25+20,0,0,UI_frame_pic),850-605,50);
+    }
+    
+    public void act(){
+        if (getObjects(BossEnermy.class).size() == 0){
+            if (!exit_shown){
+                exitCreate();
+                exit_shown = true;
+            }
+            /* enter exit to win */
+            if (player.getX()>700 && player.getX()<900 && player.getY()<50){
+                BaseWorld.BGM.stop();
+                Greenfoot.setWorld(new Win());
+            }
+        }
     }
 }

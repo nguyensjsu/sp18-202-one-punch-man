@@ -19,12 +19,14 @@ public class EnermyBullet extends Bullet
     /* override */
     public void dead(){
         /* delete if hit player and type is not through */
-        if (getOneIntersectingObject(Player.class) != null && !through){
+        if (getOneIntersectingObject(Player.class) != null){
             for (Player p: this.getIntersectingObjects(Player.class)){
                 p.damage(getX(),getY(),damage, "bullet"); 
                 break;
             }
-            getWorld().removeObject(this);
+            if (!through){
+                getWorld().removeObject(this);
+            }
         }
         /* delete if hit world edge */
         else if (this.isAtEdge()){

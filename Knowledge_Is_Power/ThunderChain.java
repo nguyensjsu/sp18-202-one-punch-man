@@ -18,7 +18,8 @@ public class ThunderChain extends Bullet
     private int transVal = 255;
     private int currentX;
     private int currentY;
-    
+    private GreenfootSound chain_sound = new GreenfootSound("thunder_medium.wav");
+    private GreenfootSound tower_sound = new GreenfootSound("thunder_short.wav");
     public ThunderChain(int currentX, int currentY, int turnX, int turnY, int sizeX, int damage){
         this.sizeX = sizeX;
         this.damage = damage;
@@ -47,6 +48,9 @@ public class ThunderChain extends Bullet
             boolean shock = true;
             if(chainCount == 1){
                 shock = false;
+                tower_sound.play();
+            } else{
+                chain_sound.play();
             }
             if(chainCount > 0){
                 Enermy enermy = getNearestEnermy(searchRange, false, shock);
@@ -90,7 +94,8 @@ public class ThunderChain extends Bullet
             image = transGif.getCurrentImage();
         }else{
             image = originGif.getCurrentImage();
-        }        
+        }
+        if(sizeX < 10) sizeX = 10;
         image.scale(sizeX, sizeY);
         setImage(image);
     }

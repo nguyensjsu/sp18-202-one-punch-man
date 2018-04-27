@@ -14,11 +14,11 @@ public class TestEnermy extends Enermy
     
     public TestEnermy(int sizeX, int sizeY, String move, String attack){
         super(sizeX,sizeY,move,attack);
-        attack_speed = 26;
+        attack_speed = 30;
         MAX_HP = 200;
         hp = 200;
         
-        GreenfootImage image = new GreenfootImage("man01.png");
+        GreenfootImage image = new GreenfootImage("testenermy.png");
         image.scale(size_x, size_y);
         setImage(image);
     }

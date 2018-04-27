@@ -19,11 +19,11 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     
     /* player stat */
     protected String player_image = "lobster.png";
-    protected String trans_image = "red-draught.png";
+    protected String trans_image = "trans.png";
     protected int size_x;
     protected int size_y;
     protected int move_speed = 5;
-    protected final int MAX_HP = 100;
+    protected final int MAX_HP = 200;
     protected int hp = MAX_HP;
     protected int bullet_damage = 10;
     protected int attack_speed = 30;  //2 per sec
@@ -54,9 +54,6 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     public Player(int x, int y){
         size_x = x;
         size_y = y;
-        GreenfootImage image = getImage();
-        image.scale(size_x, size_y);
-        setImage(image);
     }
     
     
@@ -208,13 +205,13 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     }
     
     public void invincible_flash(String origin, String trans){
-       GreenfootImage image;
+       GreenfootImage image = new GreenfootImage(origin);
        if (invincible_timer % 20 >= 10){
            if(transGif != null){
                image = transGif.getCurrentImage();
            }
            else{
-               image = new GreenfootImage(trans);
+               image.clear();
            }
        }
        else{
@@ -240,32 +237,30 @@ public class Player extends Actor implements NotBullet,FreezeObj,HasHp
     
     public void ult_cutscence(String player_pic, String sentence_pic){
         /* middle back */
-        getWorld().addObject(new UltDecorator(2400,1350,0,11,"board.jpg",120),800,450);
+        getWorld().addObject(new UltDecorator(1600,500,0,0,"ultback.gif","gif",120),800,450);
         
         /* player */
-        getWorld().addObject(new UltDecorator(800,800,-30,11,player_pic,120),1600,605);
+        getWorld().addObject(new UltDecorator(500,500,-30,0,player_pic,120),1600,450);
         
         /* sentence */
-        getWorld().addObject(new UltDecorator(600,600,-45,11,sentence_pic,120),1600,605);
-        
+        getWorld().addObject(new UltDecorator(600,400,-47,0,sentence_pic,120),1600,450);
+    
         /* side backs */
+        /*
         getWorld().addObject(new UltDecorator(900,400,0,30,"board.jpg",120),1300,50);
         getWorld().addObject(new UltDecorator(2000,300,0,352,"board.jpg",120),1000,900);
+        */
         
         /* two lines */
-        getWorld().addObject(new UltDecorator(1600,30,0,30,"bluerock.jpg",120),1200,225);
-        getWorld().addObject(new UltDecorator(2400,30,0,352,"bluerock.jpg",120),800,788);
+        getWorld().addObject(new UltDecorator(1600,30,0,0,"ultframe.png",120),800,200);
+        getWorld().addObject(new UltDecorator(1600,30,0,0,"ultframe.png",120),800,700);
         
         ult_cutscence_timer = 150;
     }
     
     public void dead(){
         if(hp <= 0){
-            /* game over phase */
-            getWorld().showText("GAME OVER",800,450);
-            
-            /* clear all */
-            getWorld().removeObjects(getWorld().getObjects(Actor.class));
+            Greenfoot.setWorld(new GameOver());
         }
     }
     public List<Enermy> getObjectsInRange(int range){

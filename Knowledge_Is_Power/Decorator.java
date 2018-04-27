@@ -17,6 +17,8 @@ public class Decorator extends Actor
     protected int rotation = 0;
     /* remove flag */
     protected boolean go_die = false;
+    /* gif */
+    protected GifImage gif = null;
     
     /* constructor */
     public Decorator(){
@@ -40,18 +42,29 @@ public class Decorator extends Actor
         setImage(image);
     }
     
+    public Decorator(int X, int Y, GreenfootImage img){
+        this(X,Y,0,0);
+        setRotation(0);
+        
+        img.scale(size_x, size_y);
+        setImage(img);
+    }
+    
     /* method */
     public void act() 
     {
         if(!freeze_state){
-            draw();
             move();
             update();
+            draw();
 
             /* timer */
             timer();
         }
-
+        
+        /* gif refresh */
+        if (gif != null)
+            gifAnimator();
         /* remove condition */
         dead();
     }
@@ -69,6 +82,12 @@ public class Decorator extends Actor
         
         /* move */
         setLocation(update_x,update_y);
+    }
+    
+     public void gifAnimator(){
+        GreenfootImage image = gif.getCurrentImage();
+        image.scale(size_x, size_y);
+        setImage(image);
     }
     
     public void update(){}

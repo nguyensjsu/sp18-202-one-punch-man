@@ -26,7 +26,7 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected int hp = MAX_HP;
     protected int attack_speed = 60;  //1 per sec
     protected int attack_timer = 0;
-    protected int push_damage = 20;     //push attack damage
+    protected int push_damage = 10;     //push attack damage
     
     /* push stat */
     protected int push_x;
@@ -50,8 +50,8 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
     protected SimpleTimer effectTimer = new SimpleTimer();
     protected String prevMoveState = "";
     
-    private boolean fade = false;
-    private int transVal = 255;
+    protected boolean fade = false;
+    protected int transVal = 255;
     
     /* constructor */
     public Enermy(){
@@ -279,6 +279,8 @@ public class Enermy extends Actor implements NotBullet,FreezeObj,HasHp
         }
     };
     
+    
+    /* buff state */
     public void buffRefresh(){
         List<IBuffState> tempList = new ArrayList<IBuffState>(buffList);
         // buff cause damage 
