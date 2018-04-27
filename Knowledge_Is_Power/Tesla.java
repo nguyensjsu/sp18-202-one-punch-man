@@ -136,9 +136,7 @@ public class Tesla extends Player
                 case "active" : 
                     mySector.updateLocation(getX(),getY(),getRotation());
                     if(Greenfoot.mouseClicked(null) ){
-                        getWorld().removeObject(mySector);
-                        sector_state = "idle";
-                        sector_sound.stop();
+                        exit();
                     }
                     break;
             }
@@ -146,6 +144,7 @@ public class Tesla extends Player
         public void exit(){
             getWorld().removeObject(mySector);
             sector_state = "idle";
+            sector_sound.stop();
         }
         public int getCoolDown(){
             return 0;
