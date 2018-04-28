@@ -12,7 +12,8 @@ public class ScreenChange extends Decorator
     protected World next_world;
     protected int trans_value_trans = 0;
     protected int trans_value_black = 255;
-    GreenfootImage img = new GreenfootImage(1600,900);
+    protected int delay = 0;
+    protected GreenfootImage img = new GreenfootImage(1600,900);
     
     public ScreenChange(String Type){
         super(1600,900,0,0);
@@ -25,29 +26,40 @@ public class ScreenChange extends Decorator
         next_world = world;
     }
     
+    public ScreenChange(String Type, int Delay){
+        super(1600,900,0,0);
+        type = Type;
+        delay = Delay;
+    }
+    
     public void act() 
     {
         if (type == "black to trans"){
-            if (trans_value_black >= 0){
-                img.clear();
-                img.setColor(new Color(0,0,0,trans_value_black));
-                img.scale(1600, 900);
-                img.fill();
-                setImage(img);
-                trans_value_black-=2;
+            if ((delay == 0) || trans_value_black == 255){
+                if (trans_value_black >= 0){
+                    img.clear();
+                    img.setColor(new Color(0,0,0,trans_value_black));
+                    img.scale(1600, 900);
+                    img.fill();
+                    setImage(img);
+                    trans_value_black-=2;
+                }
+                else getWorld().removeObject(this);
             }
-            else getWorld().removeObject(this);
         }
         else if (type == "trans to black"){
-            if (trans_value_trans <= 255){
-                img.clear();
-                img.setColor(new Color(0,0,0,trans_value_trans));
-                img.scale(1600, 900);
-                img.fill();
-                setImage(img);
-                trans_value_trans+=2;
+            if ((delay == 0) || trans_value_trans == 0){
+                if (trans_value_trans <= 255){
+                    img.clear();
+                    img.setColor(new Color(0,0,0,trans_value_trans));
+                    img.scale(1600, 900);
+                    img.fill();
+                    setImage(img);
+                    trans_value_trans+=2;
+                }
             }
         }
 
+        if (delay != 0) delay--;
     }    
 }

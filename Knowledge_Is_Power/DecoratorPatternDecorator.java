@@ -26,12 +26,14 @@ public class DecoratorPatternDecorator extends Decorator
         setRotation(rotation);
         
         for(DrPSuperAttack bullet: getObjectsInRange(radius-60-15, DrPSuperAttack.class)){
-            bullet.size_x = 60;
-            bullet.size_y = 60;
-            bullet.damage = 20;
-            GreenfootImage image = bullet.getImage();
-            image.scale(bullet.size_x, bullet.size_y);
-            bullet.setImage(image);
+            if (bullet.size_x != 60){
+                bullet.size_x = 60;
+                bullet.size_y = 60;
+                bullet.damage = 20;
+                GreenfootImage image = bullet.getImage();
+                image.scale(bullet.size_x, bullet.size_y);
+                bullet.setImage(image);
+            }
         }
     }
     

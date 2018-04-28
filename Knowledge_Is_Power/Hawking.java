@@ -31,7 +31,7 @@ public class Hawking extends Player
 
     
     public Hawking() {
-        this(80,80);
+        this(40,50);
     }
     
     public Hawking(int x, int y) {
@@ -152,7 +152,7 @@ public class Hawking extends Player
         if (ult_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
                 /* ult cutscence */
-                ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                ult_cutscence("bigbang1.png","bigbang.png");   //player, sentence
                 ult_cd_timer = 10000;
                 ((BaseWorld)getWorld()).freeze_all(true);
             }

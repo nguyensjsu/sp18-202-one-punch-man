@@ -12,6 +12,8 @@ public class TestStageTwoWorld extends TestStageWorld
     {
         super();
         player.hp = player.MAX_HP;
+        
+        addObject(new ScreenChange("black to trans",300),800,450);
         BaseWorld.BGM = new GreenfootSound("res.mp3");
         BaseWorld.BGM.play();
         BaseWorld.BGM.setVolume(20);
@@ -79,6 +81,8 @@ public class TestStageTwoWorld extends TestStageWorld
         
         /* enter exit to mob stage */
         if (player.getX()>700 && player.getX()<900 && player.getY()<50){
+            BaseWorld.BGM.stop();
+            BaseWorld.BGM = bossBGM;
             Greenfoot.setWorld(new BossStageWorld());
         }
     }

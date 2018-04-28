@@ -33,7 +33,7 @@ public class TeslaCar extends Player
     private List<NotBullet> intersect_list = new ArrayList<>();
     public TeslaCar(int damage){
         this.damage = damage;
-        GreenfootImage image = new GreenfootImage("Car_Purple_Front.png");
+        GreenfootImage image = new GreenfootImage("tesla_car.png");
         image.scale(sizeX, sizeY);
         setImage(image);
     }

@@ -15,6 +15,7 @@ public class ThunderSector extends Bullet
     private int sizeY = 200;
     private int transVal = 250;
     private boolean fade_out = true;
+    
     public ThunderSector(int r, int x, int y, int damage){
         super.damage = damage;
         GreenfootImage image = new GreenfootImage("thunder_sector.png");

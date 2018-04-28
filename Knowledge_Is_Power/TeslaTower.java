@@ -8,22 +8,22 @@ import java.util.List;
  */
 public class TeslaTower extends Player
 {
-    private int sizeX = 100;
-    private int sizeY = 100;
+    private int sizeX = 72;
+    private int sizeY = 116;
     private int transVal = 255;
     private int damage;
-    private int attack_range = 200;
+    private int attack_range = 300;
     private int lifeTime = 100000;
     private int attackTime = 500;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
-    
+    private GreenfootImage tower_image = new GreenfootImage("tesla_tower.png");
+    private GreenfootImage broken_image = new GreenfootImage("tesla_tower_broken.png");
     public TeslaTower(int damage){
         this.damage = damage;
         this.hp = 60;
-        GreenfootImage image = new GreenfootImage("tesla_tower.png");
-        image.scale(sizeX, sizeY);
-        setImage(image);
+        tower_image.scale(sizeX, sizeY);
+        setImage(tower_image);
         lifeTimer.mark();
     }
     public void act() 
@@ -65,6 +65,8 @@ public class TeslaTower extends Player
     }
     public void dead(){
         if(lifeTimer.millisElapsed() > lifeTime || hp <= 0){
+            broken_image.scale(sizeX, sizeY);
+            setImage(broken_image);
             transVal-=5;
         }
         if(transVal <= 0){
