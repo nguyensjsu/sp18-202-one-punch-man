@@ -68,7 +68,7 @@ public class TestStageWorld extends BaseWorld
             playerUIRemove();
             removeObject(player);
             player = new Darwin();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("darwin.png","evolution_monkey.png","evolution_human.png","programmer.png");
             /* create player UI */
             playerUICreate();
         }
