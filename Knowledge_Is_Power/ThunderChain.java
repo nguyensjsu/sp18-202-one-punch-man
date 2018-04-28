@@ -27,6 +27,8 @@ public class ThunderChain extends Bullet
         this.currentY = currentY;
         fade = true;
         gifAnimator();
+        chain_sound.setVolume(70);
+        tower_sound.setVolume(70);
     }
     
     public ThunderChain(int currentX, int currentY, int turnX, int turnY, int sizeX, int damage, int chainCount, int shockedTime){

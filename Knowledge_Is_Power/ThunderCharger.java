@@ -22,6 +22,7 @@ public class ThunderCharger extends Bullet
     public ThunderCharger(TeslaTower source, TeslaCar target){
         teslaTower= source;
         teslaCar = target;
+        charge_sound.setVolume(90);
         changeAnimation();
     }
     public void act(){
