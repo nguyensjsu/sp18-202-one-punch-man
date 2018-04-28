@@ -287,13 +287,5 @@ public class Newton extends Player
        if (appleRain_duration_helper !=0) appleRain_duration_helper--;
     }
 
-    public void dead(){
-        if(hp <= 0){
-            /* game over phase */
-            getWorld().showText("GAME OVER",800,450);
 
-            /* clear all */
-            getWorld().removeObjects(getWorld().getObjects(Actor.class));
-        }
-    }
 }
