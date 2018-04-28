@@ -12,24 +12,15 @@ public class FactoryMethodPatternDecorator extends Decorator
     protected int duration;
     protected int radius;
     protected DrP player;
-    protected String factory_state = "melee";   //melee or range
+    protected String factory_state = "start";   //melee or range
+    protected String factory_next_state = "start";
+    GreenfootImage image;
     
     public FactoryMethodPatternDecorator(DrP Player, int Duration, int Radius){
         super(Radius,Radius,0,0);
         player = Player;
         duration = Duration;
         radius = Radius;
-    }
-    
-    /* override */
-    public void draw(){
-        GreenfootImage image = new  GreenfootImage(radius, radius);
-        for (int r=0;r<15;r++){
-            image.setColor(Color.BLUE);
-            image.drawOval(r, r, radius-2*r, radius-2*r);
-           // image.fillOval(r, r, radius-2*r, radius-2*r);
-        }
-        setImage(image);
     }
     
     public void move(){
@@ -39,32 +30,39 @@ public class FactoryMethodPatternDecorator extends Decorator
     public void update(){
         GreenfootImage image;
         
-        /* choosing state */
-        if (getObjectsInRange(radius+200, Enermy.class).size() == 0){factory_state = "range";}
-        else {factory_state = "melee";}
+        rotation++;
+        setRotation(rotation);
         
-        if (factory_state == "range"){
-            draw();
+        /* choosing state */
+        if (getObjectsInRange(radius+200, Enermy.class).size() == 0){factory_next_state = "range";}
+        else {factory_next_state = "melee";}
+        
+        if (factory_next_state == "range"){
+            if (factory_state == "melee" || factory_state == "start"){
+                image = new GreenfootImage("blue circle.png");
+                image.scale(radius+100,radius+100);
+                setImage(image);
+            }
             for(DrPSuperAttack bullet: getObjectsInRange(radius-60-15, DrPSuperAttack.class)){
                 /* chase blue bullet */
-                bullet.chase_state = true;
-                image = new GreenfootImage("balloon2.png");
-                image.scale(bullet.size_x, bullet.size_y);
-                bullet.setImage(image);
+                if (!bullet.chase_state){
+                    bullet.chase_state = true;
+                    image = new GreenfootImage("DrPPaperBlue.png");
+                    image.scale(bullet.size_x, bullet.size_y);
+                    bullet.setImage(image);
+                }
             }
         }
         else{
-            image = new  GreenfootImage(radius, radius);
-            for (int r=0;r<15;r++){
-                image.setColor(Color.YELLOW);
-                image.drawOval(r, r, radius-2*r, radius-2*r);
-               // image.fillOval(r, r, radius-2*r, radius-2*r);
+            if (factory_state == "range" || factory_state == "start"){
+                image = new GreenfootImage("yellow circle.jpg");
+                image.scale(radius+100,radius+100);
+                setImage(image);
             }
-            setImage(image);
             for(DrPSuperAttack bullet: getObjectsInRange(radius-60-15, DrPSuperAttack.class)){
                 /* none chase yellow bullet */
                 bullet.chase_state = false;
-                image = new GreenfootImage("balloon3.png");
+                image = new GreenfootImage("DrPPaperYellow.png");
                 image.scale(bullet.size_x, bullet.size_y);
                 bullet.setImage(image);
                 
@@ -77,7 +75,7 @@ public class FactoryMethodPatternDecorator extends Decorator
                     int y = (int)(cos(toRadians(i*angle))*(radius-20-15));
                     
                     new_bullet = new DrPSuperAttack(i*angle+90,bullet.size_x,bullet.size_y,bullet.damage,bullet.chase_state);
-                    image = new GreenfootImage("balloon3.png");
+                    image = new GreenfootImage("DrPPaperYellow.png");
                     image.scale(bullet.size_x, bullet.size_y);
                     new_bullet.setImage(image);
                     new_bullet.life_timer = 30;
@@ -88,6 +86,8 @@ public class FactoryMethodPatternDecorator extends Decorator
                 getWorld().removeObject(bullet);
             }
         }
+        
+        factory_state = factory_next_state;
     }
     
     public void timer(){

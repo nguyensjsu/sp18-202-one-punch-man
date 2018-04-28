@@ -57,7 +57,7 @@ public class ThunderExplode extends Bullet
         }else{
             turn(fire_rotation);
         }
-        move(move_speed);
+        move((int)(move_speed));
         setRotation(0);
     }
     public void gifAnimator(){

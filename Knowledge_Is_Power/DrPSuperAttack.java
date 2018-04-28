@@ -13,11 +13,19 @@ public class DrPSuperAttack extends PlayerBullet
     
     public DrPSuperAttack(int r){
         this(r,20,20,5,false);        //default size 20*20, not through, 5 damage, not chasing
+        
+        GreenfootImage image = new GreenfootImage("DrPPaper.png");
+        image.scale(size_x, size_y);
+        setImage(image);
     }
     
     public DrPSuperAttack(int r, int sizeX, int sizeY, int d, boolean b){
         super(r,sizeX,sizeY,d);
         chase_state = b;
+        
+        GreenfootImage image = new GreenfootImage("DrPPaper.png");
+        image.scale(size_x, size_y);
+        setImage(image);
     }
     
     public void act(){

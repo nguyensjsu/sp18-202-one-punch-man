@@ -12,13 +12,14 @@ public class DrPPaperDecorator extends Decorator
     protected int target_x;
     protected int target_y;
     protected int finish_timer = 180;   //2 sec animation before kill all
+    protected DialogDecorator dialog = null;
     
     public DrPPaperDecorator(int targetX, int targetY, int speed, int rotation){
         super(30,30,speed,rotation);
         target_x = targetX;
         target_y = targetY;
         
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("DrPUltIcon.png");
         image.scale(30,30);
         setImage(image);
     }
@@ -53,7 +54,11 @@ public class DrPPaperDecorator extends Decorator
         /* reached target */
         else
         {
-            setRotation(0);
+            if (dialog == null){
+                dialog = new DialogDecorator(finish_timer);
+                getWorld().addObject(dialog, getX()-50,getY()-100);
+                setRotation(0);
+            }
         }
     }
 }
