@@ -18,7 +18,7 @@ public class screenBoom extends Bullet
     protected int damage = 20;
     /* bullet direction */
     protected int fire_rotation;
-    protected GifImage boom = new GifImage("boom.gif");
+    protected GifImage boom = new GifImage("boom1.gif");
    
     /* constructor */
     public screenBoom(){  

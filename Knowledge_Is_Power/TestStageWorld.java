@@ -16,7 +16,7 @@ public class TestStageWorld extends BaseWorld
     public void prepare(){
         /* create player */
         player = new Hawking(); //init player
-        playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+        playerCreate("hawking_face_right.png","hawking_skill1.png","hawking_skill2.png","hawking_skill3.png");
         /* create player UI */
         playerUICreate();
         /* create enermy */
