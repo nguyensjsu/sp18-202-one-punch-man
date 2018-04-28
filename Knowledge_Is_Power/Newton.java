@@ -16,7 +16,7 @@ public class Newton extends Player
     protected String damage_state = "normal";       //normal, invincible
 
     /* player stat */
-    protected String player_image = "person.png";
+    protected String player_image = "Newton.png";
     protected String trans_image = "red-draught.png";
     protected GifImage myprism = new GifImage("myprism.gif");
     protected int size_x;
@@ -51,7 +51,7 @@ public class Newton extends Player
     public Newton(int x, int y){
         size_x = x;
         size_y = y;
-        GreenfootImage image = new GreenfootImage("person.png");
+        GreenfootImage image = new GreenfootImage("Newton.png");
         image.scale(size_x, size_y);
         setImage(image);
     }
