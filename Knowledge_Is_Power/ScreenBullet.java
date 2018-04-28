@@ -30,6 +30,7 @@ public class ScreenBullet extends Bullet
                 e.damage(getX(),getY(),damage, "bullet");
                 break;
             }
+            getWorld().addObject(new screenBoom(),getX(),getY());
             getWorld().removeObject(this);
         }
         /* delete if hit world edge */
