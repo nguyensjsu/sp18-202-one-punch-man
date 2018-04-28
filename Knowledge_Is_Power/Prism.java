@@ -16,7 +16,7 @@ public class Prism extends Bullet
     protected int prism_timer = 27;
     protected boolean through = false;
     protected boolean hit = false;
-    protected int damage = 8;
+    protected int damage = 12;
     /* bullet direction */
     protected int fire_rotation;
     protected GifImage myprism = new GifImage("myprism.gif");
@@ -26,7 +26,7 @@ public class Prism extends Bullet
         this.fire_rotation = r;
         this.damage = d;
         GreenfootImage image = myprism.getCurrentImage();
-        image.setTransparency(150);
+        image.setTransparency(180);
         setImage(image);
         this.setRotation(r);
     }
@@ -70,7 +70,7 @@ public class Prism extends Bullet
             int x = (int) (newton.getX()+ 450*cos(toRadians(getRotation())));
             int y = (int) (newton.getY()+ 450*sin(toRadians(getRotation())));
             setLocation(x,y);
-            image.setTransparency(150);
+            image.setTransparency(180);
             setImage(image);
         }
     }

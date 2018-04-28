@@ -22,7 +22,7 @@ public class Newton extends Player
     protected int size_x;
     protected int size_y;
     protected int move_speed = 5;
-    protected int bullet_damage = 10;
+    protected int bullet_damage = 12;
     protected int attack_speed = 30;  //2 per sec
     protected int radius = 150;
     protected int attack_timer = 0;
@@ -72,14 +72,14 @@ public class Newton extends Player
            skill_1();
            skill_2();
            skill_3();
-
+           ult_animation();
            /* invincible flash */
            invincible_flash(player_image,trans_image);
 
            /* timer */
            timer();
        }
-
+       animation_timer();
        /* game over condition */
        dead();
     }
@@ -116,7 +116,7 @@ public class Newton extends Player
         if(Greenfoot.isKeyDown("2")){
             if (prism_cd_timer == 0){
                 //getWorld().addObject(new Prism(40),getX(),getY());
-                Prism prism = new Prism(getRotation(),8);
+                Prism prism = new Prism(getRotation(),12);
                 //prism.setRotation(getRotation());
                 int x = (int) (getX()+ 450*cos(toRadians(getRotation())));
                 int y = (int) (getY()+ 450*sin(toRadians(getRotation())));
@@ -130,18 +130,34 @@ public class Newton extends Player
 
      /* AppleRain */
     public void skill_3(){
-        if(Greenfoot.isKeyDown("3")){
-            if (appleRain_cd_timer == 0){
-                appleRain_duration = 300;
-                appleRain_cd_timer = 600;
-            }
-        }
+        if (ult_trigger ){
+            appleRain_duration = 300;
+            appleRain_cd_timer = 1200;
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1200),1500,775);
+
         if(appleRain_duration != 0 && appleRain_duration_helper == 0){
             Random rand = new Random();
             int x = rand.nextInt(1580) + 10;
             getWorld().addObject(new AppleRain(),x,10);
             appleRain_duration_helper = 15;
         }
+        if (appleRain_duration == 0)ult_trigger = false;
+    }
+    }
+    
+    public void ult_animation(){
+        if (appleRain_cd_timer == 0){
+            if(Greenfoot.isKeyDown("3")){
+                ult_cutscence("Newton_swag.jpg","Newton ult.png");
+                appleRain_cd_timer = 10000;
+                ((BaseWorld)getWorld()).freeze_all(true);
+            }
+        }
+    }
+    
+    public void animation_timer(){
+        if (ult_cutscence_timer !=0) ult_cutscence_timer--;
+        if (ult_cutscence_timer ==1) {ult_trigger = true;((BaseWorld)getWorld()).freeze_all(false);}
     }
 
     /* movement control using WASD */
