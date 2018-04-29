@@ -23,11 +23,11 @@ public class Tesla extends Player
         size_x = x;
         size_y = y;
         //super.originGif = new GifImage("Tesla_head.gif");
-        super.player_image = "";
+        super.player_image = "tesla.png";
         /* Avator */
-        GreenfootImage image = originGif.getCurrentImage();
-        image.scale(x, y);
-        setImage(super.originGif.getCurrentImage());
+        // GreenfootImage image = originGif.getCurrentImage();
+        // image.scale(x, y);
+        // setImage(super.originGif.getCurrentImage());
         /* Attack */
         sectorAttack = new SectorAttack();
         chainAttack = new ChainAttack();
