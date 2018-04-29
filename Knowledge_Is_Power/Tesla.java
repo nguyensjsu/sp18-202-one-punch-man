@@ -22,11 +22,12 @@ public class Tesla extends Player
     public Tesla(int x, int y){
         size_x = x;
         size_y = y;
-        super.originGif = new GifImage("Tesla_head.gif");
+        //super.originGif = new GifImage("Tesla_head.gif");
+        super.player_image = "tesla.png";
         /* Avator */
-        GreenfootImage image = originGif.getCurrentImage();
-        image.scale(x, y);
-        setImage(super.originGif.getCurrentImage());
+        // GreenfootImage image = originGif.getCurrentImage();
+        // image.scale(x, y);
+        // setImage(super.originGif.getCurrentImage());
         /* Attack */
         sectorAttack = new SectorAttack();
         chainAttack = new ChainAttack();
@@ -81,10 +82,9 @@ public class Tesla extends Player
     }
     
     public class ChainAttack implements AttackStrategy{
-        private int cooldown = 0;
-        private int timer = 30;
+        private int timer = 0;
+        private int cooldown = 50;
         private int chainDamage = 5;
-        
         public void attack(){
             if(timer == 0){
                 MouseInfo mouse = Greenfoot.getMouseInfo();
@@ -121,8 +121,8 @@ public class Tesla extends Player
     public class SectorAttack implements AttackStrategy{
         private String sector_state = "idle";
         private ThunderSector mySector;
-        private int sectorDamage = 1;
-        
+        private int sectorDamage = 2;
+        private GreenfootSound sector_sound = new GreenfootSound("thunder_sector.mp3");
         public void attack(){
             MouseInfo mouse = Greenfoot.getMouseInfo();
             switch (sector_state){
@@ -131,13 +131,13 @@ public class Tesla extends Player
                         mySector = new ThunderSector(getRotation(),getX(),getY(),sectorDamage);
                         getWorld().addObject(mySector,getX(),getY());
                         sector_state = "active";
+                        sector_sound.playLoop();
                     }
                     break;
                 case "active" : 
                     mySector.updateLocation(getX(),getY(),getRotation());
                     if(Greenfoot.mouseClicked(null) ){
-                        getWorld().removeObject(mySector);
-                        sector_state = "idle";
+                        exit();
                     }
                     break;
             }
@@ -145,6 +145,7 @@ public class Tesla extends Player
         public void exit(){
             getWorld().removeObject(mySector);
             sector_state = "idle";
+            sector_sound.stop();
         }
         public int getCoolDown(){
             return 0;
@@ -154,15 +155,14 @@ public class Tesla extends Player
     public class ExplodeAttack implements AttackStrategy{
         private int timer = 0;
         private int cooldown = 300;
-        private int explodeDamage = 9999;
-        
+        private int explodeDamage = 100;
         public void attack(){
             if(timer == 0){
                 MouseInfo mouse = Greenfoot.getMouseInfo();
                 if (mouse != null && Greenfoot.mousePressed(null)){
                     getWorld().addObject(new ThunderExplode(getRotation(), explodeDamage),getX(),getY());
                     timer = cooldown;
-                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1200,775,cooldown),0,0);
+                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1200,775,cooldown),1200,775);
                 }
             }else{
                 timer--;
@@ -179,14 +179,14 @@ public class Tesla extends Player
     public class TowerAttack implements AttackStrategy{
         private int timer = 0;
         private int cooldown = 300;
-        private int towerDamage = 2;
+        private int towerDamage = 5;
         
         public void attack(){
             if(timer == 0){
                 if(Greenfoot.isKeyDown("4")){
                     getWorld().addObject(new TeslaTower(towerDamage), getX(), getY());
                     timer = cooldown;
-                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1350,775,cooldown),0,0);
+                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1350,775,cooldown),1350,775);
                 }
             }else{
                 timer--;
@@ -213,13 +213,10 @@ public class Tesla extends Player
         public void attack(){
             if (ult_trigger){
                 ult_trigger = false;
-                getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1500,775,cooldown),0,0);
+                getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1500,775,cooldown),1500,775);
             }
             if(timer == 0){
                 if(!carStarted && Greenfoot.isKeyDown("5")){
-                    ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
-                    timer = cooldown;
-                    ((BaseWorld)getWorld()).freeze_all(true);
                     // freeze and hide tesla
                     List<UIHpDecorator> hpList = getWorld().getObjects(UIHpDecorator.class);
                     for(UIHpDecorator hp:hpList){
@@ -242,6 +239,9 @@ public class Tesla extends Player
                     carStarted = true;
                     // set cd
                     timer = cooldown;
+                    // show ultimate animation
+                    ult_cutscence("tesla_full.gif","tesla_full.gif");   //player, sentence
+                    ((BaseWorld)getWorld()).freeze_all(true);
                 }
             }else{
                 timer--;

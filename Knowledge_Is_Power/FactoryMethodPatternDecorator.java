@@ -9,24 +9,18 @@ import static java.lang.Math.*;
  */
 public class FactoryMethodPatternDecorator extends Decorator
 {
-    protected int rotation = 0;
     protected int duration;
     protected int radius;
     protected DrP player;
-    protected String factory_state = "melee";   //melee or range
+    protected String factory_state = "start";   //melee or range
+    protected String factory_next_state = "start";
+    GreenfootImage image;
     
     public FactoryMethodPatternDecorator(DrP Player, int Duration, int Radius){
         super(Radius,Radius,0,0);
         player = Player;
         duration = Duration;
         radius = Radius;
-    }
-    
-    /* override */
-    public void draw(){
-        GreenfootImage image = new GreenfootImage("blue circle.png");
-        image.scale(radius+100,radius+100);
-        setImage(image);
     }
     
     public void move(){
@@ -40,23 +34,31 @@ public class FactoryMethodPatternDecorator extends Decorator
         setRotation(rotation);
         
         /* choosing state */
-        if (getObjectsInRange(radius+200, Enermy.class).size() == 0){factory_state = "range";}
-        else {factory_state = "melee";}
+        if (getObjectsInRange(radius+200, Enermy.class).size() == 0){factory_next_state = "range";}
+        else {factory_next_state = "melee";}
         
-        if (factory_state == "range"){
-            draw();
+        if (factory_next_state == "range"){
+            if (factory_state == "melee" || factory_state == "start"){
+                image = new GreenfootImage("blue circle.png");
+                image.scale(radius+100,radius+100);
+                setImage(image);
+            }
             for(DrPSuperAttack bullet: getObjectsInRange(radius-60-15, DrPSuperAttack.class)){
                 /* chase blue bullet */
-                bullet.chase_state = true;
-                image = new GreenfootImage("DrPPaperBlue.png");
-                image.scale(bullet.size_x, bullet.size_y);
-                bullet.setImage(image);
+                if (!bullet.chase_state){
+                    bullet.chase_state = true;
+                    image = new GreenfootImage("DrPPaperBlue.png");
+                    image.scale(bullet.size_x, bullet.size_y);
+                    bullet.setImage(image);
+                }
             }
         }
         else{
-            image = new GreenfootImage("yellow circle.jpg");
-            image.scale(radius+100,radius+100);
-            setImage(image);
+            if (factory_state == "range" || factory_state == "start"){
+                image = new GreenfootImage("yellow circle.png");
+                image.scale(radius+100,radius+100);
+                setImage(image);
+            }
             for(DrPSuperAttack bullet: getObjectsInRange(radius-60-15, DrPSuperAttack.class)){
                 /* none chase yellow bullet */
                 bullet.chase_state = false;
@@ -84,6 +86,8 @@ public class FactoryMethodPatternDecorator extends Decorator
                 getWorld().removeObject(bullet);
             }
         }
+        
+        factory_state = factory_next_state;
     }
     
     public void timer(){

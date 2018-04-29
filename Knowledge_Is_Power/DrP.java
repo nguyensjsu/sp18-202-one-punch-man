@@ -9,7 +9,7 @@ import static java.lang.Math.*;
  */
 public class DrP extends Player
 {
-    protected String player_image = "DrP_head.jpg";
+    protected String player_image = "DrP.png";
     
     /* Dr.P state*/
     protected boolean decorator_pattern_state = false;
@@ -28,7 +28,7 @@ public class DrP extends Player
     protected int ult_cd_timer = 0;
     
     public DrP(){
-        this(50,50);    //default size 50*50
+        this(50,40);    //default size 50*40
     }
     
     public DrP(int x, int y){
@@ -88,7 +88,7 @@ public class DrP extends Player
                 
                 skill_one_duration_timer = 180;
                 skill_one_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),1200,775);
             }
         }
     }
@@ -102,7 +102,7 @@ public class DrP extends Player
                                                                    (int)(getY() + 200*sin(toRadians(getRotation()))));
                 skill_two_duration_timer = 500;
                 skill_two_cd_timer = 800;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,800),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,800),1350,775);
             }
         }
     }
@@ -129,7 +129,7 @@ public class DrP extends Player
             }
             
             ult_cd_timer = 1800;
-            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),1500,775);
         }
     }
     
@@ -155,7 +155,7 @@ public class DrP extends Player
         if (ult_animation_timer == 1){
             ((BaseWorld)getWorld()).freeze_all(false);
             for (Enermy enermy: getWorld().getObjects(Enermy.class)){
-                enermy.damage(getY(), getX(), 200, "bullet");
+                enermy.damage(getY(), getX(), 300, "bullet");
             }
         }
         /* timer */

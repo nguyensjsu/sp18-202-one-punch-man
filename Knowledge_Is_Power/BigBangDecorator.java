@@ -11,7 +11,7 @@ public class BigBangDecorator extends Decorator
     private int sizeX;
     private int sizeY;
     private int damage;
-    private int lifeTime = 2000;
+    private int lifeTime = 3000;
     private int attackTime = 500;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
@@ -23,7 +23,7 @@ public class BigBangDecorator extends Decorator
         this.size_y = sizeY;
         this.damage = d;
         rotation = 0;
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("bigblackhole.png");
         image.scale(900, 900);
         setImage(image);
 

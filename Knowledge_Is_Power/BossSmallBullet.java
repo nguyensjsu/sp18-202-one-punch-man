@@ -9,8 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class BossSmallBullet extends EnermyBullet
 {
     public BossSmallBullet(double s,int r,String img_name){
-        super(r,20,20,5);        //default size 20*20, not through, 5 damage
+        super(r,25,25,5);        //default size 30*30, not through, 5 damage
         move_speed = s;
+        through = true;
         
         GreenfootImage image = new GreenfootImage(img_name);
         image.scale(size_x, size_y);
@@ -18,7 +19,7 @@ public class BossSmallBullet extends EnermyBullet
     }
     
     public BossSmallBullet(double s,int x, int y, String img_name){
-        super(0,20,20,5); //default size 20*20, not through, 5 damage
+        super(0,25,25,5); //default size 30*30, not through, 5 damage
         move_speed = s;
         turnTowards(x,y);
         fire_rotation = getRotation();

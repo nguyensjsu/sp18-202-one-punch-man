@@ -21,6 +21,10 @@ public class BaseWorld extends World
     
     /* BGM */
     protected static GreenfootSound BGM;
+    protected static GreenfootSound bossBGM = new GreenfootSound("boss_fight.mp3");;
+    
+    /* Background */
+    protected static GreenfootImage background = new GreenfootImage("background.jpg");
 
     public BaseWorld()
     {
@@ -38,6 +42,7 @@ public class BaseWorld extends World
                     Bullet.class,
                     AttachEffectDecorator.class,
                     DrPPaperDecorator.class,
+                    DialogDecorator.class,
                     /* UI picture*/
                     UIPictureDecorator.class,
                     UICDDecorator.class,
@@ -45,12 +50,13 @@ public class BaseWorld extends World
                     /* UI frame */
                     UIFrameDecorator.class,
                     /* ult cutscence */
-                    UltDecorator.class
+                    UltDecorator.class,
+                    /* screen change */
+                    ScreenChange.class
         );
         
-        GreenfootImage image = new GreenfootImage("rivets.jpg");
-        //image.scale(1600, 900);
-        setBackground(image);
+        background.scale(1600, 900);
+        setBackground(background);
         
         prepare();
     }

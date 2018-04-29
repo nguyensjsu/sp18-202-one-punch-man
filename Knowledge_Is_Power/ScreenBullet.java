@@ -16,6 +16,9 @@ public class ScreenBullet extends Bullet
     
     public ScreenBullet(int r, int sizeX, int sizeY, int d){
         super(r,sizeX,sizeY,d);
+        GreenfootImage image = new GreenfootImage("screen.png");
+        image.scale(sizeX, sizeY);
+        setImage(image);
     }
     
    
@@ -27,6 +30,7 @@ public class ScreenBullet extends Bullet
                 e.damage(getX(),getY(),damage, "bullet");
                 break;
             }
+            getWorld().addObject(new screenBoom(),getX(),getY());
             getWorld().removeObject(this);
         }
         /* delete if hit world edge */

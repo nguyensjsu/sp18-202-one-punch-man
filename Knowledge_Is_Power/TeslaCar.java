@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.List;
+import java.util.*;
 import static java.lang.Math.*;
 /**
  * Write a description of class TeslaCar here.
@@ -25,10 +25,15 @@ public class TeslaCar extends Player
     private SimpleTimer driftEndTimer = new SimpleTimer();
     private boolean isCharged;
     private final int LOCAL_INVINCIBLE_TIME = 10;
-    
+    private GreenfootSound running_sound = new GreenfootSound("tesla_car_running.mp3");
+    private int running_volume = 0;
+    private int attack_volume = 90;
+    private GreenfootSound brake_sound = new GreenfootSound("tesla_car_brake.wav");
+    private int brake_volume = 90;
+    private List<NotBullet> intersect_list = new ArrayList<>();
     public TeslaCar(int damage){
         this.damage = damage;
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("tesla_car.png");
         image.scale(sizeX, sizeY);
         setImage(image);
     }
@@ -82,6 +87,8 @@ public class TeslaCar extends Player
                 if(Greenfoot.isKeyDown("space")){
                     prev_rotation = getRotation();
                     drift_state = 1;
+                    brake_sound.setVolume(brake_volume);
+                    brake_sound.play();
                 }
                 break;
             case 1:
@@ -93,19 +100,42 @@ public class TeslaCar extends Player
                 }
                 break;
         }
+        running_volume = (int)((double)abs(velocity)/(double)maxVelocity * 30.0 + 65);
+        if(abs(velocity) < 1){
+            running_sound.stop();
+        }
+        running_sound.setVolume(running_volume);
+        running_sound.play();
         /* observer notify */
         for (Enermy enermy: getWorld().getObjects(Enermy.class)){
             enermy.update(getX(),getY());
         }
     }
+    public void accelerate(boolean speedup){
+        if(velocity < maxVelocity && speedup){
+            velocity += acceleration;
+        }else if(velocity > -maxVelocity && !speedup){
+            velocity -= acceleration;
+        }
+    }
     public void attack(){
-        for (NotBullet intersect_obj: this.getIntersectingObjects(NotBullet.class)){
+        for (NotBullet intersect_obj : this.getIntersectingObjects(NotBullet.class)){
             /* melee attack player */
             if(intersect_obj instanceof Enermy){
                 if(abs(velocity)>3){
                     intersect_obj.damage(getX(),getY(),damage,"push");
+                    if(!intersect_list.contains(intersect_obj)){
+                        intersect_list.add(intersect_obj);
+                        GreenfootSound new_attack_sound = new GreenfootSound("tesla_car_attack.wav");
+                        new_attack_sound.setVolume(attack_volume);
+                        new_attack_sound.play();
+                    }
                 }
             }
+        }
+        for (NotBullet intersect_obj : new ArrayList<NotBullet>(intersect_list)){
+            if(!intersects((Actor)intersect_obj))
+                intersect_list.remove(intersect_obj);
         }
     }
     public void damage(int source_x,int source_y, int damage_num, String type){
@@ -139,22 +169,22 @@ public class TeslaCar extends Player
             }
         }
     }
-    public void accelerate(boolean speedup){
-        if(velocity < maxVelocity && speedup){
-            velocity += acceleration;
-        }else if(velocity > -maxVelocity && !speedup){
-            velocity -= acceleration;
-        }
-    }
     public void dead(){
         if(hp <= 0){
             freeze_state = true;
             fade = true;
         }
         if(fade){
+            if(running_volume > 0){
+                running_volume -= 5;
+            }else{
+                running_volume = 0;
+            }
+            running_sound.setVolume(running_volume);
             transVal-=10;
         }
         if(transVal <= 0){
+            running_sound.stop();
             getWorld().removeObject(this);
         }
         else{

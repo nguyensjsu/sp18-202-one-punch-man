@@ -18,7 +18,7 @@ public class Decorator extends Actor
     /* remove flag */
     protected boolean go_die = false;
     /* gif */
-    protected GifImage gif;
+    protected GifImage gif = null;
     
     /* constructor */
     public Decorator(){
@@ -54,9 +54,9 @@ public class Decorator extends Actor
     public void act() 
     {
         if(!freeze_state){
-            draw();
             move();
             update();
+            draw();
 
             /* timer */
             timer();
@@ -108,5 +108,8 @@ public class Decorator extends Actor
     }
     public void resetFreeze(){
         freeze_state = false;
+    }
+    public void setTransp(int val){
+        getImage().setTransparency(val);
     }
 }

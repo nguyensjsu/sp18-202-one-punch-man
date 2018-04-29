@@ -12,8 +12,9 @@ public class LaserEnermyBullet extends EnermyBullet
         super(r,x,y,5);
         move_speed = s;
         setRotation(r);
+        through = true;
         
-        GreenfootImage image = new GreenfootImage("bread.png");
+        GreenfootImage image = new GreenfootImage("laser.png");
         image.scale(size_x, size_y);
         setImage(image);
     }

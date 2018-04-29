@@ -13,7 +13,7 @@ public class BlackHoleDecorator extends Decorator
     private int sizeX = 100;
     private int sizeY = 100;
     private int damage;
-    private int lifeTime = 2000;
+    private int lifeTime = 3000;
     private int attackTime = 500;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
@@ -25,7 +25,8 @@ public class BlackHoleDecorator extends Decorator
         this.size_y = sizeY;
         this.damage = d;
         rotation = 0;
-        GreenfootImage image = getImage();
+   
+        GreenfootImage image = new GreenfootImage("blackhole.png");
         image.scale(400, 400);
         setImage(image);
 

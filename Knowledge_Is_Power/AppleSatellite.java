@@ -13,16 +13,16 @@ public class AppleSatellite extends Bullet
     protected int size_x;
     protected int size_y;
     protected int radius = 150;
-    protected int appleSatellite_timer = 300;
+    protected int appleSatellite_timer = 120;
     protected boolean through = false;
-    protected int damage = 2;
+    protected int damage = 10;
     protected boolean firstTime = true;
     protected int x=0;
     protected int y=0;
 
 
     public AppleSatellite(){
-        this(40,40,2);        //default size 30*30, not through, 2 damage
+        this(40,40,3);        //default size 30*30, not through, 3 damage
     }
 
 

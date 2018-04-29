@@ -23,7 +23,7 @@ public class BossStageWorld extends BaseWorld
         /* create boss */
         enermyCreate();
         /* create boss bgm */
-        BaseWorld.BGM = new GreenfootSound("boss_fight.mp3");
+        //BaseWorld.BGM = new GreenfootSound("boss_fight.mp3");
         BaseWorld.BGM.playLoop();
         BaseWorld.BGM.setVolume(20);
         /* create boss UI */
@@ -62,7 +62,7 @@ public class BossStageWorld extends BaseWorld
             }
             /* enter exit to win */
             if (player.getX()>700 && player.getX()<900 && player.getY()<50){
-                BGM.stop();
+                BaseWorld.BGM.stop();
                 Greenfoot.setWorld(new Win());
             }
         }

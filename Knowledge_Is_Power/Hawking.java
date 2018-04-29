@@ -14,10 +14,10 @@ public class Hawking extends Player
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
    
-    protected String player_image = "hawking.png";
+    protected String player_image = "hawking_icon.png";
    
-    protected int attack_speed = 15;
-    protected int bullet_damage = 5;
+    protected int attack_speed = 30;
+    protected int bullet_damage = 0;
     
     /* timer */
     //protected int ult_animation_timer = 0;
@@ -31,7 +31,7 @@ public class Hawking extends Player
 
     
     public Hawking() {
-        this(80,80);
+        this(50,40);
     }
     
     public Hawking(int x, int y) {
@@ -96,10 +96,10 @@ public class Hawking extends Player
     
                  int update_x = (int)(getX() + 200*cos(toRadians(getRotation())));
                  int update_y = (int)(getY() + 200*sin(toRadians(getRotation())));
-                 getWorld().addObject(new BlackHoleDecorator(100,100,bullet_damage),update_x, update_y);
+                 getWorld().addObject(new BlackHoleDecorator(100,100,10),update_x, update_y);
               
                 skill_one_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),1200,775);
             }
         }
     }
@@ -125,8 +125,8 @@ public class Hawking extends Player
                     enermy.update(update_x,update_y);
                 }
                 
-                skill_two_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
+                skill_two_cd_timer = 60;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),1350,775);
             }
         }
     }
@@ -134,15 +134,12 @@ public class Hawking extends Player
     public void ult(){
         if (ult_trigger){
             ult_trigger = false;
-            
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            int update_x = (int)(getX() + 200*cos(toRadians(getRotation())));
-            int update_y = (int)(getY() + 200*sin(toRadians(getRotation())));
-            getWorld().addObject(new BigBangDecorator(1600, 900, 300),update_x, update_y);
+
+            getWorld().addObject(new BigBangDecorator(1600, 900, 300),800, 450);
         
             ult_cd_timer = 1800;
             
-            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),1500,775);
         }
         
     }
@@ -152,7 +149,7 @@ public class Hawking extends Player
         if (ult_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
                 /* ult cutscence */
-                ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                ult_cutscence("hawking_face_left.png","Hwakin ult.png");   //player, sentence
                 ult_cd_timer = 10000;
                 ((BaseWorld)getWorld()).freeze_all(true);
             }

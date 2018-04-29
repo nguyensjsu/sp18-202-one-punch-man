@@ -9,11 +9,13 @@ public class ThunderExplode extends Bullet
     private int prevRotation;
     private int transVal = 255;
     private boolean fade = false;
+    private GreenfootSound explode_sound = new GreenfootSound("thunder_explode.wav");
     public ThunderExplode(int r, int d){
         fire_rotation = r;
         damage = d;
         move_speed = 1;
         gifAnimator();
+        explode_sound.setVolume(70);
     }
     public void act() 
     {
@@ -25,7 +27,8 @@ public class ThunderExplode extends Bullet
                 List<Enermy> enermys = getObjectsInRange(200, Enermy.class);
                 for (int i=0;i<enermys.size();i++){
                     // explode
-                    getWorld().removeObject(enermys.get(i));
+                    enermys.get(i).damage(getX(),getY(),damage,"bullet");
+                    explode_sound.play();
                     if(i==enermys.size()-1){
                         fade = true;
                         freeze_state = true;
