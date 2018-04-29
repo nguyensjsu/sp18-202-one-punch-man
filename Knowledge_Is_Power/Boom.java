@@ -15,14 +15,14 @@ public class Boom extends Bullet{
     protected int boom_timer = 35;
     protected boolean through = false;
     protected boolean hit = false;
-    protected int damage = 20;
+    protected int damage = 25;
     /* bullet direction */
     protected int fire_rotation;
     protected GifImage boom = new GifImage("boom.gif");
    
     /* constructor */
     public Boom(){  
-        this(100,100,20);
+        this(100,100,25);
     }
     
     public Boom(int sizeX, int sizeY, int d){  

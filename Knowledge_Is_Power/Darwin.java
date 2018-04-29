@@ -17,7 +17,6 @@ public class Darwin extends Player
     private GreenfootImage apemanState= new GreenfootImage("apeman.png");
 
     protected String player_image = "darwin_head.png";
-    protected String trans_image = "red-draught.png";
 
     /* timer */
     protected int ult_animation_timer = 0;
@@ -29,7 +28,7 @@ public class Darwin extends Player
 
     /* constructor */
     public Darwin(){
-        this(100,100);
+        this(50,50);
     }
 
     public Darwin(int x, int y){
@@ -99,8 +98,8 @@ public class Darwin extends Player
                 player_image = "apeman.png";
 
                 skill_one_duration_timer = 180;
-                skill_one_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+                skill_one_cd_timer = 60;
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,60),0,0);
 
             }
             else if (Greenfoot.isKeyDown("1") && state.equals("apeman")) {
@@ -109,8 +108,8 @@ public class Darwin extends Player
                 player_image = "monkey.png";
 
                 skill_one_duration_timer = 180;
-                skill_one_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+                skill_one_cd_timer = 60;
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,60),0,0);
             }
             else{}
         }
@@ -124,8 +123,8 @@ public class Darwin extends Player
                 player_image = "darwin_head.png";
 
                 skill_two_duration_timer = 180;
-                skill_two_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
+                skill_two_cd_timer = 60;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),0,0);
             }
             else if (Greenfoot.isKeyDown("2") && state.equals("monkey")){
                 setImage(apemanState);
@@ -133,8 +132,8 @@ public class Darwin extends Player
                 player_image = "apeman.png";
 
                 skill_two_duration_timer = 180;
-                skill_two_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
+                skill_two_cd_timer = 60;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),0,0);
             }
             else{}
         }
@@ -182,7 +181,7 @@ public class Darwin extends Player
         if (ult_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
                 /* ult cutscence */
-                ult_cutscence("bluej-icon.png","bluej-icon.png");   //player, sentence
+                ult_cutscence("darwin_r.png","Dalwin ult.png");   //player, sentence
                 ult_cd_timer = 10000;
                 ((BaseWorld)getWorld()).freeze_all(true);
             }

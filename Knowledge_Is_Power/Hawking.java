@@ -14,7 +14,7 @@ public class Hawking extends Player
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
    
-    protected String player_image = "hawking.png";
+    protected String player_image = "hawking_icon.png";
    
     protected int attack_speed = 15;
     protected int bullet_damage = 5;
@@ -31,7 +31,7 @@ public class Hawking extends Player
 
     
     public Hawking() {
-        this(40,50);
+        this(50,40);
     }
     
     public Hawking(int x, int y) {
@@ -125,8 +125,8 @@ public class Hawking extends Player
                     enermy.update(update_x,update_y);
                 }
                 
-                skill_two_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,600),0,0);
+                skill_two_cd_timer = 60;
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),0,0);
             }
         }
     }
@@ -134,11 +134,8 @@ public class Hawking extends Player
     public void ult(){
         if (ult_trigger){
             ult_trigger = false;
-            
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            int update_x = (int)(getX() + 200*cos(toRadians(getRotation())));
-            int update_y = (int)(getY() + 200*sin(toRadians(getRotation())));
-            getWorld().addObject(new BigBangDecorator(1600, 900, 300),update_x, update_y);
+
+            getWorld().addObject(new BigBangDecorator(1600, 900, 300),800, 450);
         
             ult_cd_timer = 1800;
             
@@ -152,7 +149,7 @@ public class Hawking extends Player
         if (ult_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
                 /* ult cutscence */
-                ult_cutscence("bigbang1.png","bigbang.png");   //player, sentence
+                ult_cutscence("hawking_face_left.png","Hwakin ult.png");   //player, sentence
                 ult_cd_timer = 10000;
                 ((BaseWorld)getWorld()).freeze_all(true);
             }

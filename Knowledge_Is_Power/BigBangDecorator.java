@@ -11,7 +11,7 @@ public class BigBangDecorator extends Decorator
     private int sizeX;
     private int sizeY;
     private int damage;
-    private int lifeTime = 2000;
+    private int lifeTime = 3000;
     private int attackTime = 500;
     private SimpleTimer lifeTimer = new SimpleTimer();
     private SimpleTimer attackTimer = new SimpleTimer();
