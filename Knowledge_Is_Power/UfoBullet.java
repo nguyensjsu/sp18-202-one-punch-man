@@ -19,11 +19,21 @@ public class UfoBullet extends EnermyBullet
     public UfoBullet(int r, int sizeX, int sizeY, int d) {
         super(r,sizeX,sizeY,d); 
         GreenfootImage image = new GreenfootImage("rocket.png");
-        image.scale(size_x, size_y);
+        image.scale(sizeX, sizeY);
         setImage(image);
     }
     
-  
+    public void act(){
+        if (!freeze_state){
+            move();
+
+            /* timer */
+            timer();
+        }
+        
+        /* remove condition */
+        dead();
+    }  
     
     /* override */
     public void dead(){

@@ -20,6 +20,18 @@ public class AlienBullet extends EnermyBullet
         setImage(image);
     }
     
+    public void act(){
+        if (!freeze_state){
+            move();
+
+            /* timer */
+            timer();
+        }
+        
+        /* remove condition */
+        dead();
+    }  
+    
      /* override */
     public void dead(){
         /* delete if hit player and type is not through */

@@ -38,6 +38,8 @@ public class MobStageWorld extends BaseWorld
             int ex = Greenfoot.getRandomNumber(getWidth());
             int ey = Greenfoot.getRandomNumber(getHeight() - 300);
             addObject(alienEnermy[i], ex, ey);
+            HpDecorator alienEnermy_hp = new HpDecorator(alienEnermy[i],alienEnermy[i].hp,alienEnermy[i].MAX_HP,0,alienEnermy[i].size_x-10,alienEnermy[i].size_x,10);
+            addObject(alienEnermy_hp, 0, 0);
         }
         
         for(int i = alienEnermy.length/2; i <  alienEnermy.length; i++) {
@@ -45,6 +47,8 @@ public class MobStageWorld extends BaseWorld
             int ex = Greenfoot.getRandomNumber(getWidth());
             //int ey = Greenfoot.getRandomNumber(getHeight() - 300);
             addObject(alienEnermy[i], ex, 0);
+            HpDecorator alienEnermy_hp = new HpDecorator(alienEnermy[i],alienEnermy[i].hp,alienEnermy[i].MAX_HP,0,alienEnermy[i].size_x-10,alienEnermy[i].size_x,10);
+            addObject(alienEnermy_hp, 0, 0);
         }
         
 
@@ -56,8 +60,11 @@ public class MobStageWorld extends BaseWorld
         
  
         if(z == 1) //delete or comment out this line to make it always add after (threshold) game ticks
-            addObject(new UfoEnermy(),ex,50);
-    
+        {   UfoEnermy ufoEnermy = new UfoEnermy(80,80,"wander","bullet");
+            addObject(ufoEnermy,ex,50);
+            HpDecorator ufoEnermy_hp = new HpDecorator(ufoEnermy,ufoEnermy.hp,ufoEnermy.MAX_HP,0,ufoEnermy.size_x-10,ufoEnermy.size_x,10);
+            addObject(ufoEnermy_hp, 0, 0);
+        }
     }
     
     public void act(){
