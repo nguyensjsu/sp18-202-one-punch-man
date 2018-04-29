@@ -10,6 +10,8 @@ public class MobStageWorld extends BaseWorld
 {
     protected int die_count = 0;
     protected boolean exit_shown = false;
+    private int a = 0;
+    private int threshold = 80; //increase to make the time until a ufo enermy created 
     
     public MobStageWorld(){
         super();
@@ -30,9 +32,41 @@ public class MobStageWorld extends BaseWorld
     }
     
     public void enermyCreate(){
+        AlienEnermy[] alienEnermy = new AlienEnermy[10];
+        for(int i = 0; i < alienEnermy.length/2; i++) {
+            alienEnermy[i] = new AlienEnermy(50,50,"chase","bullet");
+            int ex = Greenfoot.getRandomNumber(getWidth());
+            int ey = Greenfoot.getRandomNumber(getHeight() - 300);
+            addObject(alienEnermy[i], ex, ey);
+        }
+        
+        for(int i = alienEnermy.length/2; i <  alienEnermy.length; i++) {
+            alienEnermy[i] = new AlienEnermy(50,50,"wander","stop");
+            int ex = Greenfoot.getRandomNumber(getWidth());
+            //int ey = Greenfoot.getRandomNumber(getHeight() - 300);
+            addObject(alienEnermy[i], ex, 0);
+        }
+        
+
+    }
+    
+    public void RandomGenerateUFO() {
+        int z = Greenfoot.getRandomNumber(10);
+        int ex = Greenfoot.getRandomNumber(getWidth());
+        
+ 
+        if(z == 1) //delete or comment out this line to make it always add after (threshold) game ticks
+            addObject(new UfoEnermy(),ex,50);
+    
     }
     
     public void act(){
+        a++;
+        if (a == threshold) {
+            RandomGenerateUFO();
+            a = 0;
+        }
+        
         if (die_count == 0){    //total enermy in this stage
             if (!exit_shown){
                 exitCreate();
