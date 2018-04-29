@@ -77,7 +77,7 @@ public class AppleRain extends Bullet
                 e.damage(getX(),getY(),damage, "bullet");
                 break;
             }
-            getWorld().addObject(new screenBoom(),getX(),getY());
+            getWorld().addObject(new Boom(),getX(),getY());
             getWorld().removeObject(this);
         }
         else if (!getWorld().getObjects(Newton.class).isEmpty() && getOneIntersectingObject(Newton.class)!= null){

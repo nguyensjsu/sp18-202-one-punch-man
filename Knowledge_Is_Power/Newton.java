@@ -131,10 +131,10 @@ public class Newton extends Player
      /* AppleRain */
     public void skill_3(){
         if (ult_trigger ){
-            appleRain_duration = 300;
-            appleRain_cd_timer = 1200;
-            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1200),1500,775);
-
+            if (appleRain_duration == 300){
+                appleRain_cd_timer = 1200;
+                getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1200),1500,775);
+            }
         if(appleRain_duration != 0 && appleRain_duration_helper == 0){
             Random rand = new Random();
             int x = rand.nextInt(1580) + 10;
@@ -149,6 +149,7 @@ public class Newton extends Player
         if (appleRain_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
                 ult_cutscence("Newton_swag.jpg","Newton ult.png");
+                appleRain_duration = 300;
                 appleRain_cd_timer = 10000;
                 ((BaseWorld)getWorld()).freeze_all(true);
             }
