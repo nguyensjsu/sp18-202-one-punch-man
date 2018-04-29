@@ -16,7 +16,7 @@ public class TestStageWorld extends BaseWorld
     public void prepare(){
         /* create player */
         player = new Hawking(); //init player
-        playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+        playerCreate("hawking_face_right.png","hawking_skill1.png","hawking_skill2.png","hawking_skill3.png");
         /* create player UI */
         playerUICreate();
         /* create enermy */
@@ -24,20 +24,21 @@ public class TestStageWorld extends BaseWorld
         /* create exit */
         exitCreate();
     }
-    
+
     public void enermyCreate(){
         /* create 1 stand enermies that shots bullets */
-        TestEnermy enermy = new TestEnermy(50,50,"stop","bullet");
-        addObject(enermy, 400, 250);
+        TestEnermy enermy = new TestEnermy(75,75,"stop","bullet");
+        addObject(enermy, 450, 300);
         HpDecorator enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
         addObject(enermy_hp, 0, 0);
 
         /* create 4 stand enermy that does not attack */
-        enermy = new TestEnermy(50,50,"stop","stop");
-        addObject(enermy, 1200, 75);
+        enermy = new TestEnermy(75,75,"stop","stop");
+        addObject(enermy, 1150, 125);
         enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
         addObject(enermy_hp, 0, 0);
 
+<<<<<<< HEAD
         enermy = new TestEnermy(50,50,"stop","stop");
         addObject(enermy, 1050, 250);
         enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
@@ -50,6 +51,20 @@ public class TestStageWorld extends BaseWorld
 
         enermy = new TestEnermy(50,50,"stop","stop");
         addObject(enermy, 1200, 425);
+=======
+        enermy = new TestEnermy(75,75,"stop","stop");
+        addObject(enermy, 1000, 300);
+        enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
+        addObject(enermy_hp, 0, 0);
+
+        enermy = new TestEnermy(75,75,"stop","stop");
+        addObject(enermy, 1300, 300);
+        enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
+        addObject(enermy_hp, 0, 0);
+
+        enermy = new TestEnermy(75,75,"stop","stop");
+        addObject(enermy, 1150, 475);
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
         enermy_hp = new HpDecorator(enermy,enermy.hp,enermy.MAX_HP,0,enermy.size_x-10,enermy.size_x,10);   //hp 20-20, offset(0,40), size 50*10
         addObject(enermy_hp, 0, 0);
     }
@@ -60,7 +75,7 @@ public class TestStageWorld extends BaseWorld
             playerUIRemove();
             removeObject(player);
             player = new Hawking();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("hawking_face_right.png","hawking_skill1.png","hawking_skill2.png","hawking_skill3.png");
             /* create player UI */
             playerUICreate();
         }
@@ -68,7 +83,7 @@ public class TestStageWorld extends BaseWorld
             playerUIRemove();
             removeObject(player);
             player = new Darwin();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("darwin.png","evolution_monkey.png","evolution_human.png","programmer.png");
             /* create player UI */
             playerUICreate();
         }
@@ -76,7 +91,7 @@ public class TestStageWorld extends BaseWorld
             playerUIRemove();
             removeObject(player);
             player = new Newton();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("Newton_icon.png","appleSatellite_cd.jpg","prism_cd.jpg","appleRain_cd.png");
             /* create player UI */
             playerUICreate();
         }
@@ -84,7 +99,7 @@ public class TestStageWorld extends BaseWorld
             playerUIRemove();
             removeObject(player);
             player = new Tesla();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("tesla_full.gif","thunder_explode_display.jpeg","tesla_tower.png","tesla_car_display.jpg");
             /* create player UI */
             playerUICreate();
         }
@@ -92,7 +107,7 @@ public class TestStageWorld extends BaseWorld
             playerUIRemove();
             removeObject(player);
             player = new DrP();
-            playerCreate("DrP_head.jpg","yellow circle.jpg","red circle.png","DrPUltIcon.png");
+            playerCreate("DrP_head.jpg","yellow circle.png","red circle.png","DrPUltIcon.png");
             /* create player UI */
             playerUICreate();
         }

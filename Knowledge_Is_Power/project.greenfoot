@@ -88,6 +88,7 @@ dependency1.to=UfoBullet
 dependency1.type=UsesDependency
 dependency10.from=BossEnermy
 <<<<<<< HEAD
+<<<<<<< HEAD
 dependency10.to=NotBullet
 dependency10.type=UsesDependency
 dependency100.from=Newton
@@ -746,10 +747,341 @@ dependency198.type=UsesDependency
 dependency199.from=DrP
 dependency199.to=FactoryMethodPatternDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+dependency10.to=IBuffState
+dependency10.type=UsesDependency
+dependency100.from=PlayerBullet
+dependency100.to=Enermy
+dependency100.type=UsesDependency
+dependency101.from=HpDecorator
+dependency101.to=HasHp
+dependency101.type=UsesDependency
+dependency102.from=MobStageWorld
+dependency102.to=BossEnermy
+dependency102.type=UsesDependency
+dependency103.from=MobStageWorld
+dependency103.to=Decorator
+dependency103.type=UsesDependency
+dependency104.from=MobStageWorld
+dependency104.to=BossStageWorld
+dependency104.type=UsesDependency
+dependency105.from=MobStageWorld
+dependency105.to=TestStageTwoWorld
+dependency105.type=UsesDependency
+dependency106.from=MobStageWorld
+dependency106.to=AlienEnermy
+dependency106.type=UsesDependency
+dependency107.from=MobStageWorld
+dependency107.to=UfoEnermy
+dependency107.type=UsesDependency
+dependency108.from=AlienBullet
+dependency108.to=Player
+dependency108.type=UsesDependency
+dependency109.from=DrPSuperAttack
+dependency109.to=Enermy
+dependency109.type=UsesDependency
+dependency11.from=BossEnermy
+dependency11.to=NotBullet
+dependency11.type=UsesDependency
+dependency110.from=Newton
+dependency110.to=GifImage
+dependency110.type=UsesDependency
+dependency111.from=Newton
+dependency111.to=AppleSatellite
+dependency111.type=UsesDependency
+dependency112.from=Newton
+dependency112.to=UICDDecorator
+dependency112.type=UsesDependency
+dependency113.from=Newton
+dependency113.to=Prism
+dependency113.type=UsesDependency
+dependency114.from=Newton
+dependency114.to=Enermy
+dependency114.type=UsesDependency
+dependency115.from=Newton
+dependency115.to=AppleBullet
+dependency115.type=UsesDependency
+dependency116.from=Newton
+dependency116.to=AppleRain
+dependency116.type=UsesDependency
+dependency117.from=Newton
+dependency117.to=BaseWorld
+dependency117.type=UsesDependency
+dependency118.from=UICDDecorator
+dependency118.to=Player
+dependency118.type=UsesDependency
+dependency119.from=Tesla
+dependency119.to=AttackStrategy
+dependency119.type=UsesDependency
+dependency12.from=BossEnermy
+dependency12.to=Player
+dependency12.type=UsesDependency
+dependency120.from=Tesla
+dependency120.to=GifImage
+dependency120.type=UsesDependency
+dependency121.from=Tesla
+dependency121.to=ThunderChain
+dependency121.type=UsesDependency
+dependency122.from=Tesla
+dependency122.to=ThunderSector
+dependency122.type=UsesDependency
+dependency123.from=Tesla
+dependency123.to=ThunderExplode
+dependency123.type=UsesDependency
+dependency124.from=Tesla
+dependency124.to=TeslaTower
+dependency124.type=UsesDependency
+dependency125.from=Tesla
+dependency125.to=TeslaCar
+dependency125.type=UsesDependency
+dependency126.from=Tesla
+dependency126.to=HpDecorator
+dependency126.type=UsesDependency
+dependency127.from=Tesla
+dependency127.to=UICDDecorator
+dependency127.type=UsesDependency
+dependency128.from=Tesla
+dependency128.to=UIHpDecorator
+dependency128.type=UsesDependency
+dependency129.from=Tesla
+dependency129.to=BaseWorld
+dependency129.type=UsesDependency
+dependency13.from=BossEnermy
+dependency13.to=EnermyBullet
+dependency13.type=UsesDependency
+dependency130.from=FactoryMethodPatternDecorator
+dependency130.to=DrP
+dependency130.type=UsesDependency
+dependency131.from=FactoryMethodPatternDecorator
+dependency131.to=DrPSuperAttack
+dependency131.type=UsesDependency
+dependency132.from=FactoryMethodPatternDecorator
+dependency132.to=Enermy
+dependency132.type=UsesDependency
+dependency133.from=BossSmallBullet
+dependency133.to=Player
+dependency133.type=UsesDependency
+dependency134.from=DrPPaperDecorator
+dependency134.to=DialogDecorator
+dependency134.type=UsesDependency
+dependency135.from=Prism
+dependency135.to=GifImage
+dependency135.type=UsesDependency
+dependency136.from=Prism
+dependency136.to=Enermy
+dependency136.type=UsesDependency
+dependency137.from=Prism
+dependency137.to=Newton
+dependency137.type=UsesDependency
+dependency138.from=Win
+dependency138.to=Decorator
+dependency138.type=UsesDependency
+dependency139.from=Win
+dependency139.to=TestStageWorld
+dependency139.type=UsesDependency
+dependency14.from=BossEnermy
+dependency14.to=BossSmallBullet
+dependency14.type=UsesDependency
+dependency140.from=Win
+dependency140.to=MainMenu
+dependency140.type=UsesDependency
+dependency141.from=Win
+dependency141.to=BaseWorld
+dependency141.type=UsesDependency
+dependency142.from=Yin
+dependency142.to=NotBullet
+dependency142.type=UsesDependency
+dependency143.from=Yin
+dependency143.to=Player
+dependency143.type=UsesDependency
+dependency144.from=Yin
+dependency144.to=EnermyBullet
+dependency144.type=UsesDependency
+dependency145.from=Yin
+dependency145.to=YinYangBullet
+dependency145.type=UsesDependency
+dependency146.from=Yin
+dependency146.to=BossEnermy
+dependency146.type=UsesDependency
+dependency147.from=ShockedDecorator
+dependency147.to=GifImage
+dependency147.type=UsesDependency
+dependency148.from=BuffState
+dependency148.to=Decorator
+dependency148.type=UsesDependency
+dependency149.from=BuffState
+dependency149.to=SimpleTimer
+dependency149.type=UsesDependency
+dependency15.from=BossEnermy
+dependency15.to=SimpleTimer
+dependency15.type=UsesDependency
+dependency150.from=BuffState
+dependency150.to=BuffType
+dependency150.type=UsesDependency
+dependency151.from=Yang
+dependency151.to=NotBullet
+dependency151.type=UsesDependency
+dependency152.from=Yang
+dependency152.to=Player
+dependency152.type=UsesDependency
+dependency153.from=Yang
+dependency153.to=EnermyBullet
+dependency153.type=UsesDependency
+dependency154.from=Yang
+dependency154.to=YinYangBullet
+dependency154.type=UsesDependency
+dependency155.from=Yang
+dependency155.to=BossEnermy
+dependency155.type=UsesDependency
+dependency156.from=TeslaCar
+dependency156.to=SimpleTimer
+dependency156.type=UsesDependency
+dependency157.from=TeslaCar
+dependency157.to=Enermy
+dependency157.type=UsesDependency
+dependency158.from=TeslaCar
+dependency158.to=NotBullet
+dependency158.type=UsesDependency
+dependency159.from=BigBangDecorator
+dependency159.to=SimpleTimer
+dependency159.type=UsesDependency
+dependency16.from=BossEnermy
+dependency16.to=Yin
+dependency16.type=UsesDependency
+dependency160.from=BigBangDecorator
+dependency160.to=Enermy
+dependency160.type=UsesDependency
+dependency161.from=DarwinBullet
+dependency161.to=Enermy
+dependency161.type=UsesDependency
+dependency162.from=DarwinBullet
+dependency162.to=GifImage
+dependency162.type=UsesDependency
+dependency163.from=Darwin
+dependency163.to=DarwinBullet
+dependency163.type=UsesDependency
+dependency164.from=Darwin
+dependency164.to=MonkeyBullet
+dependency164.type=UsesDependency
+dependency165.from=Darwin
+dependency165.to=ApemanBullet
+dependency165.type=UsesDependency
+dependency166.from=Darwin
+dependency166.to=Enermy
+dependency166.type=UsesDependency
+dependency167.from=Darwin
+dependency167.to=TestEnermy
+dependency167.type=UsesDependency
+dependency168.from=Darwin
+dependency168.to=BaseWorld
+dependency168.type=UsesDependency
+dependency169.from=Darwin
+dependency169.to=FactoryMethodPatternDecorator
+dependency169.type=UsesDependency
+dependency17.from=BossEnermy
+dependency17.to=Yang
+dependency17.type=UsesDependency
+dependency170.from=Darwin
+dependency170.to=DecoratorPatternDecorator
+dependency170.type=UsesDependency
+dependency171.from=Darwin
+dependency171.to=EnermyBullet
+dependency171.type=UsesDependency
+dependency172.from=Darwin
+dependency172.to=Bullet
+dependency172.type=UsesDependency
+dependency173.from=Darwin
+dependency173.to=UICDDecorator
+dependency173.type=UsesDependency
+dependency174.from=NonBattle
+dependency174.to=SimpleTimer
+dependency174.type=UsesDependency
+dependency175.from=NonBattle
+dependency175.to=Decorator
+dependency175.type=UsesDependency
+dependency176.from=NonBattle
+dependency176.to=Enermy
+dependency176.type=UsesDependency
+dependency177.from=NonBattle
+dependency177.to=Player
+dependency177.type=UsesDependency
+dependency178.from=NonBattle
+dependency178.to=HpDecorator
+dependency178.type=UsesDependency
+dependency179.from=NonBattle
+dependency179.to=Bullet
+dependency179.type=UsesDependency
+dependency18.from=BossEnermy
+dependency18.to=HugeEnermyBullet
+dependency18.type=UsesDependency
+dependency180.from=NonBattle
+dependency180.to=AttachEffectDecorator
+dependency180.type=UsesDependency
+dependency181.from=NonBattle
+dependency181.to=DrPPaperDecorator
+dependency181.type=UsesDependency
+dependency182.from=NonBattle
+dependency182.to=UIPictureDecorator
+dependency182.type=UsesDependency
+dependency183.from=NonBattle
+dependency183.to=UICDDecorator
+dependency183.type=UsesDependency
+dependency184.from=NonBattle
+dependency184.to=UIHpDecorator
+dependency184.type=UsesDependency
+dependency185.from=NonBattle
+dependency185.to=UIFrameDecorator
+dependency185.type=UsesDependency
+dependency186.from=NonBattle
+dependency186.to=UltDecorator
+dependency186.type=UsesDependency
+dependency187.from=NonBattle
+dependency187.to=ScreenChange
+dependency187.type=UsesDependency
+dependency188.from=Opening
+dependency188.to=ScreenChange
+dependency188.type=UsesDependency
+dependency189.from=Opening
+dependency189.to=DrP
+dependency189.type=UsesDependency
+dependency19.from=BossEnermy
+dependency19.to=BaseWorld
+dependency19.type=UsesDependency
+dependency190.from=Opening
+dependency190.to=MainMenu
+dependency190.type=UsesDependency
+dependency191.from=Opening
+dependency191.to=Decorator
+dependency191.type=UsesDependency
+dependency192.from=UIHpDecorator
+dependency192.to=HasHp
+dependency192.type=UsesDependency
+dependency193.from=screenBoom
+dependency193.to=GifImage
+dependency193.type=UsesDependency
+dependency194.from=screenBoom
+dependency194.to=Enermy
+dependency194.type=UsesDependency
+dependency195.from=ThunderExplode
+dependency195.to=GifImage
+dependency195.type=UsesDependency
+dependency196.from=ThunderExplode
+dependency196.to=Enermy
+dependency196.type=UsesDependency
+dependency197.from=DecoratorPatternDecorator
+dependency197.to=DrPSuperAttack
+dependency197.type=UsesDependency
+dependency198.from=DrP
+dependency198.to=DrPSuperAttack
+dependency198.type=UsesDependency
+dependency199.from=DrP
+dependency199.to=FactoryMethodPatternDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 dependency199.type=UsesDependency
 dependency2.from=AppleSatellite
 dependency2.to=Newton
 dependency2.type=UsesDependency
+<<<<<<< HEAD
 <<<<<<< HEAD
 dependency20.from=BossStageWorld
 dependency20.to=BossEnermy
@@ -874,6 +1206,76 @@ dependency219.type=UsesDependency
 dependency22.from=BossStageWorld
 dependency22.to=UIPictureDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+dependency20.from=BossEnermy
+dependency20.to=LaserEnermyBullet
+dependency20.type=UsesDependency
+dependency200.from=DrP
+dependency200.to=DecoratorPatternDecorator
+dependency200.type=UsesDependency
+dependency201.from=DrP
+dependency201.to=BaseWorld
+dependency201.type=UsesDependency
+dependency202.from=DrP
+dependency202.to=Enermy
+dependency202.type=UsesDependency
+dependency203.from=DrP
+dependency203.to=DrPPaperDecorator
+dependency203.type=UsesDependency
+dependency204.from=DrP
+dependency204.to=UICDDecorator
+dependency204.type=UsesDependency
+dependency205.from=GameOver
+dependency205.to=Decorator
+dependency205.type=UsesDependency
+dependency206.from=GameOver
+dependency206.to=MainMenu
+dependency206.type=UsesDependency
+dependency207.from=GameOver
+dependency207.to=BaseWorld
+dependency207.type=UsesDependency
+dependency208.from=BlackHoleDecorator
+dependency208.to=SimpleTimer
+dependency208.type=UsesDependency
+dependency209.from=BlackHoleDecorator
+dependency209.to=Enermy
+dependency209.type=UsesDependency
+dependency21.from=BossStageWorld
+dependency21.to=BossEnermy
+dependency21.type=UsesDependency
+dependency210.from=ShockedBuff
+dependency210.to=BuffType
+dependency210.type=UsesDependency
+dependency211.from=TestStageTwoWorld
+dependency211.to=MobStageWorld
+dependency211.type=UsesDependency
+dependency212.from=TestStageTwoWorld
+dependency212.to=Hawking
+dependency212.type=UsesDependency
+dependency213.from=TestStageTwoWorld
+dependency213.to=Darwin
+dependency213.type=UsesDependency
+dependency214.from=TestStageTwoWorld
+dependency214.to=Newton
+dependency214.type=UsesDependency
+dependency215.from=TestStageTwoWorld
+dependency215.to=Tesla
+dependency215.type=UsesDependency
+dependency216.from=TestStageTwoWorld
+dependency216.to=DrP
+dependency216.type=UsesDependency
+dependency217.from=TestStageTwoWorld
+dependency217.to=Enermy
+dependency217.type=UsesDependency
+dependency218.from=TestStageTwoWorld
+dependency218.to=BossStageWorld
+dependency218.type=UsesDependency
+dependency219.from=TestStageTwoWorld
+dependency219.to=BaseWorld
+dependency219.type=UsesDependency
+dependency22.from=BossStageWorld
+dependency22.to=UIPictureDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 dependency22.type=UsesDependency
 dependency220.from=TestStageTwoWorld
 dependency220.to=ScreenChange
@@ -907,7 +1309,11 @@ dependency229.to=screenBoom
 dependency229.type=UsesDependency
 dependency23.from=BossStageWorld
 <<<<<<< HEAD
+<<<<<<< HEAD
 dependency23.to=UIFrameDecorator
+=======
+dependency23.to=UIHpDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 dependency23.to=UIHpDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -943,6 +1349,7 @@ dependency239.from=MonkeyBullet
 dependency239.to=Enermy
 dependency239.type=UsesDependency
 dependency24.from=BossStageWorld
+<<<<<<< HEAD
 <<<<<<< HEAD
 dependency24.to=Decorator
 dependency24.type=UsesDependency
@@ -1457,6 +1864,262 @@ dependency98.type=UsesDependency
 dependency99.from=FlameBuff
 dependency99.to=BuffType
 dependency99.type=UsesDependency
+=======
+dependency24.to=UIFrameDecorator
+dependency24.type=UsesDependency
+dependency240.from=ThunderSector
+dependency240.to=SimpleTimer
+dependency240.type=UsesDependency
+dependency241.from=ThunderSector
+dependency241.to=Enermy
+dependency241.type=UsesDependency
+dependency25.from=BossStageWorld
+dependency25.to=Decorator
+dependency25.type=UsesDependency
+dependency26.from=BossStageWorld
+dependency26.to=Win
+dependency26.type=UsesDependency
+dependency27.from=TestStageWorld
+dependency27.to=TestEnermy
+dependency27.type=UsesDependency
+dependency28.from=TestStageWorld
+dependency28.to=HpDecorator
+dependency28.type=UsesDependency
+dependency29.from=TestStageWorld
+dependency29.to=Decorator
+dependency29.type=UsesDependency
+dependency3.from=AppleSatellite
+dependency3.to=Enermy
+dependency3.type=UsesDependency
+dependency30.from=TestStageWorld
+dependency30.to=BossStageWorld
+dependency30.type=UsesDependency
+dependency31.from=TestStageWorld
+dependency31.to=Tesla
+dependency31.type=UsesDependency
+dependency32.from=TestStageWorld
+dependency32.to=DrP
+dependency32.type=UsesDependency
+dependency33.from=TestStageWorld
+dependency33.to=Hawking
+dependency33.type=UsesDependency
+dependency34.from=TestStageWorld
+dependency34.to=Darwin
+dependency34.type=UsesDependency
+dependency35.from=TestStageWorld
+dependency35.to=Newton
+dependency35.type=UsesDependency
+dependency36.from=TestStageWorld
+dependency36.to=Enermy
+dependency36.type=UsesDependency
+dependency37.from=TestStageWorld
+dependency37.to=MobStageWorld
+dependency37.type=UsesDependency
+dependency38.from=UfoBullet
+dependency38.to=Player
+dependency38.type=UsesDependency
+dependency39.from=EnermyBullet
+dependency39.to=Player
+dependency39.type=UsesDependency
+dependency4.from=AppleSatellite
+dependency4.to=EnermyBullet
+dependency4.type=UsesDependency
+dependency40.from=AttachEffectDecorator
+dependency40.to=GifImage
+dependency40.type=UsesDependency
+dependency41.from=AttachEffectDecorator
+dependency41.to=SimpleTimer
+dependency41.type=UsesDependency
+dependency42.from=ApemanBullet
+dependency42.to=Enermy
+dependency42.type=UsesDependency
+dependency43.from=ApemanBullet
+dependency43.to=GifImage
+dependency43.type=UsesDependency
+dependency44.from=ApemanBullet
+dependency44.to=FlameDecorator
+dependency44.type=UsesDependency
+dependency45.from=ApemanBullet
+dependency45.to=FlameBuff
+dependency45.type=UsesDependency
+dependency46.from=ApemanBullet
+dependency46.to=BuffType
+dependency46.type=UsesDependency
+dependency47.from=MainMenu
+dependency47.to=Decorator
+dependency47.type=UsesDependency
+dependency48.from=MainMenu
+dependency48.to=TestStageWorld
+dependency48.type=UsesDependency
+dependency49.from=MainMenu
+dependency49.to=BaseWorld
+dependency49.type=UsesDependency
+dependency5.from=ThunderChain
+dependency5.to=GifImage
+dependency5.type=UsesDependency
+dependency50.from=Hawking
+dependency50.to=ScreenBullet
+dependency50.type=UsesDependency
+dependency51.from=Hawking
+dependency51.to=BlackHoleDecorator
+dependency51.type=UsesDependency
+dependency52.from=Hawking
+dependency52.to=Enermy
+dependency52.type=UsesDependency
+dependency53.from=Hawking
+dependency53.to=UICDDecorator
+dependency53.type=UsesDependency
+dependency54.from=Hawking
+dependency54.to=BigBangDecorator
+dependency54.type=UsesDependency
+dependency55.from=Hawking
+dependency55.to=BaseWorld
+dependency55.type=UsesDependency
+dependency56.from=Boom
+dependency56.to=GifImage
+dependency56.type=UsesDependency
+dependency57.from=Boom
+dependency57.to=Enermy
+dependency57.type=UsesDependency
+dependency58.from=UIPictureDecorator
+dependency58.to=GifImage
+dependency58.type=UsesDependency
+dependency59.from=AlienEnermy
+dependency59.to=AlienBullet
+dependency59.type=UsesDependency
+dependency6.from=ThunderChain
+dependency6.to=Enermy
+dependency6.type=UsesDependency
+dependency60.from=BaseWorld
+dependency60.to=Player
+dependency60.type=UsesDependency
+dependency61.from=BaseWorld
+dependency61.to=DrP
+dependency61.type=UsesDependency
+dependency62.from=BaseWorld
+dependency62.to=HpDecorator
+dependency62.type=UsesDependency
+dependency63.from=BaseWorld
+dependency63.to=Enermy
+dependency63.type=UsesDependency
+dependency64.from=BaseWorld
+dependency64.to=TestEnermy
+dependency64.type=UsesDependency
+dependency65.from=BaseWorld
+dependency65.to=FreezeObj
+dependency65.type=UsesDependency
+dependency66.from=BaseWorld
+dependency66.to=Darwin
+dependency66.type=UsesDependency
+dependency67.from=BaseWorld
+dependency67.to=UIPictureDecorator
+dependency67.type=UsesDependency
+dependency68.from=BaseWorld
+dependency68.to=UIHpDecorator
+dependency68.type=UsesDependency
+dependency69.from=BaseWorld
+dependency69.to=UIFrameDecorator
+dependency69.type=UsesDependency
+dependency7.from=ThunderChain
+dependency7.to=ShockedBuff
+dependency7.type=UsesDependency
+dependency70.from=BaseWorld
+dependency70.to=BlackHoleDecorator
+dependency70.type=UsesDependency
+dependency71.from=BaseWorld
+dependency71.to=DecoratorPatternDecorator
+dependency71.type=UsesDependency
+dependency72.from=BaseWorld
+dependency72.to=FactoryMethodPatternDecorator
+dependency72.type=UsesDependency
+dependency73.from=BaseWorld
+dependency73.to=Bullet
+dependency73.type=UsesDependency
+dependency74.from=BaseWorld
+dependency74.to=FlameDecorator
+dependency74.type=UsesDependency
+dependency75.from=BaseWorld
+dependency75.to=ShockedDecorator
+dependency75.type=UsesDependency
+dependency76.from=BaseWorld
+dependency76.to=DrPPaperDecorator
+dependency76.type=UsesDependency
+dependency77.from=BaseWorld
+dependency77.to=UICDDecorator
+dependency77.type=UsesDependency
+dependency78.from=BaseWorld
+dependency78.to=UltDecorator
+dependency78.type=UsesDependency
+dependency79.from=BaseWorld
+dependency79.to=Newton
+dependency79.type=UsesDependency
+dependency8.from=ThunderChain
+dependency8.to=ShockedDecorator
+dependency8.type=UsesDependency
+dependency80.from=BaseWorld
+dependency80.to=Decorator
+dependency80.type=UsesDependency
+dependency81.from=BaseWorld
+dependency81.to=AttachEffectDecorator
+dependency81.type=UsesDependency
+dependency82.from=BaseWorld
+dependency82.to=ScreenChange
+dependency82.type=UsesDependency
+dependency83.from=BaseWorld
+dependency83.to=DialogDecorator
+dependency83.type=UsesDependency
+dependency84.from=TestEnermy
+dependency84.to=EnermyTestBullet
+dependency84.type=UsesDependency
+dependency85.from=Enermy
+dependency85.to=IBuffState
+dependency85.type=UsesDependency
+dependency86.from=Enermy
+dependency86.to=SimpleTimer
+dependency86.type=UsesDependency
+dependency87.from=Enermy
+dependency87.to=EnermyBullet
+dependency87.type=UsesDependency
+dependency88.from=Enermy
+dependency88.to=NotBullet
+dependency88.type=UsesDependency
+dependency89.from=Enermy
+dependency89.to=Player
+dependency89.type=UsesDependency
+dependency9.from=ThunderChain
+dependency9.to=BuffType
+dependency9.type=UsesDependency
+dependency90.from=Enermy
+dependency90.to=BuffType
+dependency90.type=UsesDependency
+dependency91.from=Enermy
+dependency91.to=BossSmallBullet
+dependency91.type=UsesDependency
+dependency92.from=Player
+dependency92.to=GifImage
+dependency92.type=UsesDependency
+dependency93.from=Player
+dependency93.to=Enermy
+dependency93.type=UsesDependency
+dependency94.from=Player
+dependency94.to=PlayerBullet
+dependency94.type=UsesDependency
+dependency95.from=Player
+dependency95.to=UltDecorator
+dependency95.type=UsesDependency
+dependency96.from=Player
+dependency96.to=GameOver
+dependency96.type=UsesDependency
+dependency97.from=Player
+dependency97.to=BaseWorld
+dependency97.type=UsesDependency
+dependency98.from=IBuffState
+dependency98.to=BuffType
+dependency98.type=UsesDependency
+dependency99.from=FlameBuff
+dependency99.to=BuffType
+dependency99.type=UsesDependency
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 editor.fx.0.height=1098
 editor.fx.0.width=1938
 editor.fx.0.x=-9
@@ -1467,6 +2130,9 @@ mainWindow.x=-9
 mainWindow.y=-9
 package.numDependencies=241
 package.numTargets=78
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 project.charset=UTF-8
 readme.height=58
@@ -1532,7 +2198,11 @@ target15.x=0
 target15.y=0
 target16.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target16.name=Boom
+=======
+target16.name=Hawking
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target16.name=Hawking
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1544,7 +2214,11 @@ target16.x=0
 target16.y=0
 target17.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target17.name=UIPictureDecorator
+=======
+target17.name=UIFrameDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target17.name=UIFrameDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1555,6 +2229,7 @@ target17.width=140
 target17.x=0
 target17.y=0
 target18.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target18.name=BaseWorld
 target18.showInterface=false
@@ -1584,6 +2259,21 @@ target19.type=ClassTarget
 target19.typeParameters=
 target19.width=140
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+target18.name=Boom
+target18.showInterface=false
+target18.type=ClassTarget
+target18.typeParameters=
+target18.width=80
+target18.x=0
+target18.y=0
+target19.height=50
+target19.name=UIPictureDecorator
+target19.showInterface=false
+target19.type=ClassTarget
+target19.typeParameters=
+target19.width=140
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target19.x=0
 target19.y=0
 target2.height=50
@@ -1596,7 +2286,11 @@ target2.x=0
 target2.y=0
 target20.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target20.name=Enermy
+=======
+target20.name=AlienEnermy
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target20.name=AlienEnermy
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1608,7 +2302,11 @@ target20.x=0
 target20.y=0
 target21.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target21.name=Player
+=======
+target21.name=BaseWorld
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target21.name=BaseWorld
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1620,7 +2318,11 @@ target21.x=0
 target21.y=0
 target22.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target22.name=IBuffState
+=======
+target22.name=TestEnermy
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target22.name=TestEnermy
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1631,6 +2333,7 @@ target22.width=90
 target22.x=0
 target22.y=0
 target23.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target23.name=SimpleTimer
 target23.showInterface=false
@@ -1668,6 +2371,25 @@ target24.y=0
 target25.height=50
 target25.name=IBuffState
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+target23.name=Enermy
+target23.showInterface=false
+target23.type=ClassTarget
+target23.typeParameters=
+target23.width=80
+target23.x=0
+target23.y=0
+target24.height=50
+target24.name=Player
+target24.showInterface=false
+target24.type=ClassTarget
+target24.typeParameters=
+target24.width=80
+target24.x=0
+target24.y=0
+target25.height=50
+target25.name=IBuffState
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target25.showInterface=false
 target25.type=InterfaceTarget
 target25.typeParameters=
@@ -1676,7 +2398,11 @@ target25.x=0
 target25.y=0
 target26.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target26.name=HpDecorator
+=======
+target26.name=SimpleTimer
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target26.name=SimpleTimer
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1687,6 +2413,7 @@ target26.width=100
 target26.x=0
 target26.y=0
 target27.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target27.name=MobStageWorld
 target27.showInterface=false
@@ -1710,6 +2437,8 @@ target29.type=ClassTarget
 target29.typeParameters=
 target29.width=80
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target27.name=FlameBuff
 target27.showInterface=false
 target27.type=ClassTarget
@@ -1731,6 +2460,9 @@ target29.showInterface=false
 target29.type=ClassTarget
 target29.typeParameters=
 target29.width=100
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target29.x=0
 target29.y=0
@@ -1743,6 +2475,7 @@ target3.width=110
 target3.x=0
 target3.y=0
 target30.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target30.name=EnermyTestBullet
 target30.showInterface=false
@@ -1780,6 +2513,25 @@ target31.y=0
 target32.height=50
 target32.name=DrPSuperAttack
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+target30.name=MobStageWorld
+target30.showInterface=false
+target30.type=ClassTarget
+target30.typeParameters=
+target30.width=130
+target30.x=0
+target30.y=0
+target31.height=50
+target31.name=AlienBullet
+target31.showInterface=false
+target31.type=ClassTarget
+target31.typeParameters=
+target31.width=90
+target31.x=0
+target31.y=0
+target32.height=50
+target32.name=DrPSuperAttack
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target32.showInterface=false
 target32.type=ClassTarget
 target32.typeParameters=
@@ -1788,7 +2540,11 @@ target32.x=0
 target32.y=0
 target33.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target33.name=UltDecorator
+=======
+target33.name=GifImage
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target33.name=GifImage
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1799,6 +2555,7 @@ target33.width=100
 target33.x=0
 target33.y=0
 target34.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target34.name=Tesla
 target34.showInterface=false
@@ -1820,9 +2577,21 @@ target34.y=0
 target35.height=50
 target35.name=Newton
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+target34.name=EnermyTestBullet
+target34.showInterface=false
+target34.type=ClassTarget
+target34.typeParameters=
+target34.width=140
+target34.x=0
+target34.y=0
+target35.height=50
+target35.name=Newton
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target35.showInterface=false
 target35.type=InterfaceTarget
 target35.typeParameters=
+<<<<<<< HEAD
 <<<<<<< HEAD
 target35.width=120
 target35.x=0
@@ -1868,6 +2637,29 @@ target37.y=0
 target38.height=50
 target38.name=Tesla
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+target35.width=80
+target35.x=0
+target35.y=0
+target36.height=50
+target36.name=UICDDecorator
+target36.showInterface=false
+target36.type=ClassTarget
+target36.typeParameters=
+target36.width=120
+target36.x=0
+target36.y=0
+target37.height=50
+target37.name=UltDecorator
+target37.showInterface=false
+target37.type=ClassTarget
+target37.typeParameters=
+target37.width=100
+target37.x=0
+target37.y=0
+target38.height=50
+target38.name=Tesla
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target38.showInterface=false
 target38.type=ClassTarget
 target38.typeParameters=
@@ -1876,7 +2668,11 @@ target38.x=0
 target38.y=0
 target39.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target39.name=Prism
+=======
+target39.name=AttackStrategy
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target39.name=AttackStrategy
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1896,7 +2692,11 @@ target4.x=0
 target4.y=0
 target40.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target40.name=Win
+=======
+target40.name=FactoryMethodPatternDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target40.name=FactoryMethodPatternDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1908,6 +2708,7 @@ target40.x=0
 target40.y=0
 target41.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target41.name=Yin
 target41.showInterface=false
 target41.type=ClassTarget
@@ -1918,6 +2719,8 @@ target41.y=0
 target42.height=50
 target42.name=ShockedDecorator
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target41.name=BossSmallBullet
 target41.showInterface=false
 target41.type=ClassTarget
@@ -1927,6 +2730,9 @@ target41.x=0
 target41.y=0
 target42.height=50
 target42.name=DrPPaperDecorator
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target42.showInterface=false
 target42.type=ClassTarget
@@ -1936,7 +2742,11 @@ target42.x=0
 target42.y=0
 target43.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target43.name=BuffState
+=======
+target43.name=Prism
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target43.name=Prism
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1948,7 +2758,11 @@ target43.x=0
 target43.y=0
 target44.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target44.name=Yang
+=======
+target44.name=Win
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target44.name=Win
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1960,7 +2774,11 @@ target44.x=0
 target44.y=0
 target45.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target45.name=TeslaCar
+=======
+target45.name=Yin
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target45.name=Yin
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1972,7 +2790,11 @@ target45.x=0
 target45.y=0
 target46.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target46.name=BigBangDecorator
+=======
+target46.name=ShockedDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target46.name=ShockedDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -1984,6 +2806,7 @@ target46.x=0
 target46.y=0
 target47.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target47.name=YinYangBullet
 target47.showInterface=false
 target47.type=ClassTarget
@@ -1994,6 +2817,8 @@ target47.y=0
 target48.height=50
 target48.name=DarwinBullet
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target47.name=BuffState
 target47.showInterface=false
 target47.type=ClassTarget
@@ -2003,6 +2828,9 @@ target47.x=0
 target47.y=0
 target48.height=50
 target48.name=Yang
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target48.showInterface=false
 target48.type=ClassTarget
@@ -2012,7 +2840,11 @@ target48.x=0
 target48.y=0
 target49.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target49.name=Darwin
+=======
+target49.name=TeslaCar
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target49.name=TeslaCar
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -2032,7 +2864,11 @@ target5.x=0
 target5.y=0
 target50.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target50.name=FreezeObj
+=======
+target50.name=BigBangDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target50.name=BigBangDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -2043,6 +2879,7 @@ target50.width=140
 target50.x=0
 target50.y=0
 target51.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target51.name=NonBattle
 target51.showInterface=false
@@ -2064,6 +2901,17 @@ target51.y=0
 target52.height=50
 target52.name=DialogDecorator
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
+target51.name=YinYangBullet
+target51.showInterface=false
+target51.type=ClassTarget
+target51.typeParameters=
+target51.width=110
+target51.x=0
+target51.y=0
+target52.height=50
+target52.name=DialogDecorator
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target52.showInterface=false
 target52.type=ClassTarget
 target52.typeParameters=
@@ -2072,7 +2920,11 @@ target52.x=0
 target52.y=0
 target53.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target53.name=BuffType
+=======
+target53.name=DarwinBullet
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target53.name=DarwinBullet
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -2080,17 +2932,23 @@ target53.showInterface=false
 target53.type=EnumTarget
 target53.typeParameters=
 <<<<<<< HEAD
+<<<<<<< HEAD
 target53.width=80
 target53.x=0
 target53.y=0
 target54.height=50
 target54.name=UIHpDecorator
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target53.width=100
 target53.x=0
 target53.y=0
 target54.height=50
 target54.name=Darwin
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target54.showInterface=false
 target54.type=ClassTarget
@@ -2099,6 +2957,7 @@ target54.width=120
 target54.x=0
 target54.y=0
 target55.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target55.name=Bullet
 =======
@@ -2130,6 +2989,12 @@ target57.y=0
 target58.height=50
 target58.name=ScreenChange
 =======
+=======
+target55.name=FreezeObj
+target55.showInterface=false
+target55.type=InterfaceTarget
+target55.typeParameters=
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target55.width=90
 target55.x=0
 target55.y=0
@@ -2151,6 +3016,9 @@ target57.x=0
 target57.y=0
 target58.height=50
 target58.name=BuffType
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target58.showInterface=false
 target58.type=EnumTarget
@@ -2160,11 +3028,19 @@ target58.x=0
 target58.y=0
 target59.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target59.name=DrP
 target59.showInterface=false
 target59.type=ClassTarget
 target59.typeParameters=
 target59.width=80
+=======
+target59.name=UIHpDecorator
+target59.showInterface=false
+target59.type=ClassTarget
+target59.typeParameters=
+target59.width=120
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target59.name=UIHpDecorator
 target59.showInterface=false
@@ -2183,6 +3059,7 @@ target6.width=130
 target6.x=0
 target6.y=0
 target60.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target60.name=GameOver
 target60.showInterface=false
@@ -2218,6 +3095,8 @@ target63.y=0
 target64.height=50
 target64.name=FlameDecorator
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target60.name=screenBoom
 target60.showInterface=false
 target60.type=ClassTarget
@@ -2251,6 +3130,9 @@ target63.x=0
 target63.y=0
 target64.height=50
 target64.name=ScreenChange
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target64.showInterface=false
 target64.type=ClassTarget
@@ -2260,7 +3142,11 @@ target64.x=0
 target64.y=0
 target65.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target65.name=TeslaTower
+=======
+target65.name=DrP
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 =======
 target65.name=DrP
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
@@ -2271,6 +3157,7 @@ target65.width=80
 target65.x=0
 target65.y=0
 target66.height=50
+<<<<<<< HEAD
 <<<<<<< HEAD
 target66.name=ScreenBullet
 target66.showInterface=false
@@ -2302,6 +3189,8 @@ target69.type=ClassTarget
 target69.typeParameters=
 target69.width=80
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target66.name=GameOver
 target66.showInterface=false
 target66.type=ClassTarget
@@ -2331,6 +3220,9 @@ target69.showInterface=false
 target69.type=ClassTarget
 target69.typeParameters=
 target69.width=160
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target69.x=0
 target69.y=0
@@ -2344,6 +3236,7 @@ target7.x=0
 target7.y=0
 target70.height=50
 <<<<<<< HEAD
+<<<<<<< HEAD
 target70.name=MonkeyBullet
 target70.showInterface=false
 target70.type=ClassTarget
@@ -2354,6 +3247,8 @@ target70.y=0
 target71.height=50
 target71.name=ThunderSector
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target70.name=AppleBullet
 target70.showInterface=false
 target70.type=ClassTarget
@@ -2363,6 +3258,9 @@ target70.x=0
 target70.y=0
 target71.height=50
 target71.name=FlameDecorator
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target71.showInterface=false
 target71.type=ClassTarget
@@ -2371,7 +3269,10 @@ target71.width=120
 target71.x=0
 target71.y=0
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target72.height=50
 target72.name=TeslaTower
 target72.showInterface=false
@@ -2428,6 +3329,9 @@ target78.typeParameters=
 target78.width=120
 target78.x=0
 target78.y=0
+<<<<<<< HEAD
+>>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
+=======
 >>>>>>> 12a8549d5d632972fa6f50582f5df7f9477ebc86
 target8.height=50
 target8.name=TestStageWorld
