@@ -10,6 +10,7 @@ public class AppleBullet extends Bullet
 {
     public AppleBullet(int r){
         this(r,20,20,10);        //default size 20*20, not through, 10 damage
+        this(r,20,20,12);        //default size 20*20, not through,12 damage
     }
     
     public AppleBullet(int r, int sizeX, int sizeY, int d){
