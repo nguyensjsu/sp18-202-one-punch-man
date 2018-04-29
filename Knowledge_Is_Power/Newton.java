@@ -17,7 +17,6 @@ public class Newton extends Player
 
     /* player stat */
     protected String player_image = "Newton.png";
-    protected String trans_image = "red-draught.png";
     protected GifImage myprism = new GifImage("myprism.gif");
     protected int size_x;
     protected int size_y;
@@ -106,7 +105,7 @@ public class Newton extends Player
                 getWorld().addObject(appleSatellite,x,y);
                 appleSatellite_cd_timer = 360;
 
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),1200,77);
             }
         }
     }
@@ -277,22 +276,30 @@ public class Newton extends Player
             }
         }
     }
-
+    
     public void invincible_flash(String origin, String trans){
+       GreenfootImage image = new GreenfootImage(origin);
        if (invincible_timer % 20 >= 10){
-           GreenfootImage image = new GreenfootImage(trans);
-           image.scale(size_x, size_y);
-           setImage(image);
+           if(transGif != null){
+               image = transGif.getCurrentImage();
+           }
+           else{
+               image.clear();
+           }
        }
        else{
-           GreenfootImage image = new GreenfootImage(origin);
-           image.scale(size_x, size_y);
-           setImage(image);
+           if(originGif != null){
+               image = originGif.getCurrentImage();
+           }
+           else{
+               image = new GreenfootImage(origin);
+            }
         }
-
+       image.scale(size_x, size_y);
+       setImage(image);
        if ((invincible_timer == 0) && damage_state == "invincible") damage_state = "normal";
     }
-
+    
     public void timer(){
        if (attack_timer != 0) attack_timer--;
        if (push_timer != 0) push_timer--;

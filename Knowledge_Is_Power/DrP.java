@@ -155,7 +155,7 @@ public class DrP extends Player
         if (ult_animation_timer == 1){
             ((BaseWorld)getWorld()).freeze_all(false);
             for (Enermy enermy: getWorld().getObjects(Enermy.class)){
-                enermy.damage(getY(), getX(), 200, "bullet");
+                enermy.damage(getY(), getX(), 300, "bullet");
             }
         }
         /* timer */

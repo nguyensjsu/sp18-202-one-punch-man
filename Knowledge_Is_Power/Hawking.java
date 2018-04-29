@@ -16,8 +16,8 @@ public class Hawking extends Player
    
     protected String player_image = "hawking_icon.png";
    
-    protected int attack_speed = 15;
-    protected int bullet_damage = 5;
+    protected int attack_speed = 30;
+    protected int bullet_damage = 0;
     
     /* timer */
     //protected int ult_animation_timer = 0;
@@ -96,10 +96,10 @@ public class Hawking extends Player
     
                  int update_x = (int)(getX() + 200*cos(toRadians(getRotation())));
                  int update_y = (int)(getY() + 200*sin(toRadians(getRotation())));
-                 getWorld().addObject(new BlackHoleDecorator(100,100,bullet_damage),update_x, update_y);
+                 getWorld().addObject(new BlackHoleDecorator(100,100,10),update_x, update_y);
               
                 skill_one_cd_timer = 360;
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,360),1200,775);
             }
         }
     }
@@ -126,7 +126,7 @@ public class Hawking extends Player
                 }
                 
                 skill_two_cd_timer = 60;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),1350,775);
             }
         }
     }
@@ -139,7 +139,7 @@ public class Hawking extends Player
         
             ult_cd_timer = 1800;
             
-            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),1500,775);
         }
         
     }

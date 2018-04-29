@@ -40,7 +40,7 @@ public class BossEnermy extends Enermy
         
         /* starting stat */
         damage_state = "invincible";
-        MAX_HP = 2960;
+        MAX_HP = 2920;
         hp = 50;
         
         GreenfootImage image = new GreenfootImage("boss.png");

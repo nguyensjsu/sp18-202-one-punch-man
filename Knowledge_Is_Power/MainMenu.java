@@ -44,12 +44,12 @@ public class MainMenu extends NonBattle
             }
             else if (mouse.getX()>=750 && mouse.getX()<=850 && mouse.getY()>=663 && mouse.getY()<=737) System.exit(0);
         }
-        if (mouse.getX()>=575 && mouse.getX()<=1025 && mouse.getY()>=563 && mouse.getY()<=637){
+        if (mouse != null && mouse.getX()>=575 && mouse.getX()<=1025 && mouse.getY()>=563 && mouse.getY()<=637){
             startFocus.setTransp(255);
         }else{
             startFocus.setTransp(0);
         }
-        if (mouse.getX()>=750 && mouse.getX()<=850 && mouse.getY()>=663 && mouse.getY()<=737){
+        if (mouse != null && mouse.getX()>=750 && mouse.getX()<=850 && mouse.getY()>=663 && mouse.getY()<=737){
             exitFocus.setTransp(255);
         }else{
             exitFocus.setTransp(0);

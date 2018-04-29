@@ -36,7 +36,7 @@ public class TestStageTwoWorld extends TestStageWorld
             playerUIRemove();
             removeObject(player);
             player = new Hawking();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("hawking_face_right.png","hawking_skill1.png","hawking_skill2.png","hawking_skill3.png");
             /* create player UI */
             playerUICreate();
         }
@@ -44,7 +44,7 @@ public class TestStageTwoWorld extends TestStageWorld
             playerUIRemove();
             removeObject(player);
             player = new Darwin();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("darwin.png","evolution_monkey.png","evolution_human.png","programmer.png");
             /* create player UI */
             playerUICreate();
         }
@@ -52,7 +52,7 @@ public class TestStageTwoWorld extends TestStageWorld
             playerUIRemove();
             removeObject(player);
             player = new Newton();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("Newton_icon.png","appleSatellite_cd.jpg","prism_cd.jpg","appleRain_cd.png");
             /* create player UI */
             playerUICreate();
         }
@@ -60,7 +60,7 @@ public class TestStageTwoWorld extends TestStageWorld
             playerUIRemove();
             removeObject(player);
             player = new Tesla();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("tesla_full.gif","thunder_explode_display.jpeg","tesla_tower.png","tesla_car_display.jpg");
             /* create player UI */
             playerUICreate();
         }
@@ -68,7 +68,7 @@ public class TestStageTwoWorld extends TestStageWorld
             playerUIRemove();
             removeObject(player);
             player = new DrP();
-            playerCreate("DrP_head.jpg","yellow circle.jpg","red circle.png","DrPUltIcon.png");
+            playerCreate("DrP_head.jpg","yellow circle.png","red circle.png","DrPUltIcon.png");
             /* create player UI */
             playerUICreate();
         }

@@ -17,6 +17,7 @@ public class Darwin extends Player
     private GreenfootImage apemanState= new GreenfootImage("apeman.png");
 
     protected String player_image = "darwin_head.png";
+    protected int bullet_damage = 20;
 
     /* timer */
     protected int ult_animation_timer = 0;
@@ -99,7 +100,7 @@ public class Darwin extends Player
 
                 skill_one_duration_timer = 180;
                 skill_one_cd_timer = 60;
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,60),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,60),1200,775);
 
             }
             else if (Greenfoot.isKeyDown("1") && state.equals("apeman")) {
@@ -109,7 +110,7 @@ public class Darwin extends Player
 
                 skill_one_duration_timer = 180;
                 skill_one_cd_timer = 60;
-                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,60),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1200,775,60),1200,775);
             }
             else{}
         }
@@ -124,7 +125,7 @@ public class Darwin extends Player
 
                 skill_two_duration_timer = 180;
                 skill_two_cd_timer = 60;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),1350,775);
             }
             else if (Greenfoot.isKeyDown("2") && state.equals("monkey")){
                 setImage(apemanState);
@@ -133,7 +134,7 @@ public class Darwin extends Player
 
                 skill_two_duration_timer = 180;
                 skill_two_cd_timer = 60;
-                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),0,0);
+                getWorld().addObject(new UICDDecorator(this,100,100,1350,775,60),1350,775);
             }
             else{}
         }
@@ -203,7 +204,7 @@ public class Darwin extends Player
 
             ult_cd_timer = 1800;
 
-            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),0,0);
+            getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1800),1500,775);
         }
     }
 

@@ -55,7 +55,7 @@ public class FactoryMethodPatternDecorator extends Decorator
         }
         else{
             if (factory_state == "range" || factory_state == "start"){
-                image = new GreenfootImage("yellow circle.jpg");
+                image = new GreenfootImage("yellow circle.png");
                 image.scale(radius+100,radius+100);
                 setImage(image);
             }

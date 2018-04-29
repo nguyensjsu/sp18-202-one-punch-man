@@ -16,7 +16,7 @@ public class Prism extends Bullet
     protected int prism_timer = 27;
     protected boolean through = false;
     protected boolean hit = false;
-    protected int damage = 12;
+    protected int damage = 20;
     /* bullet direction */
     protected int fire_rotation;
     protected GifImage myprism = new GifImage("myprism.gif");

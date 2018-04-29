@@ -162,7 +162,7 @@ public class Tesla extends Player
                 if (mouse != null && Greenfoot.mousePressed(null)){
                     getWorld().addObject(new ThunderExplode(getRotation(), explodeDamage),getX(),getY());
                     timer = cooldown;
-                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1200,775,cooldown),0,0);
+                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1200,775,cooldown),1200,775);
                 }
             }else{
                 timer--;
@@ -186,7 +186,7 @@ public class Tesla extends Player
                 if(Greenfoot.isKeyDown("4")){
                     getWorld().addObject(new TeslaTower(towerDamage), getX(), getY());
                     timer = cooldown;
-                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1350,775,cooldown),0,0);
+                    getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1350,775,cooldown),1350,775);
                 }
             }else{
                 timer--;
@@ -213,7 +213,7 @@ public class Tesla extends Player
         public void attack(){
             if (ult_trigger){
                 ult_trigger = false;
-                getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1500,775,cooldown),0,0);
+                getWorld().addObject(new UICDDecorator(Tesla.this,100,100,1500,775,cooldown),1500,775);
             }
             if(timer == 0){
                 if(!carStarted && Greenfoot.isKeyDown("5")){
