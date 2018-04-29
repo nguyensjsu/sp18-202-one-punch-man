@@ -109,4 +109,7 @@ public class Decorator extends Actor
     public void resetFreeze(){
         freeze_state = false;
     }
+    public void setTransp(int val){
+        getImage().setTransparency(val);
+    }
 }

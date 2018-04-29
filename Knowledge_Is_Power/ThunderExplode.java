@@ -15,6 +15,7 @@ public class ThunderExplode extends Bullet
         damage = d;
         move_speed = 1;
         gifAnimator();
+        explode_sound.setVolume(70);
     }
     public void act() 
     {

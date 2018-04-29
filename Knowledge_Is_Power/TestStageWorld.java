@@ -84,7 +84,7 @@ public class TestStageWorld extends BaseWorld
             playerUIRemove();
             removeObject(player);
             player = new Tesla();
-            playerCreate("board.jpg","board.jpg","board.jpg","board.jpg");
+            playerCreate("tesla_full.gif","thunder_explode_display.jpeg","tesla_tower.png","tesla_car_display.jpg");
             /* create player UI */
             playerUICreate();
         }

@@ -22,7 +22,8 @@ public class Tesla extends Player
     public Tesla(int x, int y){
         size_x = x;
         size_y = y;
-        super.originGif = new GifImage("Tesla_head.gif");
+        //super.originGif = new GifImage("Tesla_head.gif");
+        super.player_image = "";
         /* Avator */
         GreenfootImage image = originGif.getCurrentImage();
         image.scale(x, y);
