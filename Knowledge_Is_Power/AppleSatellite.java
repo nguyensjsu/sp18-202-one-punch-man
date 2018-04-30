@@ -13,7 +13,7 @@ public class AppleSatellite extends Bullet
     protected int size_x;
     protected int size_y;
     protected int radius = 150;
-    protected int appleSatellite_timer = 120;
+    protected int appleSatellite_timer = 150;
     protected boolean through = false;
     protected int damage = 10;
     protected boolean firstTime = true;

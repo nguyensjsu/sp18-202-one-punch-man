@@ -17,6 +17,7 @@ public class Newton extends Player
 
     /* player stat */
     protected String player_image = "Newton.png";
+    protected String trans_image = "red-draught.png";
     protected GifImage myprism = new GifImage("myprism.gif");
     protected int size_x;
     protected int size_y;
@@ -70,8 +71,8 @@ public class Newton extends Player
            base_attack();
            skill_1();
            skill_2();
-           skill_3();
            ult_animation();
+           skill_3();
            /* invincible flash */
            invincible_flash(player_image,trans_image);
 
@@ -130,20 +131,20 @@ public class Newton extends Player
      /* AppleRain */
     public void skill_3(){
         if (ult_trigger ){
-            if (appleRain_duration == 300){
+            if (appleRain_duration == 299){
                 appleRain_cd_timer = 1200;
                 getWorld().addObject(new UICDDecorator(this,100,100,1500,775,1200),1500,775);
             }
-        if(appleRain_duration != 0 && appleRain_duration_helper == 0){
-            Random rand = new Random();
-            int x = rand.nextInt(1580) + 10;
-            getWorld().addObject(new AppleRain(),x,10);
-            appleRain_duration_helper = 15;
+            if(appleRain_duration != 0 && appleRain_duration_helper == 0){
+                Random rand = new Random();
+                int x = rand.nextInt(1580) + 10;
+                getWorld().addObject(new AppleRain(),x,10);
+                appleRain_duration_helper = 15;
+            }
+            if (appleRain_duration == 0)ult_trigger = false;
         }
-        if (appleRain_duration == 0)ult_trigger = false;
     }
-    }
-    
+
     public void ult_animation(){
         if (appleRain_cd_timer == 0){
             if(Greenfoot.isKeyDown("3")){
@@ -154,7 +155,7 @@ public class Newton extends Player
             }
         }
     }
-    
+
     public void animation_timer(){
         if (ult_cutscence_timer !=0) ult_cutscence_timer--;
         if (ult_cutscence_timer ==1) {ult_trigger = true;((BaseWorld)getWorld()).freeze_all(false);}
@@ -276,7 +277,7 @@ public class Newton extends Player
             }
         }
     }
-    
+
     public void invincible_flash(String origin, String trans){
        GreenfootImage image = new GreenfootImage(origin);
        if (invincible_timer % 20 >= 10){
@@ -299,7 +300,7 @@ public class Newton extends Player
        setImage(image);
        if ((invincible_timer == 0) && damage_state == "invincible") damage_state = "normal";
     }
-    
+
     public void timer(){
        if (attack_timer != 0) attack_timer--;
        if (push_timer != 0) push_timer--;
