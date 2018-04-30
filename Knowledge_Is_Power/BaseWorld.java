@@ -39,6 +39,7 @@ public class BaseWorld extends World
                     Player.class,
                     /* effect over actor */
                     HpDecorator.class,
+                    Boom.class,
                     Bullet.class,
                     AttachEffectDecorator.class,
                     DrPPaperDecorator.class,

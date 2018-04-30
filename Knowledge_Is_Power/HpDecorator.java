@@ -36,14 +36,18 @@ public class HpDecorator extends Decorator
             int remain_x = (int)(size_x * current_hp / max_hp);
             if (current_hp != 0){
                 if(remain_x <= 0){
-                    remain_x = 1;       //not good, need to modify
+                    GreenfootImage hp = new GreenfootImage(1,size_y);
+                    hp.clear();
+                    setImage(hp);
                 }
-                GreenfootImage hp = new GreenfootImage(remain_x,size_y);
-                if (current_hp > 0.6*max_hp) hp.setColor(Color.GREEN);
-                else if (current_hp > 0.2*max_hp) hp.setColor(Color.YELLOW);
-                else hp.setColor(Color.RED);
-                hp.fill();
-                setImage(hp);
+                else{
+                    GreenfootImage hp = new GreenfootImage(remain_x,size_y);
+                    if (current_hp > 0.6*max_hp) hp.setColor(Color.GREEN);
+                    else if (current_hp > 0.2*max_hp) hp.setColor(Color.YELLOW);
+                    else hp.setColor(Color.RED);
+                    hp.fill();
+                    setImage(hp);
+                }
             }
             else go_die = true;
         }

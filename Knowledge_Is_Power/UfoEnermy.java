@@ -18,8 +18,8 @@ public class UfoEnermy extends Enermy
      protected int turn_cd = 0;
      protected int rotation = 90;
      protected int move_speed = 2;
-     protected int attack_timer = 100;
-     protected int attack_speed = 50;
+     protected int attack_timer = 150;
+     protected int attack_speed = 100;
      protected int num; // 0-7, 8 directions to move
 
     public UfoEnermy(){
