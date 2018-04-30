@@ -240,7 +240,7 @@ public class Tesla extends Player
                     // set cd
                     timer = cooldown;
                     // show ultimate animation
-                    ult_cutscence("tesla_full.gif","tesla_full.gif");   //player, sentence
+                    ult_cutscence("tesla_full.gif","Tesla ult.png");   //player, sentence
                     ((BaseWorld)getWorld()).freeze_all(true);
                 }
             }else{
