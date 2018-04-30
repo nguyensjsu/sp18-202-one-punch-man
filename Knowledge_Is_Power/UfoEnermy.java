@@ -45,7 +45,6 @@ public class UfoEnermy extends Enermy
             timer();
 
         }
-
         if(!fade){
             // refresh buff state
             buffRefresh();

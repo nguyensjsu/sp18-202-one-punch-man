@@ -2,30 +2,42 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class AlienBullet here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class AlienBullet extends EnermyBullet
 {
-   
+    protected double move_speed = 7.0;
     public AlienBullet(int r) {
-        super(r,20,20,1); 
+        super(r,20,20,1);
     }
-    
+
     public AlienBullet(int r, int sizeX, int sizeY, int d) {
-        super(r,sizeX,sizeY,d); 
+        super(r,sizeX,sizeY,d);
         GreenfootImage image = new GreenfootImage("ice.png");
         image.scale(size_x, size_y);
         setImage(image);
     }
-    
+
+    public void act(){
+        if (!freeze_state){
+            move();
+
+            /* timer */
+            timer();
+        }
+
+        /* remove condition */
+        dead();
+    }
+
      /* override */
     public void dead(){
         /* delete if hit player and type is not through */
         if (getOneIntersectingObject(Player.class) != null){
             for (Player p: this.getIntersectingObjects(Player.class)){
-                p.damage(getX(),getY(),damage, "bullet"); 
+                p.damage(getX(),getY(),damage, "bullet");
                 break;
             }
             if (!through){
@@ -37,5 +49,5 @@ public class AlienBullet extends EnermyBullet
             getWorld().removeObject(this);
         }
     }
-    
+
 }

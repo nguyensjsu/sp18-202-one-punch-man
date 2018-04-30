@@ -101,7 +101,9 @@ public class MobStageWorld extends BaseWorld
       default:
       break;
     }
+
   }
+
 
   public void RandomGenerateUFO() {
     Random rand = new Random();
@@ -117,6 +119,7 @@ public class MobStageWorld extends BaseWorld
       RandomGenerateUFO();
       ufo_timer = 250;
     }
+
 
     if (alienEnermy_timer == 0 && alienEnermy_stopTime >= 0) {
       RandomGenerateAlienEnermy();
