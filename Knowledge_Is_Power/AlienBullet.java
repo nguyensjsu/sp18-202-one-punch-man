@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AlienBullet extends EnermyBullet
 {
-    protected double move_speed = 7.0;
+    protected double move_speed = 5.0;
     public AlienBullet(int r) {
         super(r,20,20,1);
     }
