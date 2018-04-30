@@ -60,10 +60,6 @@ public class AlienEnermy extends Enermy
     }
 
     public void bullet_attack(){
-        if (attack_timer == 0){
-            setRotation(90);
-            getWorld().addObject(new AlienBullet(getRotation(), 20, 20, 20),getX(),getY());
-            attack_timer = attack_speed;
-        }
+        //No bullet attack
     }
 }

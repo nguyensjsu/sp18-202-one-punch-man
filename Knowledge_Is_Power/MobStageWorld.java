@@ -115,13 +115,13 @@ public class MobStageWorld extends BaseWorld
   }
 
   public void act(){
-    if (ufo_timer == 0 && ufo_stopTime >= 0) {
+    if (ufo_timer == 0 && ufo_stopTime > 0) {
       RandomGenerateUFO();
       ufo_timer = 250;
     }
 
 
-    if (alienEnermy_timer == 0 && alienEnermy_stopTime >= 0) {
+    if (alienEnermy_timer == 0 && alienEnermy_stopTime > 0) {
       RandomGenerateAlienEnermy();
       alienEnermy_timer = 250;
     }

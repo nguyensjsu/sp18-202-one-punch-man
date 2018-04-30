@@ -12,6 +12,12 @@ public class EnermyBullet extends Bullet
         this(r,20,20,20);        //default size 20*20, not through, 20 damage
     }
     
+    public EnermyBullet(int sizeX,int sizeY, int d){
+        size_x = sizeX;
+        size_y = sizeY;
+        damage = d;
+    }
+    
     public EnermyBullet(int r, int sizeX, int sizeY, int d){
         super(r,sizeX,sizeY,d);
     }

@@ -18,11 +18,12 @@ public class UfoEnermy extends Enermy
      protected int turn_cd = 0;
      protected int rotation = 90;
      protected int move_speed = 2;
+     protected int attack_timer = 100;
      protected int attack_speed = 50;
      protected int num; // 0-7, 8 directions to move
 
     public UfoEnermy(){
-        super(80,80,"stop","stop");    //default size 50*50
+        super(54,80,"stop","stop");    //default size 50*50
         MAX_HP = 120;
         hp = 120;
 
@@ -65,6 +66,8 @@ public class UfoEnermy extends Enermy
         // if(getY() <= 5 || getY() >= getWorld().getHeight() -5) {
         //     turn(180);
         // }
+        Player player = (Player) getWorld().getObjects(Player.class).get(0);
+        turnTowards(player.getX(),player.getY());
         if(getX() <= 5 && getY() <= 5){
             setLocation(getX()+20, getY()+20);
             rotation = 45;
@@ -154,7 +157,8 @@ public class UfoEnermy extends Enermy
 
     public void attack(){
         if (attack_timer == 0){
-            getWorld().addObject(new UfoBullet(90, 50, 50, 20),getX(),getY());
+            //Player player = (Player)getWorld().getObjects(Player.class).get(0);
+            getWorld().addObject(new UfoBullet(getRotation(),50, 17, 20),getX(),getY());
             attack_timer = attack_speed;
         }
     }
