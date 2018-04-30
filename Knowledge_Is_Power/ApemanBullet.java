@@ -50,7 +50,7 @@ public class ApemanBullet extends Bullet
             for (Enermy e: this.getIntersectingObjects(Enermy.class)){
                 e.damage(getX(),getY(),damage, "bullet");
                 // flame buff effect
-                FlameBuff buff = new FlameBuff(this,2000,2);
+                FlameBuff buff = new FlameBuff(this,2000,10);
                 if(e.hasBuff(BuffType.Burning)){
                     e.updateBuff(BuffType.Burning);
                 }else{
@@ -74,7 +74,7 @@ public class ApemanBullet extends Bullet
                     continue;
                 intersect_enermy.add(e);
                 // flame buff effect
-                FlameBuff buff = new FlameBuff(this,2000,2);
+                FlameBuff buff = new FlameBuff(this,2000,10);
                 if(e.hasBuff(BuffType.Burning)){
                     e.updateBuff(BuffType.Burning);
                 }else{
